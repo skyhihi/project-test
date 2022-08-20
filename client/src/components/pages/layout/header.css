@@ -1,0 +1,22 @@
+.mobile-menu {
+  visibility: hidden;
+}
+
+@media only screen and (max-width: 900px) {
+  .menu-items {
+    visibility: hidden !important;
+    width: 0 !important;
+    padding: 0 !important;
+  }
+
+  .mobile-menu {
+    visibility: visible;
+  }
+  .ant-drawer-content {
+    width: 75% !important;
+    float: right !important;
+  }
+  .ant-drawer-content-wrapper {
+    box-shadow: 0 0 0 0 !important;
+  }
+}

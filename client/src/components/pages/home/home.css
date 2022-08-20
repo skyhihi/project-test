@@ -1,0 +1,30 @@
+/*
+.home__bg {
+  background-image: url("../../assets/home-layered-waves2.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+*/
+
+.home__container {
+  background-color: url(../../assets/home-layered-waves2.svg);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 20rem;
+}
+.home__text {
+  padding: 1rem 0;
+}
+.home__btn {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+  .home__container {
+    padding: 0 3rem;
+  }
+}

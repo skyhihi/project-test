@@ -1,0 +1,22 @@
+span.ant-menu-title-content a {
+  color: black !important;
+}
+.ant-menu-item-selected span.ant-menu-title-content a {
+  color: rgb(255, 255, 255) !important;
+}
+
+span.ant-menu-title-content a:hover {
+  color: rgb(255, 255, 255) !important;
+}
+.ant-drawer-content-wrapper
+  .ant-menu-item-selected
+  span.ant-menu-title-content
+  a {
+  color: black !important;
+}
+.ant-drawer-content-wrapper span.ant-menu-title-content a:hover {
+  color: rgb(91, 91, 100) !important;
+}
+span.anticon anticon-menu-fold svg {
+  align-items: center !important;
+}
