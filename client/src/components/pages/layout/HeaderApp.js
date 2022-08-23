@@ -37,6 +37,12 @@ const HeaderApp = () => {
           <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item className="menu-items">
+          <Link to="/types">Types</Link>
+        </Menu.Item>
+        <Menu.Item className="menu-items">
+          <Link to="/test">Test</Link>
+        </Menu.Item>
+        <Menu.Item className="menu-items">
           <Link to="/login">Login</Link>
         </Menu.Item>
         <Menu.Item className="menu-items">
@@ -53,7 +59,7 @@ const HeaderApp = () => {
           type="primary"
           onClick={showDrawer}
           style={{
-            order: "5",
+            order: "20",
             marginTop: "auto",
             marginBottom: "auto",
             marginLeft: "auto",
@@ -73,7 +79,13 @@ const HeaderApp = () => {
             <Link to="/">Home</Link>
           </Menu.Item>
           <Menu.Item>
+            <Link to="/types">Types</Link>
+          </Menu.Item>
+          <Menu.Item>
             <Link to="/login">Login</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/test">Test</Link>
           </Menu.Item>
           <Menu.Item>
             <Link to="/result">Result</Link>

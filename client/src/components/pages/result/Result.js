@@ -5,7 +5,7 @@ import "./result.css";
 const Result = () => {
   return (
     <>
-      <div className="container">
+      <div className="container-fuild">
         <div className="row">
           <div className="col-lg-6 result__chart-card">
             <div className="result__chart-ch">

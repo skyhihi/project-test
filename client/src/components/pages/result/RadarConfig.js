@@ -30,6 +30,10 @@ export const RadarOptions = {
       stepSize: 0.5,
       showLabelBackdrop: false,
       backdropColor: "rgba(203, 197, 11, 1)",
+      font: {
+        size: 13,
+        family: "Prompt",
+      },
     },
     angleLines: {
       color: "rgba(255, 255, 255, .3)",
@@ -38,6 +42,26 @@ export const RadarOptions = {
     gridLines: {
       color: "rgba(255, 255, 255, .3)",
       circular: true,
+    },
+  },
+  plugins: {
+    legend: {
+      labels: {
+        font: {
+          size: 15,
+          family: "Prompt",
+        },
+      },
+    },
+  },
+  scales: {
+    r: {
+      pointLabels: {
+        font: {
+          size: 14,
+          family: "Prompt",
+        },
+      },
     },
   },
 };

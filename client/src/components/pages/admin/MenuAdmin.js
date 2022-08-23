@@ -2,22 +2,47 @@ import {
   AppstoreOutlined,
   MailOutlined,
   SettingOutlined,
+  QuestionCircleOutlined,
+  NumberOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import React, { useState } from "react";
-import "./menu.css";
+import React from "react";
+import { Link } from "react-router-dom";
 
-function getItem(label, key, icon, children, type) {
+function getItem(label, key, icon, children, type, link) {
   return {
     key,
     icon,
     children,
     label,
     type,
+    link,
   };
 }
 
 const items = [
+  getItem(
+    "HomeAdmin",
+    "ha",
+    <Link to="/admin">
+      <NumberOutlined />
+    </Link>
+  ),
+  getItem(
+    "Question",
+    "q",
+    <Link to="/admin/question">
+      <QuestionCircleOutlined />
+    </Link>
+  ),
+  getItem(
+    "Detail",
+    "dt",
+    <Link to="/admin/detail-types">
+      <AppstoreOutlined />
+    </Link>
+  ),
+
   getItem("Navigation One", "sub1", <MailOutlined />, [
     getItem("Option 1", "1"),
     getItem("Option 2", "2"),
@@ -40,37 +65,30 @@ const items = [
   ]),
 ]; // submenu keys of first level
 
-const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
-
 const MenuAdmin = () => {
-  const [openKeys, setOpenKeys] = useState(["sub1"]);
-
-  const onOpenChange = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-
-    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    }
-  };
   return (
-    <Menu
-      mode="inline"
-      openKeys={openKeys}
-      onOpenChange={onOpenChange}
-      //theme="dark"
-      style={{
-        width: 200,
-        marginLeft: "-2rem",
-        marginTop: "-1rem",
-        //backgroundColor: "brown",
-        height: "100vh",
-        position: "fixed",
-        //paddingTop: "2rem",
-      }}
-      items={items}
-    />
+    <>
+      <Menu
+        mode="inline"
+        //theme="dark"
+        style={{
+          width: 200,
+          marginLeft: "-2rem",
+          marginTop: "-1rem",
+          //backgroundColor: "brown",
+          height: "100vh",
+          position: "fixed",
+          //paddingTop: "2rem",
+        }}
+        items={items}
+      >
+        {/** 
+        <Menu.Item>
+          <Link to="/admin/question">question</Link>
+        </Menu.Item>
+        */}
+      </Menu>
+    </>
   );
 };
 

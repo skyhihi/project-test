@@ -8,7 +8,10 @@ import Login from "./components/pages/login/Login";
 import Result from "./components/pages/result/Result";
 import Register from "./components/pages/register/Register";
 import HomeAm from "./components/pages/admin/HomeAm";
-
+import Question from "./components/pages/admin/questionAd/Question";
+import DetailTypes from "./components/pages/admin/detailTypes/DetailTypes";
+import Types from "./components/pages/types/Types";
+import Test from "./components/pages/test/Test";
 const { Header, Content } = Layout;
 
 const App = () => (
@@ -35,10 +38,15 @@ const App = () => (
       >
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/types" element={<Types />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/result" element={<Result />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/admin" element={<HomeAm />} />
+          <Route path="/admin/question" element={<Question />} />
+          <Route path="/admin/detail-types" element={<DetailTypes />} />
         </Routes>
       </Content>
     </Layout>

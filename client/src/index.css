@@ -3,6 +3,7 @@
 
 * {
   font-family: "Prompt", sans-serif;
+  box-sizing: border-box;
 }
 html {
   background-color: hsl(258, 60%, 99%);
