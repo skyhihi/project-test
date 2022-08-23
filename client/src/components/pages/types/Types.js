@@ -8,7 +8,7 @@ const Types = () => {
           <div class="col-md-12">
             <div class="main-timeline">
               <div class="timeline">
-                <a href="#" class="timeline-content">
+                <a href="/" class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fa fa-globe"></i>
                   </div>
@@ -22,7 +22,7 @@ const Types = () => {
                 </a>
               </div>
               <div class="timeline">
-                <a href="#" class="timeline-content">
+                <a href="/" class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fa fa-rocket"></i>
                   </div>
