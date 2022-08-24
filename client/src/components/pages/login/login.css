@@ -1,0 +1,19 @@
+.login__bg{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-image : url("../../assets/login-bg.svg");
+    position:absolute;
+}
+
+.login__content{
+ margin-top:5rem ;
+
+   
+}

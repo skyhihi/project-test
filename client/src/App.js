@@ -12,6 +12,8 @@ import Question from "./components/pages/admin/questionAd/Question";
 import DetailTypes from "./components/pages/admin/detailTypes/DetailTypes";
 import Types from "./components/pages/types/Types";
 import Test from "./components/pages/test/Test";
+
+
 const { Header, Content } = Layout;
 
 const App = () => (
@@ -31,7 +33,7 @@ const App = () => (
         style={{
           marginTop: 64,
           backgroundColor: "hsl(258, 60%, 99%)",
-          padding: "1rem 2rem",
+          padding: "2rem 2rem",
           width: "100vw",
           //height: "100%",
         }}
