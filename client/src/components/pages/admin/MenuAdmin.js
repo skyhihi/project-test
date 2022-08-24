@@ -22,46 +22,36 @@ function getItem(label, key, icon, children, type, link) {
 
 const items = [
   getItem(
-    "HomeAdmin",
+    "General Information",
     "ha",
     <Link to="/admin">
       <NumberOutlined />
     </Link>
   ),
   getItem(
-    "General Information",
+    "Student Information",
     "q",
     <Link to="/admin/question">
       <QuestionCircleOutlined />
     </Link>
   ),
-  getItem(
-    "Student Information",
-    "dt",
-    <Link to="/admin/detail-types">
-      <AppstoreOutlined />
-    </Link>
-  ),
 
   getItem("Question", "sub1", <MailOutlined />, [
-    getItem("Add", "1"),
-    getItem("Edit", "2"),
-    getItem("Delete", "3"),
-  ]), 
-  getItem("Detail", "sub4", <SettingOutlined />, [
-    getItem("Add", "1"),
-    getItem("Edit", "2"),
-    getItem("Delete", "3"),
+    getItem("ADD", "1"),
+    getItem("EDIT", "2"),
+    getItem("DELETE", "3"),
   ]),
-  getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
-    getItem("Option 5", "5"),
-    getItem("Option 6", "6"),
-    getItem("Submenu", "sub3", null, [
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
+  getItem("Detail", "sub2", <AppstoreOutlined />, [
+    getItem("ADD", "1"),
+    getItem("EDIT", "2"),
+    getItem("DELETE", "3"),
   ]),
- 
+  getItem("Navigation Three", "sub4", <SettingOutlined />, [
+    getItem("Option 9", "9"),
+    getItem("Option 10", "10"),
+    getItem("Option 11", "11"),
+    getItem("Option 12", "12"),
+  ]),
 ]; // submenu keys of first level
 
 const MenuAdmin = () => {
@@ -77,7 +67,7 @@ const MenuAdmin = () => {
           //backgroundColor: "brown",
           height: "100vh",
           position: "fixed",
-          paddingTop: "1rem", 
+          //paddingTop: "2rem",
         }}
         items={items}
       >

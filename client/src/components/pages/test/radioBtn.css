@@ -1,0 +1,15 @@
+.mobile-btn {
+  visibility: hidden;
+  position: fixed;
+}
+@media screen and (max-width: 400px) {
+  .normal {
+    visibility: hidden;
+    position: fixed;
+  }
+  .mobile-btn {
+    visibility: visible;
+    align-items: center;
+    position: static;
+  }
+}

@@ -1,3 +1,4 @@
+
 const question = [{
 	id : 1,
 	nameQ : "ฉันเรียนหมอและเก่งวิชาคณิตศาสตร์",
@@ -150,3 +151,4 @@ const question = [{
 }
 ];
 console.log(question);
+
