@@ -63,7 +63,7 @@ const MenuAdmin = () => {
         style={{
           width: 200,
           marginLeft: "-2rem",
-          marginTop: "-1rem",
+          marginTop: "-2rem",
           //backgroundColor: "brown",
           height: "100vh",
           position: "fixed",
