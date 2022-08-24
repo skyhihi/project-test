@@ -1,23 +1,23 @@
 import React from "react";
+//import type { SizeType } from "antd/es/config-provider/SizeContext";
 import {
   UserOutlined,
+  InfoCircleOutlined,
   EyeInvisibleOutlined,
   EyeTwoTone,
   LockFilled,
-  InfoCircleOutlined,LoginOutlined,
+  LoginOutlined,
 } from "@ant-design/icons";
 import { Input, Tooltip, Button } from "antd";
 
-const Login = () => {
-  return (
-    <>
-      <div className="container">
-        <div class="row">
-          <div class="col-lg-4"></div>
-          <div class="col-lg-4">
-            <div>
-              <br />
-              <h1>LOGIN</h1>
+const Login = () => (
+  <>
+    <div className="row">
+      <div className="col-lg-4"></div>
+      <div className="col-lg-4">
+        <div style={{ margin: "0 20px" }}>
+          <br />
+          <h1>LOGIN</h1>
               <br />
               <Input
                 size="large"
@@ -51,14 +51,11 @@ const Login = () => {
               Login
               <br />
             </Button>
-              <div class="col-lg-4"></div>
-            </div>
-            <br />
-          </div>
         </div>
       </div>
-    </>
-  );
-};
+      <div className="col-lg-4"></div>
+    </div>
+  </>
+);
 
 export default Login;

@@ -29,25 +29,29 @@ const items = [
     </Link>
   ),
   getItem(
-    "Question",
+    "General Information",
     "q",
     <Link to="/admin/question">
       <QuestionCircleOutlined />
     </Link>
   ),
   getItem(
-    "Detail",
+    "Student Information",
     "dt",
     <Link to="/admin/detail-types">
       <AppstoreOutlined />
     </Link>
   ),
 
-  getItem("Navigation One", "sub1", <MailOutlined />, [
-    getItem("Option 1", "1"),
-    getItem("Option 2", "2"),
-    getItem("Option 3", "3"),
-    getItem("Option 4", "4"),
+  getItem("Question", "sub1", <MailOutlined />, [
+    getItem("Add", "1"),
+    getItem("Edit", "2"),
+    getItem("Delete", "3"),
+  ]), 
+  getItem("Detail", "sub4", <SettingOutlined />, [
+    getItem("Add", "1"),
+    getItem("Edit", "2"),
+    getItem("Delete", "3"),
   ]),
   getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
     getItem("Option 5", "5"),
@@ -57,12 +61,7 @@ const items = [
       getItem("Option 8", "8"),
     ]),
   ]),
-  getItem("Navigation Three", "sub4", <SettingOutlined />, [
-    getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
-    getItem("Option 11", "11"),
-    getItem("Option 12", "12"),
-  ]),
+ 
 ]; // submenu keys of first level
 
 const MenuAdmin = () => {
@@ -74,11 +73,11 @@ const MenuAdmin = () => {
         style={{
           width: 200,
           marginLeft: "-2rem",
-          marginTop: "-1rem",
+          marginTop: "-2rem",
           //backgroundColor: "brown",
           height: "100vh",
           position: "fixed",
-          //paddingTop: "2rem",
+          paddingTop: "1rem", 
         }}
         items={items}
       >
