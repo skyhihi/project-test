@@ -10,9 +10,11 @@ import Register from "./components/pages/register/Register";
 import HomeAm from "./components/pages/admin/HomeAm";
 import Question from "./components/pages/admin/questionAd/Question";
 import DetailTypes from "./components/pages/admin/detailTypes/DetailTypes";
-import Types from "./components/pages/types/Types";
+import Types from "./components/pages/types/Type";
 import Test from "./components/pages/test/Test";
-import StudentInf from "./components/pages/types/studentInformation/StudentInf"
+
+import General from "./components/pages/admin/generalInformation/General";
+import StudentIn from "./components/pages/admin/studentIn/StudentIn";
 
 
 const { Header, Content } = Layout;
@@ -50,7 +52,10 @@ const App = () => (
           <Route path="/admin" element={<HomeAm />} />
           <Route path="/admin/question" element={<Question />} />
           <Route path="/admin/detail-types" element={<DetailTypes />} />
-          <Route path="/type/studentInformation/StudentInf" element={<StudentInf />} />
+
+          <Route path="/admin/student-i" element={<StudentIn />} />
+          <Route path="/admin/genral" element={<General />} />
+
         </Routes>
       </Content>
     </Layout>

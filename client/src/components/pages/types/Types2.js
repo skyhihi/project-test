@@ -1,6 +1,6 @@
 import React from "react";
 import "./types.css";
-const Types = () => {
+const Types2 = () => {
   return (
     <>
       <div class="container">
@@ -35,6 +35,9 @@ const Types = () => {
                   </p>
                 </a>
               </div>
+
+  
+
             </div>
           </div>
         </div>
@@ -43,4 +46,4 @@ const Types = () => {
   );
 };
 
-export default Types;
+export default Types2;

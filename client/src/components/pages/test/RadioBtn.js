@@ -18,7 +18,7 @@ const RadioBtn = () => {
             size="large"
             onChange={onChange}
             value={value}
-            style={{ marginTop: "20px" }}
+            //style={{ marginTop: "20px" }}
           >
             <Radio.Button value="a">น้อยที่สุด</Radio.Button>
             <Radio.Button value="b">น้อย</Radio.Button>
