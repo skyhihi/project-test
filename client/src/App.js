@@ -12,6 +12,7 @@ import Question from "./components/pages/admin/questionAd/Question";
 import DetailTypes from "./components/pages/admin/detailTypes/DetailTypes";
 import Types from "./components/pages/types/Types";
 import Test from "./components/pages/test/Test";
+import StudentInf from "./components/pages/types/studentInformation/StudentInf"
 
 
 const { Header, Content } = Layout;
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/admin" element={<HomeAm />} />
           <Route path="/admin/question" element={<Question />} />
           <Route path="/admin/detail-types" element={<DetailTypes />} />
+          <Route path="/type/studentInformation/StudentInf" element={<StudentInf />} />
         </Routes>
       </Content>
     </Layout>

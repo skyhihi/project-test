@@ -1,4 +1,5 @@
 import React from 'react'
+import { Select,} from "antd";
 
 const StudentInf = () => {
   return (
@@ -15,7 +16,7 @@ const StudentInf = () => {
                   fontSize: "18px",
                   width: "100%",
                 }}
-                onChange={handleChange}
+               
               >
                 <Option value="jack" style={{ fontSize: "18px" }}>
                   มหาวิทยาลัยมหิดล
