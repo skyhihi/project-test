@@ -1,9 +1,12 @@
 import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
+  // AppstoreOutlined,
+  //MailOutlined,
+  //SettingOutlined,
   QuestionCircleOutlined,
   NumberOutlined,
+  DatabaseOutlined,
+  ProfileOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import React from "react";
@@ -19,23 +22,45 @@ function getItem(label, key, icon, children, type, link) {
     link,
   };
 }
-
 const items = [
   getItem(
-    "General Information",
+    "หน้าหลัก",
     "ha",
     <Link to="/admin">
       <NumberOutlined />
     </Link>
   ),
   getItem(
-    "Student Information",
+    "ข้อมูลคำถาม",
     "q",
     <Link to="/admin/question">
       <QuestionCircleOutlined />
     </Link>
   ),
+  getItem(
+    "รายละเอียด",
+    "dt",
+    <Link to="/admin/detail-types">
+      <DatabaseOutlined />
+    </Link>
+  ),
+  getItem(
+    "ข้อมูลทั่วไป",
+    "ga",
+    <Link to="/admin/genral">
+      <ProfileOutlined />
+    </Link>
+  ),
 
+  getItem(
+    "ข้อมูลนักศึกษา",
+    "qi",
+    <Link to="/admin/student-i">
+      <UserOutlined />
+    </Link>
+  ),
+  {
+    /** 
   getItem("Question", "sub1", <MailOutlined />, [
     getItem("ADD", "1"),
     getItem("EDIT", "2"),
@@ -51,8 +76,9 @@ const items = [
     getItem("Option 10", "10"),
     getItem("Option 11", "11"),
     getItem("Option 12", "12"),
-  ]),
-]; // submenu keys of first level
+  ]),*/
+  },
+];
 
 const MenuAdmin = () => {
   return (
@@ -67,7 +93,7 @@ const MenuAdmin = () => {
           //backgroundColor: "brown",
           height: "100vh",
           position: "fixed",
-          //paddingTop: "2rem",
+          //paddingTop: "1rem",
         }}
         items={items}
       >

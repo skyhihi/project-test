@@ -1,13 +1,13 @@
 import React from "react";
 import MenuAdmin from "../MenuAdmin";
 
-const General = () => {
+const StudentIn = () => {
   return (
     <>
       <MenuAdmin />
-      <div style={{ paddingLeft: "200px" }}> hi General</div>
+      <div style={{ paddingLeft: "200px" }}> hi student</div>
     </>
   );
 };
 
-export default General;
+export default StudentIn;

@@ -2,6 +2,7 @@ import React from "react";
 import MenuAdmin from "./MenuAdmin";
 import { Routes, Route } from "react-router-dom";
 import Question from "./questionAd/Question";
+import General from "./generalInformation/General";
 const HomeAm = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const HomeAm = () => {
             pariatur laborum, neque unde non dolorem?
             <Routes>
               <Route path="/admin/question" element={<Question />} />
+              <Route path="/admin/genral" element={<General />} />
             </Routes>
           </div>
           <div className="col-lg-3">
