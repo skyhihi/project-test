@@ -1,38 +1,37 @@
 import React, { useRef, useState } from "react";
-import { Select, Button, Input, Space, Table } from "antd";
+import { Button, Input, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
 import MenuAdmin from "../MenuAdmin";
 
-const { Option } = Select;
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
-
 const data = [
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
+    name: "ชวมนต์",
+    ID: "6203051613204",
+    year: "2562",
+    uni: "Mahidol",
   },
   {
     key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
+    name: "ปาณิสรา",
+    ID: "6203051613212",
+    year: "2562",
+    uni: "Mahidol",
   },
   {
     key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
+    name: "วริศรา",
+    ID: "6203051613212",
+    year: "2562",
+    uni: "Mahidol",
   },
   {
     key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
+    name: "ปุณรัตน์",
+    ID: "6203051613212",
+    year: "2562",
+    uni: "Mahidol",
   },
 ];
 
@@ -47,10 +46,10 @@ const StudentIn = () => {
     setSearchedColumn(dataIndex);
   };
 
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText("");
-  };
+  //const handleReset = (clearFilters) => {
+  //clearFilters();
+  //setSearchText("");
+  //};
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -89,28 +88,6 @@ const StudentIn = () => {
           >
             Search
           </Button>
-          <Button
-            onClick={() => clearFilters && handleReset(clearFilters)}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({
-                closeDropdown: false,
-              });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button>
         </Space>
       </div>
     ),
@@ -142,32 +119,37 @@ const StudentIn = () => {
 
   const columns = [
     {
-      title: "Name",
+      title: "ชื่อ นามสกุล",
       dataIndex: "name",
       key: "name",
       width: "30%",
       ...getColumnSearchProps("name"),
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "รหัสนักศึกษา",
+      dataIndex: "ID",
+      key: "ID",
       width: "20%",
-      ...getColumnSearchProps("age"),
+      ...getColumnSearchProps("ID"),
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      title: "ปีการศึกษา",
+      dataIndex: "year",
+      key: "year",
+      ...getColumnSearchProps("year"),
+    },
+    {
+      title: "มหาวิทยาลัย",
+      dataIndex: "uni",
+      key: "uni",
+      width: "20%",
+      ...getColumnSearchProps("uni"),
     },
   ];
 
   return (
     <>
-      
+    
       <MenuAdmin />
       <div style={{ paddingLeft: "200px" }}>
         <div class="card">
@@ -175,53 +157,11 @@ const StudentIn = () => {
             <div className="row">
               <div className="col-lg-2"></div>
               <div className="col-lg-8">
-                <div className="row">
-                  <div className="col-sm-6" style={{ marginBottom: "1rem" }}>
-                    <label>มหาวิทยาลัย</label>
-                    <Select
-                      defaultValue="มหาวิทยาลัย"
-                      style={{
-                        fontSize: "18px",
-                        width: "100%",
-                      }}
-                      onChange={handleChange}
-                    >
-                      <Option value="jack" style={{ fontSize: "18px" }}>
-                        มหาวิทยาลัยมหิดล
-                      </Option>
-                      <Option value="lucy" style={{ fontSize: "18px" }}>
-                        มหาวิทยาลัย...
-                      </Option>
-                    </Select>
-                  </div>
-                  
-                  <div className="col-sm-6">
-
-                    <label>ปีการศึกษา</label>
-                    <Select
-                      defaultValue="ปีการศึกษา"
-                      style={{
-                        fontSize: "18px",
-                        width: "100%",
-                      }}
-                    >
-                      <Option value="lucy" style={{ fontSize: "18px" }}>
-                        2565
-                      </Option>
-                      <Option value="lucy" style={{ fontSize: "18px" }}>
-                        2564
-                      </Option>
-                      <Option value="lucy" style={{ fontSize: "18px" }}>
-                        2563
-                      </Option>
-                    </Select><br />
-                    
-                    
-                    
-                  </div>
-                </div>
-                <Table columns={columns} dataSource={data} />;
-              </div>
+                <div className="row"></div>
+                
+              </div><h5>ข้อมูลนักศึกษา</h5><br /><br />
+              
+              <Table columns={columns} dataSource={data} />;
             </div>
           </div>
         </div>
