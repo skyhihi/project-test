@@ -29,9 +29,17 @@ const HeaderApp = () => {
         }}
         mode="horizontal"
       >
-        <h2 style={{ margin: "auto 0", paddingRight: "3rem" }}>
-          <b>LOGO</b>
-        </h2>
+        {/** */}
+        <h5
+          style={{
+            margin: "auto 0",
+            paddingRight: "2.45rem",
+            color: "#395B64",
+          }}
+        >
+          <i class="bi bi-ui-radios-grid"></i>
+          <b> แบบประเมิน</b>
+        </h5>
 
         <Menu.Item className="menu-items">
           <Link to="/">Home</Link>
