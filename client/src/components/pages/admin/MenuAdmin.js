@@ -58,9 +58,9 @@ const items = [
     <Link to="/admin/student-i">
       <UserOutlined />
     </Link>
-  ),
+  ) /** 
   {
-    /** 
+    
   getItem("Question", "sub1", <MailOutlined />, [
     getItem("ADD", "1"),
     getItem("EDIT", "2"),
@@ -76,8 +76,8 @@ const items = [
     getItem("Option 10", "10"),
     getItem("Option 11", "11"),
     getItem("Option 12", "12"),
-  ]),*/
-  },
+  ]),
+  },*/,
 ];
 
 const MenuAdmin = () => {
