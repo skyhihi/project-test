@@ -1,4 +1,4 @@
-.login__bg {
+.register__bg {
   position: absolute;
   left: 0;
   right: 0;
@@ -11,24 +11,24 @@
   object-fit: cover;
 }
 
-.login__content {
+.register__content {
   padding-top: 5rem;
   overflow: hidden;
 }
-.login__text {
+.register__text {
   position: absolute;
   margin: -4rem 0;
 }
 
 @media screen and (max-width: 900px) {
-  .login__bg {
+  .register__bg {
     background-image: url("../../assets/login-layered-steps-verticel.svg");
     background-size: cover;
     width: 100%;
     height: auto;
-    margin-bottom: -5rem;
+    margin-bottom: -18rem;
   }
-  .login__text {
+  .register__text {
     margin: -2rem 0;
   }
 }

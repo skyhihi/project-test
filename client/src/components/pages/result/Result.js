@@ -12,7 +12,7 @@ const Result = () => {
               <RadarChart />
             </div>
           </div>
-          <div className="col-lg-6 result__info">
+          <div className="col-lg-6 result__info container">
             <div className="card_r box-red">
               <div className="result__info-header">
                 <h3>hi</h3>

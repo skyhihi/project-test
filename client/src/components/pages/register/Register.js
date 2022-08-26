@@ -10,15 +10,18 @@ import {
   LoginOutlined,
 } from "@ant-design/icons";
 import { Input, Tooltip, Space, Button } from "antd";
+import "./register.css";
 
 const Register = () => (
   <>
-    <div className="row">
-      <div className="col-lg-4"></div>
-      <div className="col-lg-4">
-        <div style={{ margin: "0 20px" }}>
-          <br />
-          <h1>REGISTER</h1>
+    <div className="register__bg"></div>
+    <div className="register__content">
+      <div className="row">
+        <div className="col-lg-4"></div>
+        <div className="col-lg-4">
+          <h1 className="register__text">
+            <span className="badge bg-secondary">REGISTER</span>
+          </h1>
           <br />
           <Input
             size="large"
@@ -68,7 +71,9 @@ const Register = () => (
             {/******************************************************** */}
             <br />
             <Button
-              type="primary"
+              type="secondary"
+              shape="round"
+              //size="large"
               style={{ float: "right" }}
               icon={<LoginOutlined />}
             >
@@ -76,8 +81,8 @@ const Register = () => (
             </Button>
           </Space>
         </div>
+        <div className="col-lg-4"></div>
       </div>
-      <div className="col-lg-4"></div>
     </div>
   </>
 );

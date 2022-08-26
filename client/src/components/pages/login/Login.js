@@ -1,6 +1,6 @@
 import React from "react";
-import Image2 from "../../assets/blob-haikei.svg"
-import "./login.css"
+import "./login.css";
+
 //import type { SizeType } from "antd/es/config-provider/SizeContext";
 import {
   UserOutlined,
@@ -14,48 +14,50 @@ import { Input, Tooltip, Button } from "antd";
 
 const Login = () => (
   <>
-    <div className="row">
-      <div className="col-lg-4"></div>
-      <div className="col-lg-4">
-        <div style={{ margin: "0 20px" }}>
-        <img src={Image2} alt="" className="login__bg" />
+    <div className="login__bg"></div>
+    <div className="login__content">
+      <div className="row">
+        <div className="col-lg-4"></div>
+        <div className="col-lg-4">
+          <h1 className="login__text">
+            <span className="badge bg-secondary">LOGIN</span>
+          </h1>
+
           <br />
-          <div className="login__content">
-          <h1>LOGIN</h1>
-              <br />
-              <Input
-                size="large"
-                placeholder=" Username"
-                prefix={<UserOutlined />}
-                suffix={
-                  <Tooltip title="Enter Username">
-                    <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-                  </Tooltip>
-                }
-              />
+          <Input
+            size="large"
+            placeholder=" Username"
+            prefix={<UserOutlined />}
+            suffix={
+              <Tooltip title="Enter Username">
+                <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+              </Tooltip>
+            }
+          />
 
-              <br />
-              <br />
+          <br />
+          <br />
 
-              <Input.Password
-                size="large"
-                placeholder=" Password"
-                prefix={<LockFilled />}
-                iconRender={(visible) =>
-                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                }
-              />
-              <br />
-              <br />
-              <Button
-              type="primary"
-              style={{ float: "right" }}
-              icon={<LoginOutlined />}
-            >
-              Login
-              <br />
-            </Button>
-            </div>
+          <Input.Password
+            size="large"
+            placeholder=" Password"
+            prefix={<LockFilled />}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+          />
+          <br />
+          <br />
+          <Button
+            type="secondary"
+            shape="round"
+            //size="large"
+            style={{ float: "right" }}
+            icon={<LoginOutlined />}
+          >
+            Login
+            <br />
+          </Button>
         </div>
       </div>
       <div className="col-lg-4"></div>
