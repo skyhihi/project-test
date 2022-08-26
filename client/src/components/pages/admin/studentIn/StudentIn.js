@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
-import { Button, Input, Space, Table } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Input, Table } from "antd";
+//import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
 
 import MenuAdmin from "../MenuAdmin";
 
@@ -46,17 +47,13 @@ const StudentIn = () => {
     setSearchedColumn(dataIndex);
   };
 
-  //const handleReset = (clearFilters) => {
-  //clearFilters();
-  //setSearchText("");
-  //};
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
       confirm,
-      clearFilters,
+      //clearFilters,
     }) => (
       <div
         style={{
@@ -76,28 +73,11 @@ const StudentIn = () => {
             display: "block",
           }}
         />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Search
-          </Button>
-        </Space>
+        
+        
       </div>
     ),
-    filterIcon: (filtered) => (
-      <SearchOutlined
-        style={{
-          color: filtered ? "#1890ff" : undefined,
-        }}
-      />
-    ),
+   
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: (visible) => {
@@ -107,10 +87,14 @@ const StudentIn = () => {
     },
     render: (text) =>
       searchedColumn === dataIndex ? (
-        <h
+        <Highlighter
+          //highlightStyle={{
+           // backgroundColor: '#ffc069',
+           // padding: 0,
+         // }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ""}
+          textToHighlight={text ? text.toString() : ''}
         />
       ) : (
         text
@@ -161,7 +145,7 @@ const StudentIn = () => {
                 
               </div><h5>ข้อมูลนักศึกษา</h5><br /><br />
               
-              <Table columns={columns} dataSource={data} />;
+              <Table columns={columns} dataSource={data} />
             </div>
           </div>
         </div>

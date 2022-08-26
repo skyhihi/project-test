@@ -45,7 +45,7 @@ const items = [
     </Link>
   ),
   getItem(
-    "ข้อมูลทั่วไป",
+    "ข้อมูลทั้งหมด",
     "ga",
     <Link to="/admin/genral">
       <ProfileOutlined />

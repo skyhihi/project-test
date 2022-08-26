@@ -1,19 +1,47 @@
 .login__bg{
+    position:absolute;
     left: 0;
     right: 0;
     bottom: 0;
     top: 0;
-    
     background-size: cover;
     width: 100%;
     height: auto;
     object-fit: cover;
-    background-image : url("../../assets/login-bg.svg");
-    position:absolute;
+    background-image : url("../../assets/blob-haikei.svg");
+    
 }
+.login__container{
+    position: relative;
+  display: flex;
+  height: 50%;
+  width: 100%;
+  padding: 0 20rem;
+  align-items:center;
+  justify-content: center;
+}
+.login__content {
+    position: absolute;
+    justify-content: center;
+  }
+.login__content img {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
 .login__content{
  margin-top:5rem ;
-
-   
 }
+@media screen and (max-width: 900px) {
+    .login__container {
+      padding: 0 3rem;
+    }
+    .login__text {
+      margin: 1rem 3rem;
+    }
+    .login__bg {
+      background-image: url("../../assets/home-blob-screne-verticel.svg");
+      object-fit: cover;
+    }
+  }

@@ -1,4 +1,6 @@
 import React from "react";
+import Image2 from "../../assets/blob-haikei.svg"
+import "./login.css"
 //import type { SizeType } from "antd/es/config-provider/SizeContext";
 import {
   UserOutlined,
@@ -16,7 +18,9 @@ const Login = () => (
       <div className="col-lg-4"></div>
       <div className="col-lg-4">
         <div style={{ margin: "0 20px" }}>
+        <img src={Image2} alt="" className="login__bg" />
           <br />
+          <div className="login__content">
           <h1>LOGIN</h1>
               <br />
               <Input
@@ -51,6 +55,7 @@ const Login = () => (
               Login
               <br />
             </Button>
+            </div>
         </div>
       </div>
       <div className="col-lg-4"></div>
