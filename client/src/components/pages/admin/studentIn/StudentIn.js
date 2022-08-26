@@ -47,7 +47,6 @@ const StudentIn = () => {
     setSearchedColumn(dataIndex);
   };
 
-
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -73,11 +72,9 @@ const StudentIn = () => {
             display: "block",
           }}
         />
-        
-        
       </div>
     ),
-   
+
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: (visible) => {
@@ -89,12 +86,12 @@ const StudentIn = () => {
       searchedColumn === dataIndex ? (
         <Highlighter
           //highlightStyle={{
-           // backgroundColor: '#ffc069',
-           // padding: 0,
-         // }}
+          // backgroundColor: '#ffc069',
+          // padding: 0,
+          // }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
         text
@@ -103,13 +100,6 @@ const StudentIn = () => {
 
   const columns = [
     {
-      title: "ชื่อ นามสกุล",
-      dataIndex: "name",
-      key: "name",
-      width: "30%",
-      ...getColumnSearchProps("name"),
-    },
-    {
       title: "รหัสนักศึกษา",
       dataIndex: "ID",
       key: "ID",
@@ -117,10 +107,11 @@ const StudentIn = () => {
       ...getColumnSearchProps("ID"),
     },
     {
-      title: "ปีการศึกษา",
-      dataIndex: "year",
-      key: "year",
-      ...getColumnSearchProps("year"),
+      title: "ชื่อ นามสกุล",
+      dataIndex: "name",
+      key: "name",
+      width: "30%",
+      ...getColumnSearchProps("name"),
     },
     {
       title: "มหาวิทยาลัย",
@@ -129,11 +120,18 @@ const StudentIn = () => {
       width: "20%",
       ...getColumnSearchProps("uni"),
     },
+    {
+      title: "ปีการศึกษา",
+      dataIndex: "year",
+      key: "year",
+      ...getColumnSearchProps("year"),
+    },
+    
+    
   ];
 
   return (
     <>
-    
       <MenuAdmin />
       <div style={{ paddingLeft: "200px" }}>
         <div class="card">
@@ -142,9 +140,11 @@ const StudentIn = () => {
               <div className="col-lg-2"></div>
               <div className="col-lg-8">
                 <div className="row"></div>
-                
-              </div><h5>ข้อมูลนักศึกษา</h5><br /><br />
-              
+              </div>
+              <h5>ข้อมูลนักศึกษา</h5>
+              <br />
+              <br />
+
               <Table columns={columns} dataSource={data} />
             </div>
           </div>
