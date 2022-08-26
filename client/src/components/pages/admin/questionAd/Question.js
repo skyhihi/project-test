@@ -13,14 +13,16 @@ const Question = () => {
       <MenuAdmin />
       <div style={{ paddingLeft: "200px" }}>
         <div className="row">
-          <div className="col-lg-1"></div>
-          <div className="col-lg-10">
-            <div className="card">
-              <h5 className="card-header">Question</h5>
+          {/*<div className="col-lg-1"></div>*/}
+          <div className="col-lg-12">
+            <div className="card" ><br />
+              <h5 style={{ paddingLeft: "1rem" }}>ข้อมูลคำถาม</h5>
               <div className="card-body">
+                
                 <div className="ques__layout-head">
                   <div className="row">
-                    <div className="col-lg-6"></div>
+                    {/**<div className="col-lg-6"></div>*/}
+                    <div className="col-lg-2"></div>
                     <div className="col-lg-6">
                       <Select
                         defaultValue="หมวดหมู่"
@@ -35,11 +37,13 @@ const Question = () => {
                         <Option value="lucy2">หมวด4</Option>
                       </Select>
                     </div>
+                    <div className="col-lg-4"><button type="button" class="btn btn-success btn-sm" >เพิ่มคำถาม</button></div>
+                    
                   </div>
                 </div>
 
                 <div className="ques__body">
-                  <button className="btn btn-success">เพิ่มคำถาม</button>
+                  
                   <br />
                   <br />
                   <table class="table table-striped">
@@ -94,7 +98,7 @@ const Question = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-1"></div>
+          {/*<div className="col-lg-1"></div>*/}
         </div>
       </div>
     </>

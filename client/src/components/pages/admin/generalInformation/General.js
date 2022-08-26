@@ -185,9 +185,9 @@ const General = () => {
               <div className="col-lg-8">
                 <div className="row"></div>
               </div>
-              <h4>ข้อมูลทั้งหมด</h4>
-              <div className="col-sm-6" style={{ marginBottom: "1rem" }}>
-                <label>มหาวิทยาลัย</label>
+              <h5>ข้อมูลทั้งหมด</h5>
+              <div className="col-sm-5" style={{ marginBottom: "1rem" }}>
+                
                 <Select
                   defaultValue="มหาวิทยาลัย"
                   style={{
@@ -204,8 +204,8 @@ const General = () => {
                   </Option>
                 </Select>
               </div>
-              <div className="col-sm-6">
-                <label>ปีการศึกษา</label>
+              <div className="col-sm-5">
+                
                 <Select
                   defaultValue="ปีการศึกษา"
                   style={{
@@ -223,8 +223,14 @@ const General = () => {
                     2563
                   </Option>
                 </Select>
+                
+                
               </div>
+              <div className="col-lg-2">
+                  <button className="btn btn-outline-success btn-sm"><i class="bi bi-file-earmark-arrow-down"></i> ดาวน์โหลดเอกสาร</button>
+                </div>
             </div>
+            
             <Table
               columns={columns}
               dataSource={data}
@@ -232,6 +238,7 @@ const General = () => {
                 x: 1300,
               }}
             />
+            
           </div>
         </div>
       </div>

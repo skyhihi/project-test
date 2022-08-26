@@ -6,15 +6,24 @@ const DetailTypes = () => {
       <MenuAdmin />
       <div style={{ paddingLeft: "200px" }}>
         <div className="row">
-          <div className="col-lg-1"></div>
-          <div className="col-lg-10">
-            <div className="card">
-              <h5 className="card-header">ข้อมูลหมวดหมู่</h5>
+          
+          <div className="col-lg-12">
+            <div className="card"><br />
+            <tr>
+              <td>
+                <h5 style={{ paddingLeft: "1rem" }}>ข้อมูลหมวดหมู่</h5>
+              </td>
+              <td> 
+                <button className="btn btn-outline-success btn-sm" style={{ marginLeft: "1rem" }}><i class="bi bi-plus-circle"></i> เพิ่มหมวดหมู่</button>
+              </td>
+            </tr>
+              
+              
               <div className="card-body">
-                <div className="ques__body">
-                  <button className="btn btn-success">เพิ่มหมวดหมู่</button>
+                <div className="ques__body"> 
+                  
                   <br />
-                  <br />
+                 
                   <table class="table table-striped">
                     <thead>
                       <tr>
