@@ -2,6 +2,7 @@ import React from "react";
 //import { DownloadOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import "./home.css";
+import { Link } from "react-router-dom";
 import Image1 from "../../assets/home-zoom.svg";
 
 const Home = () => {
@@ -21,14 +22,16 @@ const Home = () => {
               </p>
             </div>
             <div className="home__btn">
-              <Button
-                type="primary"
-                shape="round"
-                size="large"
-                //icon={<DownloadOutlined />}
-              >
-                เริ่มทำแบบสอบถาม
-              </Button>
+              <Link to="/test">
+                <Button
+                  type="primary"
+                  shape="round"
+                  size="large"
+                  //icon={<DownloadOutlined />}
+                >
+                  เริ่มทำแบบสอบถาม
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

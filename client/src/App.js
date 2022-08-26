@@ -16,7 +16,6 @@ import Test from "./components/pages/test/Test";
 import General from "./components/pages/admin/generalInformation/General";
 import StudentIn from "./components/pages/admin/studentIn/StudentIn";
 
-
 const { Header, Content } = Layout;
 
 const App = () => (
@@ -25,7 +24,7 @@ const App = () => (
       <Header
         style={{
           position: "fixed",
-          zIndex: 1,
+          zIndex: 3,
           width: "100%",
           padding: 0,
         }}
@@ -55,7 +54,6 @@ const App = () => (
 
           <Route path="/admin/student-i" element={<StudentIn />} />
           <Route path="/admin/genral" element={<General />} />
-
         </Routes>
       </Content>
     </Layout>
