@@ -1,22 +1,36 @@
 span.ant-menu-title-content a {
   color: #395b64 !important;
 }
-.ant-menu-item-selected span.ant-menu-title-content a {
+/*.ant-menu-item-selected span.ant-menu-title-content a {
   color: rgb(255, 255, 255) !important;
-}
+}*/
 
 span.ant-menu-title-content a:hover {
   color: rgb(255, 255, 255) !important;
 }
-.ant-drawer-content-wrapper
-  .ant-menu-item-selected
-  span.ant-menu-title-content
-  a {
-  color: black !important;
-}
+
 .ant-drawer-content-wrapper span.ant-menu-title-content a:hover {
   color: rgb(91, 91, 100) !important;
 }
 span.anticon anticon-menu-fold svg {
   align-items: center !important;
+}
+
+li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-active.ant-menu-item-selected.ant-menu-item-only-child.menu-items {
+  background-color: #395b64 !important;
+}
+li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child.menu-items {
+  background-color: #ffffff !important;
+}
+li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child.menu-items
+  a {
+  color: #395b64 !important;
+}
+li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child.menu-items:hover {
+  background-color: #395b64 !important;
+  color: #ffffff !important;
+}
+li.ant-menu-overflow-item.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child.menu-items
+  a:hover {
+  color: #ffffff !important;
 }

@@ -41,25 +41,25 @@ const HeaderApp = () => {
           <b> แบบประเมิน</b>
         </h5>
 
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="1">
           <Link to="/">Home</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="2">
           <Link to="/types">Types</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="3">
           <Link to="/test">Test</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="4">
           <Link to="/login">Login</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="5">
           <Link to="/result">Result</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="6">
           <Link to="/register">Register</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items">
+        <Menu.Item className="menu-items" key="7">
           <Link to="/admin">Admin</Link>
         </Menu.Item>
 
