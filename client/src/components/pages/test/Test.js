@@ -1,6 +1,7 @@
-import { Select, Input } from "antd";
-import { UserOutlined, NumberOutlined } from "@ant-design/icons";
+import { Select, Input,} from "antd";
+import { UserOutlined, NumberOutlined,} from "@ant-design/icons";
 import React from "react";
+import { Link } from "react-router-dom";
 import RadioBtn from "./RadioBtn";
 //import Data from "./Data";
 
@@ -151,6 +152,13 @@ const Test = () => {
               <RadioBtn />
             </center>
           </div>
+          
+         
+            <Link to="/result">
+            <button type="button" className="btn btn-secondary" style={{float:"right",marginTop:"1rem",marginBottom:"5rem"}} >คำนวณผลลัพธ์  <i className="bi bi-arrow-right"></i></button>
+            </Link>
+        
+         
         </div>
 
         <div className="col-lg-2"></div>

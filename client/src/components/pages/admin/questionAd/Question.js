@@ -16,7 +16,7 @@ const Question = () => {
           {/*<div className="col-lg-1"></div>*/}
           <div className="col-lg-12">
             <div className="card" ><br />
-              <h5 style={{ paddingLeft: "1rem" }}>ข้อมูลคำถาม</h5>
+              <h5 style={{ textAlign:"center" }}>ข้อมูลคำถาม</h5>
               <div className="card-body">
                 
                 <div className="ques__layout-head">

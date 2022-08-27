@@ -29,16 +29,25 @@ const HeaderApp = () => {
         }}
         mode="horizontal"
       >
-        {/** */}
         <h5
           style={{
             margin: "auto 0",
             paddingRight: "2.45rem",
+
             color: "#395B64",
           }}
         >
           <i class="bi bi-ui-radios-grid"></i>
-          <b> แบบประเมิน</b>
+          <Link to="/">
+            <b
+              style={{
+                textDecoration: "none",
+                color: "#395B64",
+              }}
+            >
+              แบบประเมิน
+            </b>
+          </Link>
         </h5>
 
         <Menu.Item className="menu-items" key="1">
