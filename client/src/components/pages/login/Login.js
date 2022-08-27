@@ -1,5 +1,6 @@
 import React from "react";
 import "./login.css";
+import { Link } from "react-router-dom";
 
 //import type { SizeType } from "antd/es/config-provider/SizeContext";
 import {
@@ -48,6 +49,7 @@ const Login = () => (
           />
           <br />
           <br />
+          <Link to="/admin">
           <Button
             type="secondary"
             shape="round"
@@ -58,6 +60,7 @@ const Login = () => (
             Login
             <br />
           </Button>
+          </Link>
         </div>
       </div>
       <div className="col-lg-4"></div>

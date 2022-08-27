@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 //import type { SizeType } from "antd/es/config-provider/SizeContext";
 import {
   UserOutlined,
@@ -70,6 +71,7 @@ const Register = () => (
             />
             {/******************************************************** */}
             <br />
+            <Link to="/login">
             <Button
               type="secondary"
               shape="round"
@@ -79,6 +81,7 @@ const Register = () => (
             >
               Register
             </Button>
+            </Link>
           </Space>
         </div>
         <div className="col-lg-4"></div>
