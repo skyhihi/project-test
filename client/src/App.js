@@ -10,7 +10,7 @@ import Register from "./components/pages/register/Register";
 import HomeAm from "./components/pages/admin/HomeAm";
 import Question from "./components/pages/admin/questionAd/Question";
 import DetailTypes from "./components/pages/admin/detailTypes/DetailTypes";
-import Types from "./components/pages/types/Type";
+import Types from "./components/pages/types/Types";
 import Test from "./components/pages/test/Test";
 
 import General from "./components/pages/admin/generalInformation/General";
