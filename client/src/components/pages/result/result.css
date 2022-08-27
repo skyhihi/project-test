@@ -5,6 +5,9 @@
   border-radius: 20px;
 }*/
 
+canvas {
+  position: fixed;
+}
 .result__chart-ch {
   max-width: 650px;
   margin: auto;
@@ -66,5 +69,8 @@
 
   .card_r {
     margin: 2rem 0;
+  }
+  canvas {
+    position: relative;
   }
 }
