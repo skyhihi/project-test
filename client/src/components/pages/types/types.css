@@ -1,18 +1,21 @@
 :root {
   --main-color: #0e6880;
 }
-.serviceBox {
+.typeBox {
   color: var(--main-color);
   background-color: #fff;
   /*font-family: "Raleway", sans-serif;*/
   text-align: center;
   padding: 0 25px 30px;
   position: relative;
-  margin: 2rem 0;
+  margin: 3rem 0;
   z-index: 1;
 }
-.serviceBox:before,
-.serviceBox:after {
+.type__name {
+  color: #fff;
+}
+.typeBox:before,
+.typeBox:after {
   content: "";
   background: #fff;
   border-radius: 15px 15px;
@@ -24,7 +27,7 @@
   right: 10px;
   z-index: -1;
 }
-.serviceBox:after {
+.typeBox:after {
   background-color: var(--main-color);
   height: 50%;
   top: auto;
@@ -33,7 +36,7 @@
   bottom: 0;
   z-index: -2;
 }
-.serviceBox .service-icon {
+.typeBox .type-icon {
   color: #fff;
   background: var(--main-color);
   font-size: 45px;
@@ -42,8 +45,8 @@
   border-radius: 0 0 50px 50px;
   position: relative;
 }
-.serviceBox .service-icon:before,
-.serviceBox .service-icon:after {
+.typeBox .type-icon:before,
+.typeBox .type-icon:after {
   content: "";
   background: linear-gradient(
     to top left,
@@ -56,7 +59,7 @@
   top: 0;
   left: -10px;
 }
-.serviceBox .service-icon:after {
+.typeBox .type-icon:after {
   background: linear-gradient(
     to top right,
     var(--main-color) 49%,
@@ -65,35 +68,44 @@
   left: auto;
   right: -10px;
 }
-.serviceBox .title {
-  font-size: 18px;
+.typeBox .title {
+  font-size: 25px;
   font-weight: 600;
   text-transform: uppercase;
   margin: 0 0 10px;
 }
-.serviceBox .description {
+.typeBox .description {
   color: #555;
-  font-size: 14px;
+  font-size: 18px;
   letter-spacing: 0.5px;
   line-height: 25px;
 }
-.serviceBox.yellow {
+.description_header {
+  text-align: left;
+  font-size: 22px;
+  margin: 0 0;
+  font-weight: 900;
+}
+.type__content {
+  text-align: left;
+}
+.typeBox.yellow {
   --main-color: #ffb90d;
 }
-.serviceBox.green {
+.typeBox.green {
   --main-color: #60b361;
 }
-.serviceBox.blue {
+.typeBox.blue {
   --main-color: #016fce;
 }
-.serviceBox.red {
+.typeBox.red {
   --main-color: #f65e5d;
 }
-.serviceBox.navy {
+.typeBox.navy {
   --main-color: #293462;
 }
 @media only screen and (max-width: 1199px) {
-  .serviceBox {
+  .typeBox {
     margin: 0 0 40px;
   }
 }
