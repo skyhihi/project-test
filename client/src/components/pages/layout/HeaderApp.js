@@ -33,7 +33,6 @@ const HeaderApp = () => {
           style={{
             margin: "auto 0",
             paddingRight: "2.45rem",
-
             color: "#395B64",
           }}
         >
@@ -43,6 +42,7 @@ const HeaderApp = () => {
               style={{
                 textDecoration: "none",
                 color: "#395B64",
+                marginLeft: "8px",
               }}
             >
               แบบประเมิน

@@ -4,6 +4,7 @@
   box-shadow: 0px 5px 20px 0px rgb(69 67 96 / 10%);
   border-radius: 20px;
 }*/
+
 .result__chart-ch {
   max-width: 650px;
   margin: auto;
@@ -11,7 +12,28 @@
 .result__info {
   padding: 0 2rem;
 }
+.result__info-header {
+  font-size: 28px;
+  font-weight: 600;
+  /* background-color: rgba(255, 99, 132, 1);*/
+  color: #ffffff;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px 0px rgb(69 67 96 / 10%);
+}
 
+.result__info-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.result__info-header.red {
+  background-color: rgba(255, 99, 132, 1);
+}
+.result__info-header.blue {
+  background-color: rgba(34, 202, 236, 1);
+}
 .box-red {
   border-radius: 5px;
   box-shadow: 0px 10px 20px -5px hsl(229, 6%, 85%);

@@ -15,36 +15,37 @@ const Question = () => {
         <div className="row">
           {/*<div className="col-lg-1"></div>*/}
           <div className="col-lg-12">
-            <div className="card" ><br />
-              <h5 style={{ textAlign:"center" }}>ข้อมูลคำถาม</h5>
+            <div className="card">
+              <br />
+              <h5 style={{ textAlign: "center" }}>ข้อมูลคำถาม</h5>
               <div className="card-body">
-                
-                <div className="ques__layout-head">
-                  <div className="row">
-                    {/**<div className="col-lg-6"></div>*/}
-                    <div className="col-lg-2"></div>
-                    <div className="col-lg-6">
-                      <Select
-                        defaultValue="หมวดหมู่"
-                        style={{
-                          width: "100%",
-                        }}
-                        onChange={handleChange}
-                      >
-                        <Option value="jack">หมวด1</Option>
-                        <Option value="lucy">หมวด2</Option>
-                        <Option value="jack2">หมวด3</Option>
-                        <Option value="lucy2">หมวด4</Option>
-                      </Select>
-                    </div>
-                    <div className="col-lg-4"><button type="button" class="btn btn-success btn-sm" >เพิ่มคำถาม</button></div>
-                    
-                  </div>
+                <div
+                  className="ques__layout-head"
+                  style={{ textAlign: "center" }}
+                >
+                  {/**<div className="col-lg-6"></div>*/}
+
+                  <Select
+                    defaultValue="หมวดหมู่"
+                    style={{
+                      width: "50%",
+                      margin: "0 2rem",
+                    }}
+                    onChange={handleChange}
+                  >
+                    <Option value="jack">หมวด1</Option>
+                    <Option value="lucy">หมวด2</Option>
+                    <Option value="jack2">หมวด3</Option>
+                    <Option value="lucy2">หมวด4</Option>
+                  </Select>
+
+                  <button type="button" class="btn btn-success btn-sm">
+                    <i class="bi bi-plus-square me-2"></i>
+                    เพิ่มคำถาม
+                  </button>
                 </div>
 
                 <div className="ques__body">
-                  
-                  <br />
                   <br />
                   <table class="table table-striped">
                     <thead>

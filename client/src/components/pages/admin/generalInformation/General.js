@@ -12,6 +12,12 @@ const data = [
     ID: "6203051613204",
     year: "2562",
     uni: "Mahidol",
+    e: "2.3",
+    i: "2.3",
+    b: "2.3",
+    p: "2.3",
+    t: "2.3",
+    d: "2.3",
   },
   {
     key: "2",
@@ -19,6 +25,12 @@ const data = [
     ID: "6203051613212",
     year: "2562",
     uni: "Mahidol",
+    e: "1.5",
+    i: "4.1",
+    b: "2.8",
+    p: "3.2",
+    t: "2.3",
+    d: "2.3",
   },
   {
     key: "3",
@@ -26,6 +38,12 @@ const data = [
     ID: "6203051613212",
     year: "2562",
     uni: "Mahidol",
+    e: "2.1",
+    i: "5",
+    b: "2.3",
+    p: "1.5",
+    t: "2.3",
+    d: "0.3",
   },
   {
     key: "4",
@@ -33,6 +51,12 @@ const data = [
     ID: "6203051613212",
     year: "2562",
     uni: "Mahidol",
+    e: "4.6",
+    i: "2.3",
+    b: "2.3",
+    p: "2.8",
+    t: "2.3",
+    d: "5",
   },
 ];
 
@@ -187,7 +211,6 @@ const General = () => {
               </div>
               <h5>ข้อมูลทั้งหมด</h5>
               <div className="col-sm-5" style={{ marginBottom: "1rem" }}>
-                
                 <Select
                   defaultValue="มหาวิทยาลัย"
                   style={{
@@ -205,7 +228,6 @@ const General = () => {
                 </Select>
               </div>
               <div className="col-sm-5">
-                
                 <Select
                   defaultValue="ปีการศึกษา"
                   style={{
@@ -223,14 +245,14 @@ const General = () => {
                     2563
                   </Option>
                 </Select>
-                
-                
               </div>
               <div className="col-lg-2">
-                  <button className="btn btn-outline-success btn-sm"><i class="bi bi-file-earmark-arrow-down"></i> ดาวน์โหลดเอกสาร</button>
-                </div>
+                <button className="btn btn-outline-success btn-sm">
+                  <i class="bi bi-file-earmark-arrow-down"></i> ดาวน์โหลดเอกสาร
+                </button>
+              </div>
             </div>
-            
+
             <Table
               columns={columns}
               dataSource={data}
@@ -238,7 +260,6 @@ const General = () => {
                 x: 1300,
               }}
             />
-            
           </div>
         </div>
       </div>

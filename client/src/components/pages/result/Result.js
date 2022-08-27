@@ -14,38 +14,114 @@ const Result = () => {
           </div>
           <div className="col-lg-6 result__info container">
             <div className="card_r box-red">
-              <div className="result__info-header">
-                <h3>hi</h3>
-              </div>
+              <div className="result__info-header red">แพทย์</div>
               <div className="result__info-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                explicabo nemo dolores neque ipsum quisquam atque reiciendis
-                voluptas, quod doloremque assumenda cumque magni quo vero, iure
-                suscipit magnam debitis vitae.
+                <div className="result__info-title">เงินเดือน :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+                <div className="result__info-title">รายละเอียด :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
               </div>
             </div>
 
             <div className="card_r box-blue">
-              <div className="result__info-header">
-                <h3>hi</h3>
-              </div>
+              <div className="result__info-header blue">อาจารย์แพทย์</div>
               <div className="result__info-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                explicabo nemo dolores neque ipsum quisquam atque reiciendis
-                voluptas, quod doloremque assumenda cumque magni quo vero, iure
-                suscipit magnam debitis vitae.
+                <div className="result__info-title">เงินเดือน :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+                <div className="result__info-title">รายละเอียด :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
               </div>
             </div>
 
             <div className="card_r box-red">
-              <div className="result__info-header">
-                <h3>hi</h3>
+              <div className="result__info-header red">นักสาธารณสุข</div>
+              <div className="result__info-body">
+                <div className="result__info-title">เงินเดือน :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+                <div className="result__info-title">รายละเอียด :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+              </div>
+            </div>
+
+            <div className="card_r box-blue">
+              <div className="result__info-header blue">วิศวกร</div>
+              <div className="result__info-body">
+                <div className="result__info-title">เงินเดือน :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+                <div className="result__info-title">รายละเอียด :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+              </div>
+            </div>
+
+            <div className="card_r box-red">
+              <div className="result__info-header red">
+                นักเทคโนโลยีสารสนเทศ
               </div>
               <div className="result__info-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                explicabo nemo dolores neque ipsum quisquam atque reiciendis
-                voluptas, quod doloremque assumenda cumque magni quo vero, iure
-                suscipit magnam debitis vitae.
+                <div className="result__info-title">เงินเดือน :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+                <div className="result__info-title">รายละเอียด :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+              </div>
+            </div>
+
+            <div className="card_r box-blue">
+              <div className="result__info-header blue">
+                นักการตลาดการจัดการ
+              </div>
+              <div className="result__info-body">
+                <div className="result__info-title">เงินเดือน :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
+                <div className="result__info-title">รายละเอียด :</div>
+                <p>
+                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
+                  quaerat fugit quas veniam perferendis repudiandae sequi,
+                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
+                </p>
               </div>
             </div>
           </div>
