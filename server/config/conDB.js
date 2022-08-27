@@ -7,6 +7,19 @@ const pool = mariadb.createPool({
   database: "demodb",
 });
 
+const connectDB = async () => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log("connect to DB");
+  } catch (err) {
+    console.log("can not connect to DB");
+    process.exit(1);
+  } finally {
+    if (conn) return conn.end();
+  }
+};
+/*
 async function main() {
   let conn;
   try {
@@ -20,5 +33,6 @@ async function main() {
     if (conn) return conn.end();
   }
 }
-
 main();
+*/
+module.exports = connectDB;

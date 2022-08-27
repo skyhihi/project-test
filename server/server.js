@@ -1,16 +1,14 @@
 const express = require("express");
-const app = express();
-const port = 5015;
-const path = require("path");
+const cors = require("cors");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
+//const dotenv = require('dotenv')
+require("dotenv").config(); //.env เก็บ pathหรือตัวแปรต่างๆ
+const { readdirSync } = require("fs");
+//import การ connect database
+const connectDB = require("./config/conDB");
 
-const locationRoutes = require("./routes/locationRoutes");
+const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use("/api/locations", locationRoutes);
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/show"));
-});
+//connectDB
+connectDB();
