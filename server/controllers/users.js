@@ -22,7 +22,7 @@ exports.listUsers = async (req, res) => {
 
 //================================================//
 
-//Get read-user
+//Post read-user
 exports.readUser = async (req, res) => {
   const { username } = req.body;
 
@@ -33,7 +33,7 @@ exports.readUser = async (req, res) => {
   }
   try {
     const user = await connectDB.query(
-      `SELECT username FROM user WHERE username = ?`,
+      `SELECT * FROM user WHERE username = ?`,
       [username]
     );
     res.status(200).json(user);
@@ -64,15 +64,16 @@ exports.registerUsers = async (req, res) => {
   }
 
   try {
-    const username_rep = await connectDB.query(
+    const username_have = await connectDB.query(
       `SELECT username FROM user WHERE username = ?`,
       [username]
     );
-    if (username_rep.length > 0) {
+    if (username_have.length > 0) {
       return res.status(400).json({
         error: "Username already exists",
       });
     }
+
     bcrypt
       .hash(password, parseInt(process.env.SALT_ROUNDS))
       .then(async function (hashedPassword) {
@@ -85,7 +86,7 @@ exports.registerUsers = async (req, res) => {
         ]);
       });
 
-    return res.status(200).json({
+    res.status(200).json({
       status: "success",
       message: "create success",
     });

@@ -12,7 +12,7 @@ const {
 } = require("../controllers/users");
 
 router.get("/users", listUsers);
-router.get("/read-user", readUser);
+router.post("/read-user", readUser);
 
 router.post("/register", registerUsers);
 
