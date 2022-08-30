@@ -79,8 +79,8 @@ exports.registerUsers = async (req, res) => {
       .then(async function (hashedPassword) {
         await connectDB.query(`INSERT INTO user VALUES(?,?,?,?,?)`, [
           null,
-          username,
           name,
+          username,
           hashedPassword,
           "m",
         ]);
@@ -136,9 +136,12 @@ exports.changeRole = async (req, res) => {
 
 //Delete
 exports.deleteUsers = async (req, res) => {
+  const { username } = req.body;
   try {
-    //=====code=====
-    //=====code=====
+    await connectDB.query(`DELETE FROM user WHERE username = ? `,[username]);
+    res.status(200).json({
+      status:"user has been delete"
+    }); 
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error!");
