@@ -1,9 +1,54 @@
 const connectDB = require("../config/conDB");
+var bcrypt = require("bcrypt");
 
 //Get
 exports.listUsers = async (req, res) => {
-  const user = await connectDB.query("SELECT * FROM user");
-  return res.status(200).json(user);
+  try {
+    const user = await connectDB.query("SELECT * FROM user");
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({
+      error: error.message,
+      msg: "Sever Error",
+    });
+  }
+
+  /*
+    const sqlQuery = "SELECT * FROM user";
+    const rows = await connectDB.query(sqlQuery);
+    res.status(200).json(rows);
+    */
+};
+
+//================================================//
+
+//Get read-user
+exports.readUser = async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({
+      error: "Missing username",
+    });
+  }
+  try {
+    const user = await connectDB.query(
+      `SELECT username FROM user WHERE username = ?`,
+      [username]
+    );
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({
+      error: error.message,
+      msg: "Sever Error",
+    });
+  }
+
+  /*
+    const sqlQuery = "SELECT * FROM user";
+    const rows = await connectDB.query(sqlQuery);
+    res.status(200).json(rows);
+    */
 };
 
 //================================================//
@@ -28,23 +73,22 @@ exports.registerUsers = async (req, res) => {
         error: "Username already exists",
       });
     }
-    const user = await connectDB.query(`INSERT INTO user VALUES(?,?,?,?,?)`, [
-      null,
-      name,
-      username,
-      password,
-      "m",
-    ]);
+    bcrypt
+      .hash(password, parseInt(process.env.SALT_ROUNDS))
+      .then(async function (hashedPassword) {
+        await connectDB.query(`INSERT INTO user VALUES(?,?,?,?,?)`, [
+          null,
+          username,
+          name,
+          hashedPassword,
+          "m",
+        ]);
+      });
+
     return res.status(200).json({
       status: "success",
       message: "create success",
     });
-
-    /*
-    const sqlQuery = "SELECT * FROM user";
-    const rows = await connectDB.query(sqlQuery);
-    res.status(200).json(rows);
-    */
   } catch (err) {
     //ดักจับ error
     console.log(err); //log บอกว่ามี error อะไร
@@ -57,7 +101,34 @@ exports.registerUsers = async (req, res) => {
 //Put
 exports.updateUsers = async (req, res) => {
   try {
-  } catch (err) {}
+    //=====code=====
+    //=====code=====
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error!");
+  }
+};
+
+//================================================//
+
+//Put change-role
+exports.changeRole = async (req, res) => {
+  const { id, username, role } = req.body;
+  if (!id || !username || !role) {
+    return res.status(400).json({
+      error: "Missing id or username or role",
+    });
+  }
+  try {
+    await connectDB.query(`UPDATE user SET role = ? WHERE id = ?`, [role, id]);
+    res.status(200).json({
+      status: "update success",
+      msg: username + " change role",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error!");
+  }
 };
 
 //================================================//
@@ -65,7 +136,12 @@ exports.updateUsers = async (req, res) => {
 //Delete
 exports.deleteUsers = async (req, res) => {
   try {
-  } catch (err) {}
+    //=====code=====
+    //=====code=====
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error!");
+  }
 };
 
 //================================================//

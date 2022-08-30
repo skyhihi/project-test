@@ -2,11 +2,22 @@ const express = require("express");
 const router = express.Router();
 const connectDB = require("../config/conDB");
 //import controllers
-const { listUsers, registerUsers } = require("../controllers/users");
+const {
+  listUsers,
+  registerUsers,
+  updateUsers,
+  readUser,
+  changeRole,
+  deleteUsers,
+} = require("../controllers/users");
 
 router.get("/users", listUsers);
+router.get("/read-user", readUser);
 
 router.post("/register", registerUsers);
+
+router.put("/change-role", changeRole);
+router.delete("/users/:id", deleteUsers);
 
 /*
 router.get("/users", async function (req, res) {
