@@ -4,12 +4,13 @@ const connectDB = require("../config/conDB");
 //import controllers
 const {
   listUsers,
-  registerUsers,
   updateUsers,
   readUser,
   changeRole,
   deleteUsers,
 } = require("../controllers/users");
+
+const { registerUsers } = require("../controllers/auth");
 
 router.get("/users", listUsers);
 router.post("/read-user", readUser);

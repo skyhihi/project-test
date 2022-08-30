@@ -4,7 +4,10 @@ var bcrypt = require("bcrypt");
 //Get
 exports.listUsers = async (req, res) => {
   try {
-    const user = await connectDB.query("SELECT * FROM user");
+    const user = await connectDB.query(
+      "SELECT name , username , role FROM user;"
+    );
+
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({
@@ -33,7 +36,7 @@ exports.readUser = async (req, res) => {
   }
   try {
     const user = await connectDB.query(
-      `SELECT * FROM user WHERE username = ?`,
+      `SELECT name , username , role FROM user WHERE username = ?`,
       [username]
     );
     res.status(200).json(user);
@@ -138,10 +141,10 @@ exports.changeRole = async (req, res) => {
 exports.deleteUsers = async (req, res) => {
   const { username } = req.body;
   try {
-    await connectDB.query(`DELETE FROM user WHERE username = ? `,[username]);
+    await connectDB.query(`DELETE FROM user WHERE username = ? `, [username]);
     res.status(200).json({
-      status:"user has been delete"
-    }); 
+      status: "user has been delete",
+    });
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error!");
