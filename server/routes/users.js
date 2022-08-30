@@ -15,12 +15,16 @@ const { registerUsers, login } = require("../controllers/auth");
 router.get("/users", listUsers);
 
 router.post("/read-user", readUser);
+router.delete("/delete-user", deleteUsers);
 
 router.post("/register", registerUsers);
 
 router.put("/change-role", changeRole);
 
+<<<<<<< HEAD
 router.post("/login", login);
+=======
+>>>>>>> 6177bef350f697ae498ff2a0d0fb1e809ec563aa
 
 /*
 router.get("/users", async function (req, res) {
