@@ -89,42 +89,52 @@ const Login = () => {
               <span className="badge bg-secondary">LOGIN</span>
             </h1>
             <br />
-            <form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                size="large"
-                placeholder=" Username"
-                prefix={<UserOutlined />}
-                suffix={
-                  <Tooltip title="Enter Username">
-                    <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-                  </Tooltip>
-                }
-                name="username"
-                onChange={handleChange}
-              />
 
-              <br />
-              <br />
+            <Input
+              type="text"
+              size="large"
+              placeholder=" Username"
+              prefix={<UserOutlined />}
+              suffix={
+                <Tooltip title="Enter Username">
+                  <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+                </Tooltip>
+              }
+              name="username"
+              onChange={handleChange}
+            />
 
-              <Input.Password
-                type="password"
-                size="large"
-                placeholder="Password"
-                prefix={<LockFilled />}
-                iconRender={(visible) =>
-                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                }
-                name="password"
-                onChange={handleChange}
-              />
+            <br />
+            <br />
+
+            <Input.Password
+              type="password"
+              size="large"
+              placeholder="Password"
+              prefix={<LockFilled />}
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              name="password"
+              onChange={handleChange}
+            />
+            <br />
+            <br />
+            <Button
+              shape="round"
+              //size="large"
+              style={{ float: "right" }}
+              icon={<LoginOutlined />}
+              onClick={handleSubmit}
+            >
+              Login
               <br />
-              <br />
-              <button className="btn btn-primary" type="submit">
-                Submit
-              </button>
-            </form>
+            </Button>
+
             {/* 
+
+            <input className="btn btn-primary" type="submit"></input>
+
             <Button
               type="secondary"
               shape="round"
