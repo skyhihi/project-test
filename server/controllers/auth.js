@@ -60,6 +60,11 @@ exports.login = async (req, res) => {
       "SELECT password FROM user WHERE username = ?",
       [username]
     );
+    if (pw == 0) {
+      res.status(401).json({
+        error: "undefind user",
+      });
+    }
 
     bcrypt.compare(password, pw[0].password).then(async function (result) {
       const user = await connectDB.query(
