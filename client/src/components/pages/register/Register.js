@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 //import { useDispatch } from 'react-redux'
-//import { useNavigate } from "react-router-dom";
-//import type { SizeType } from "antd/es/config-provider/SizeContext";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../functions/auth";
 import {
   UserOutlined,
   InfoCircleOutlined,
@@ -18,6 +18,8 @@ import "./register.css";
 
 
 const Register = () => {
+
+  const navigate = useNavigate();
   
 const [value, setValue] = useState({
   name:"",
@@ -27,21 +29,28 @@ const [value, setValue] = useState({
   
 });
 const onClick = (e) => {
-  //e.preventDefault(); //
+  e.preventDefault(); //
   console.log(value);
   if (value.password !== value.confirm_password) {
     toast.error("Password not match");
   } else {
-    Register(value)
+    register(value)
       .then((res) => {
         console.log(res.data);
         toast.success(res.data);
+        navigate("/login");
       })
       .catch((err) => {
-        console.log(err.response.data);
-        toast.error(err.response.data);
+        console.log(err.response.data.error);
+        toast.error(err.response.data.error);
       });
   }
+
+  register(value)
+  .then((res) => {
+    toast.success(res.data.message)
+  });
+
 };
 
 const onChange = (e) => {
@@ -122,7 +131,7 @@ return(
             />
             {/******************************************************** */}
             <br />
-            <Link to="/login">
+            
             <Button
               type="submit"
               shape="round"
@@ -133,7 +142,7 @@ return(
             >
               Register
             </Button>
-            </Link>
+            
           </Space>
         </div>
         <div className="col-lg-4"></div>
