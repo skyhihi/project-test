@@ -60,14 +60,7 @@ exports.login = async (req, res) => {
       "SELECT password FROM user WHERE username = ?",
       [username]
     );
-    /*
-    const isMatch = await bcrypt.compare(password, pw[0].password);
-    if (!isMatch) {
-      return res.status(400).json({
-        status: "Password Invalid",
-      });
-    }
-    */
+
     bcrypt.compare(password, pw[0].password).then(async function (result) {
       const user = await connectDB.query(
         "SELECT name,username,role FROM user WHERE username = ?",

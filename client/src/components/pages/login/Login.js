@@ -35,7 +35,7 @@ const Login = () => {
     if (role === "a") {
       navigate("/admin");
     } else {
-      navigate("/admin");
+      navigate("/");
     }
   };
 
