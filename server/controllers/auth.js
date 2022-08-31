@@ -84,7 +84,7 @@ exports.login = async (req, res) => {
         };
 
         if (result) {
-          jwt.sign(payload, "jwtSecret", { expiresIn: "5m" }, (err, token) => {
+          jwt.sign(payload, "jwtSecret", { expiresIn: "1d" }, (err, token) => {
             if (err) throw err;
             res.status(200).json({
               token,
@@ -108,15 +108,15 @@ exports.login = async (req, res) => {
 
 //POST currentUser
 exports.currentUser = async (req, res) => {
-  const { username } = req.body;
-  const user = await connectDB.query(
-    "SELECT password FROM user WHERE username = ?",
-    [username]
-  );
-  res.send(user);
-  console.log("user", user);
+  const username = req.user.username;
 
   try {
+    const user = await connectDB.query(
+      `SELECT name , username , role FROM user WHERE username = ?`,
+      [username]
+    );
+    res.send(user[0]);
+    console.log("user", user[0]);
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error");

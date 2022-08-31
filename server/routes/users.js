@@ -9,8 +9,10 @@ const {
   changeRole,
   deleteUsers,
 } = require("../controllers/users");
+//middleware
+const { auth } = require("../middleware/auth");
 
-const { registerUsers, login } = require("../controllers/auth");
+const { registerUsers, login, currentUser } = require("../controllers/auth");
 
 router.get("/users", listUsers);
 
@@ -23,5 +25,7 @@ router.post("/register", registerUsers);
 router.put("/change-role", changeRole);
 
 router.post("/login", login);
+
+router.post("/current-user", auth, currentUser);
 
 module.exports = router;

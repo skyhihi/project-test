@@ -3,7 +3,26 @@ import MenuAdmin from "./MenuAdmin";
 import { Routes, Route } from "react-router-dom";
 import Question from "./questionAd/Question";
 import General from "./generalInformation/General";
+
+import { useNavigate } from "react-router-dom";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+//useSelector คือการเข้าถึง store
+
 const HomeAm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => ({ ...state }));
+  //console.log("user navbar " + user.username);
+
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    navigate("/");
+  };
   return (
     <>
       <MenuAdmin />
@@ -11,6 +30,19 @@ const HomeAm = () => {
       <div className="admin__content" style={{ paddingLeft: "200px" }}>
         <div className="row">
           <div className="col-lg-9">
+            {user && (
+              <>
+                <button className="btn btn-sm bg-danger" onClick={logout}>
+                  LOGOUT
+                </button>
+              </>
+            )}
+            {!user && (
+              <>
+                <p>login now</p>
+              </>
+            )}
+            <br />
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur
             laborum nam voluptatibus. Molestiae cum necessitatibus quaerat
             excepturi soluta rerum quis minima assumenda commodi incidunt

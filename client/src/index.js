@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./App";
 import "antd/dist/antd.min.css";
 import { BrowserRouter } from "react-router-dom";
+
+import { legacy_createStore as createStore } from "redux";
+//import { createStore } from "redux";
+//Redux
 import { Provider } from "react-redux";
 //import { createStore } from "redux";
-import { legacy_createStore as createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./components/reducers/index";
+
 //import 'antd/dist/antd.css'
 const store = createStore(rootReducer, composeWithDevTools());
 
