@@ -16,11 +16,16 @@ import Test from "./components/pages/test/Test";
 import General from "./components/pages/admin/generalInformation/General";
 import StudentIn from "./components/pages/admin/studentIn/StudentIn";
 
+//react-toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const { Header, Content } = Layout;
 
 const App = () => (
   <>
     <Layout style={{ height: "100vh", width: "100vw" }}>
+      <ToastContainer />
       <Header
         style={{
           position: "fixed",

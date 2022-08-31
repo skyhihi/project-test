@@ -10,9 +10,10 @@ const {
   deleteUsers,
 } = require("../controllers/users");
 
-const { registerUsers } = require("../controllers/auth");
+const { registerUsers, login } = require("../controllers/auth");
 
 router.get("/users", listUsers);
+
 router.post("/read-user", readUser);
 router.delete("/delete-user", deleteUsers);
 
@@ -20,6 +21,7 @@ router.post("/register", registerUsers);
 
 router.put("/change-role", changeRole);
 
+router.post("/login", login);
 
 /*
 router.get("/users", async function (req, res) {
