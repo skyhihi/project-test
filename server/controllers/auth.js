@@ -56,45 +56,50 @@ exports.login = async (req, res) => {
     });
   }
   try {
-    const pw = await connectDB.query(
-      "SELECT password FROM user WHERE username = ?",
+    const username_have = await connectDB.query(
+      "SELECT username FROM user WHERE username = ?",
       [username]
     );
-    if (pw == 0) {
+    if (username_have.length == 0) {
       res.status(401).json({
-        error: "undefind user",
+        error: "undefined user",
       });
-    }
-
-    bcrypt.compare(password, pw[0].password).then(async function (result) {
-      const user = await connectDB.query(
-        "SELECT name,username,role FROM user WHERE username = ?",
+    } else {
+      const pw = await connectDB.query(
+        "SELECT password FROM user WHERE username = ?",
         [username]
       );
-      const payload = {
-        user: {
-          name: user[0].name,
-          username: user[0].username,
-          role: user[0].role,
-        },
-      };
 
-      if (result) {
-        jwt.sign(payload, "jwtSecret", { expiresIn: "5m" }, (err, token) => {
-          if (err) throw err;
-          res.status(200).json({
-            token,
-            payload,
-            status: "success",
-            message: "User logged in",
+      bcrypt.compare(password, pw[0].password).then(async function (result) {
+        const user = await connectDB.query(
+          "SELECT name,username,role FROM user WHERE username = ?",
+          [username]
+        );
+        const payload = {
+          user: {
+            name: user[0].name,
+            username: user[0].username,
+            role: user[0].role,
+          },
+        };
+
+        if (result) {
+          jwt.sign(payload, "jwtSecret", { expiresIn: "5m" }, (err, token) => {
+            if (err) throw err;
+            res.status(200).json({
+              token,
+              payload,
+              status: "success",
+              message: "User logged in",
+            });
           });
-        });
-      } else {
-        return res.status(400).json({
-          status: "Password Invalid",
-        });
-      }
-    });
+        } else {
+          return res.status(400).json({
+            status: "Password Invalid",
+          });
+        }
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error");

@@ -73,8 +73,8 @@ const Login = () => {
         roleBaseRedirect(res.data.payload.user.role);
       })
       .catch((err) => {
-        console.log(err.response.data);
-        toast.error(err.response.data);
+        console.log(err.response.data.error);
+        toast.error(err.response.data.error);
       });
   };
 
