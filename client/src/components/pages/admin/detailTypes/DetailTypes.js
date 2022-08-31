@@ -1,5 +1,6 @@
 import React from "react";
 import MenuAdmin from "../MenuAdmin";
+
 const DetailTypes = () => {
   return (
     <>
