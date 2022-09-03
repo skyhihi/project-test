@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./types.css";
+//import { type } from "../../functions/type";
+
 
 const Type = () => {
+  
   return (
     <>
       <div className="container-fluid">
