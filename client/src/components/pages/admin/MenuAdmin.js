@@ -96,13 +96,7 @@ const MenuAdmin = () => {
           //paddingTop: "1rem",
         }}
         items={items}
-      >
-        {/** 
-        <Menu.Item>
-          <Link to="/admin/question">question</Link>
-        </Menu.Item>
-        */}
-      </Menu>
+      ></Menu>
     </>
   );
 };
