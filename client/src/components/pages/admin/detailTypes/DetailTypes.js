@@ -10,10 +10,11 @@ import { toast } from "react-toastify";
 const DetailTypes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  {
+    /* 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(value);
+   console.log(value);
 
     login(value)
       .then((res) => {
@@ -38,7 +39,8 @@ const DetailTypes = () => {
         toast.error(err.response.data.error);
       });
   };
-
+*/
+  }
   return (
     <>
       <MenuAdmin />
@@ -84,7 +86,7 @@ const DetailTypes = () => {
                           <button
                             className="btn btn-warning btn-sm me-3"
                             name="edit"
-                            onChange={handleChange}
+                            // onChange={handleChange}
                           >
                             แก้ไข
                           </button>
@@ -99,18 +101,18 @@ const DetailTypes = () => {
                           <button
                             className="btn btn-warning btn-sm me-3"
                             name="edit"
-                            onChange={handleChange}
+                            //     onChange={handleChange}
                           >
                             แก้ไข
                           </button>
                           <button
                             className="btn btn-danger btn-sm"
                             name="delete"
-                            onChange={handleChange}
+                            //    onChange={handleChange}
                           >
                             ลบ
                           </button>
-                        </td>  
+                        </td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
@@ -120,7 +122,7 @@ const DetailTypes = () => {
                           <button
                             className="btn btn-warning btn-sm me-3"
                             name="edit"
-                            onChange={handleChange}
+                            //    onChange={handleChange}
                           >
                             แก้ไข
                           </button>
@@ -128,7 +130,7 @@ const DetailTypes = () => {
                           <button
                             className="btn btn-danger btn-sm"
                             name="delete"
-                            onChange={handleChange}
+                            //    onChange={handleChange}
                           >
                             ลบ
                           </button>
