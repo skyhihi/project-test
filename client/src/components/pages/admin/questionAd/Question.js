@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import MenuAdmin from "../MenuAdmin";
-import { Select, Input, Tooltip, Button, Modal } from "antd";
+import {
+  Select,
+  Input,
+  Tooltip,
+  Button,
+  Modal,
+  message,
+  Popconfirm,
+} from "antd";
 import {
   listQuestions,
   removeQuestion,
@@ -88,20 +96,29 @@ const Question = () => {
       });
   };
 
-  const handleRemove = (id) => {
-    if (window.confirm("Are You Sure Delete")) {
-      removeQuestion(id)
-        .then((res) => {
-          //console.log(res.data.status);
-          toast.success(res.data.status);
-          loadData();
-        })
-        .catch((err) => {
-          //console.log(err.response.data.error);
-          toast.error(err.response.data.error);
-        });
-    }
+  //==========================
+  const confirm = (id) => {
+    //console.log(e);
+    //message.success("Click on Yes");
+    removeQuestion(id)
+      .then((res) => {
+        //console.log(res.data.status);
+        toast.success(res.data.status);
+        loadData();
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
   };
+
+  const cancel = (e) => {
+    //console.log(e);
+    message.error("Click on No");
+  };
+
+  //==========================
+
   const [selectedType, setSelectedType] = useState();
   const handleChangeType = (id) => {
     setSelectedType(id);
@@ -193,40 +210,47 @@ const Question = () => {
               <br />
               <h5 style={{ textAlign: "center" }}>ข้อมูลคำถาม</h5>
               <div className="card-body">
-                <div
-                  className="ques__layout-head"
-                  style={{ textAlign: "center" }}
-                >
-                  {/**<div className="col-lg-6"></div>*/}
-                  <Select
-                    defaultValue="ทั้งหมด"
-                    style={{
-                      width: "50%",
-                      margin: "0 2rem",
-                    }}
-                    onChange={(value) => handleChange(value)}
-                    value={selected}
-                    //onChange={handleChange}
-                  >
-                    {typeData.map((item, index) => (
-                      <Option value={item.name} key={index}>
-                        {item.name}
-                      </Option>
-                    ))}
-                  </Select>
-
-                  <Button onClick={clearSelected}>Clear Selected</Button>
-                </div>
-
                 <div className="ques__body">
-                  {/**================================== */}
+                  <br />
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-primary"
+                    disabled
+                  >
+                    เพิ่มคำถาม :
+                  </button>
+                  <br />
+                  <br />
+                  {/** 
+                  <h5>
+                    <span className="badge badge-pill bg-secondary">
+                      เพิ่มคำถาม :
+                    </span>
+                  </h5>*/}
                   <div className="row">
-                    <div className="col-md-1"></div>
                     <div className="col-md-3">
+                      <Select
+                        placeholder="กรุณาเลือก"
+                        style={{
+                          width: "100%",
+                        }}
+                        //size="large"
+                        onChange={(id) => handleChangeType(id)}
+                        value={selectedType}
+                        //onChange={handleChange}
+                      >
+                        {typeData.map((item, index) => (
+                          <Option value={item.type_id} key={index}>
+                            {item.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </div>
+                    <div className="col-md-7">
                       <Input
                         type="text"
                         name="detail"
-                        size="large"
+                        //size="large"
                         placeholder=" เพิ่มคำถาม"
                         onChange={onChange}
                         prefix={
@@ -241,24 +265,7 @@ const Question = () => {
                         }
                       />
                     </div>
-                    <div className="col-md-3">
-                      <Select
-                        placeholder="กรุณาเลือก"
-                        style={{
-                          width: "100%",
-                        }}
-                        size="large"
-                        onChange={(id) => handleChangeType(id)}
-                        value={selectedType}
-                        //onChange={handleChange}
-                      >
-                        {typeData.map((item, index) => (
-                          <Option value={item.type_id} key={index}>
-                            {item.name}
-                          </Option>
-                        ))}
-                      </Select>
-                    </div>
+
                     <div className="col-md-2">
                       <button
                         type="button"
@@ -266,19 +273,35 @@ const Question = () => {
                         onClick={onClick}
                       >
                         <i class="bi bi-plus-square me-2"></i>
-                        เพิ่มคำถาม
+                        เพิ่ม
                       </button>
                     </div>
-                    <div className="col-md-1"></div>
                   </div>
 
-                  {/**================================== */}
+                  <br />
+                  <hr />
+                  <br />
 
+                  <Select
+                    defaultValue="ทั้งหมด"
+                    style={{
+                      width: "25%",
+                      marginRight: "1rem",
+                    }}
+                    onChange={(value) => handleChange(value)}
+                    value={selected}
+                    //onChange={handleChange}
+                  >
+                    {typeData.map((item, index) => (
+                      <Option value={item.name} key={index}>
+                        {item.name}
+                      </Option>
+                    ))}
+                  </Select>
+
+                  <Button onClick={clearSelected}>Clear Selected</Button>
                   <br />
                   <br />
-
-                  {/** ======bootstap====== */}
-                  {/** */}
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -288,8 +311,6 @@ const Question = () => {
                         <th scope="col"></th>
                       </tr>
                     </thead>
-
-
 
                     <tbody>
                       {questions.map((item, index) => (
@@ -309,13 +330,29 @@ const Question = () => {
                                 >
                                   แก้ไข
                                 </Button>
-
+                                <Popconfirm
+                                  placement="topRight"
+                                  title="Are you sure?"
+                                  onConfirm={() => confirm(item.id)}
+                                  onCancel={cancel}
+                                  okText="Yes"
+                                  cancelText="No"
+                                >
+                                  <button
+                                    className="btn btn-danger btn-sm"
+                                    //onClick={() => handleRemove(item.id)}
+                                  >
+                                    ลบ
+                                  </button>
+                                </Popconfirm>
+                                {/** 
                                 <button
                                   className="btn btn-danger btn-sm"
                                   onClick={() => handleRemove(item.id)}
                                 >
                                   ลบ
                                 </button>
+                                */}
                               </td>
                             </>
                           ) : (
@@ -339,12 +376,21 @@ const Question = () => {
                                   แก้ไข
                                 </Button>
 
-                                <button
-                                  className="btn btn-danger btn-sm"
-                                  onClick={() => handleRemove(item.id)}
+                                <Popconfirm
+                                  title="Are you sure?"
+                                  placement="topRight"
+                                  onConfirm={() => confirm(item.id)}
+                                  onCancel={cancel}
+                                  okText="Yes"
+                                  cancelText="No"
                                 >
-                                  ลบ
-                                </button>
+                                  <button
+                                    className="btn btn-danger btn-sm"
+                                    //onClick={() => handleRemove(item.id)}
+                                  >
+                                    ลบ
+                                  </button>
+                                </Popconfirm>
                               </td>
                             </>
                           ) : (
@@ -353,7 +399,6 @@ const Question = () => {
                         </tr>
                       ))}
                     </tbody>
-
                   </table>
                   <Modal
                     title="แก้ไขคำถาม"
