@@ -5,38 +5,51 @@ import Highlighter from "react-highlight-words";
 
 import MenuAdmin from "../MenuAdmin";
 
-const data = [
-  {
-    key: "1",
-    name: "ชวมนต์",
-    ID: "6203051613204",
-    year: "2562",
-    uni: "Mahidol",
-  },
-  {
-    key: "2",
-    name: "ปาณิสรา",
-    ID: "6203051613212",
-    year: "2562",
-    uni: "Mahidol",
-  },
-  {
-    key: "3",
-    name: "วริศรา",
-    ID: "6203051613212",
-    year: "2562",
-    uni: "Mahidol",
-  },
-  {
-    key: "4",
-    name: "ปุณรัตน์",
-    ID: "6203051613212",
-    year: "2562",
-    uni: "Mahidol",
-  },
-];
+//import { listUser } from "../../../../../../../../serverPJ/server/controllers/users"
 
 const StudentIn = () => {
+
+  //const loadData = () =>{
+    //listUser()
+    //.then((res) => {
+      //console.log(res)
+    //}).catch((err)=> {
+      //console.log(err)
+    //}); 
+  //}
+//---------------------------------------------------------//
+  const data = [
+    {
+      key: "1",
+      name: "",
+      ID: "6203051613204",
+      year: "2562",
+      uni: "Mahidol",
+   },
+    {
+      key: "2",
+      name: "ปาณิสรา",
+      ID: "6203051613212",
+      year: "2562",
+      uni: "Mahidol",
+    },
+    {
+      key: "3",
+      name: "วริศรา",
+      ID: "6203051613212",
+      year: "2562",
+      uni: "Mahidol",
+    },
+    {
+     key: "4",
+     name: "ปุณรัตน์",
+     ID: "6203051613212",
+     year: "2562",
+     uni: "Mahidol",
+    },
+  ];
+  
+//-----------------------------------------//
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);

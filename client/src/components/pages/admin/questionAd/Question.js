@@ -215,6 +215,9 @@ const Question = () => {
                         <th scope="col"></th>
                       </tr>
                     </thead>
+
+
+
                     <tbody>
                       {questions.map((item, index) => (
                         <tr key={index}>
@@ -285,6 +288,7 @@ const Question = () => {
                         </tr>
                       ))}
                     </tbody>
+
                   </table>
 
                   {/**================================== */}

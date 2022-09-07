@@ -1,46 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuAdmin from "../MenuAdmin";
-import { createDetail_type } from "../../../functions/type";
 
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+//import { useDispatch } from "react-redux";
+//import { useNavigate } from "react-router-dom";
+
+import {
+  type,
+  create_type,
+  delete_type,
+  edit_typeName,
+  edit_typeSym,
+} from "../../../functions/type.js";
 
 import { toast } from "react-toastify";
 
 const DetailTypes = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  {
-    /* 
-  const handleChange = (e) => {
-    e.preventDefault();
-   console.log(value);
+  //const [value, setValue] = useState({
+    //type_id: "",
+    //name: "",
+   // type_sym: "",
+  //});
 
-    login(value)
+  const [ListType, setListType] = useState([]);
+  const loadData = () => {
+    type()
       .then((res) => {
-        //console.log(res.data);
-        toast.success(res.data.payload.user.username + " Create Success");
-
-        dispatch({
-          type: "TYPE",
-          payload: {
-            token: res.data.token,
-            username: res.data.payload.user.username,
-            role: res.data.payload.user.role,
-          },
-        });
-
-        //เก็บเข้าคลังของเว็บ
-        localStorage.setItem("token", res.data.token);
-        roleBaseRedirect(res.data.payload.user.role);
+        setListType(res.data);
       })
       .catch((err) => {
-        console.log(err.response.data.error);
-        toast.error(err.response.data.error);
+        console.log(err);
       });
   };
-*/
-  }
+  useEffect(() => {
+    loadData();
+    // eslint-disable-next-line
+  }, []);
+
+  
+  const handleRemove = (id) => {
+    if (window.confirm("Are You Sure Delete")) {
+      delete_type(id)
+        .then((res) => {
+          console.log(res.data.status);
+          toast.success(res.data.status);
+          loadData();
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
+  };
+
+  //useEffect(() => {
+  //loadData();
+  //}, []);
+
   return (
     <>
       <MenuAdmin />
@@ -72,71 +86,43 @@ const DetailTypes = () => {
                     <thead>
                       <tr>
                         <th scope="col">no.</th>
+                        <th scope="col">symbol</th>
                         <th scope="col">ชื่อหมวด</th>
-
                         <th scope="col"></th>
                       </tr>
                     </thead>
+
+                    {/**=================body================= */}
+
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>วิศวกร</td>
-
-                        <td>
-                          <button
-                            className="btn btn-warning btn-sm me-3"
-                            name="edit"
-                            // onChange={handleChange}
-                          >
-                            แก้ไข
-                          </button>
-                          <button className="btn btn-danger btn-sm">ลบ</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>หมอ</td>
-
-                        <td>
-                          <button
-                            className="btn btn-warning btn-sm me-3"
-                            name="edit"
-                            //     onChange={handleChange}
-                          >
-                            แก้ไข
-                          </button>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            name="delete"
-                            //    onChange={handleChange}
-                          >
-                            ลบ
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>นักเทคโนโลยี</td>
-
-                        <td>
-                          <button
-                            className="btn btn-warning btn-sm me-3"
-                            name="edit"
-                            //    onChange={handleChange}
-                          >
-                            แก้ไข
-                          </button>
-
-                          <button
-                            className="btn btn-danger btn-sm"
-                            name="delete"
-                            //    onChange={handleChange}
-                          >
-                            ลบ
-                          </button>
-                        </td>
-                      </tr>
+                      {ListType.map((item, index) => (
+                        <tr key={index}>
+                          <>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.type_sym}</td>
+                            <td>{item.name}</td>
+                            <td>
+                              <button
+                                className="btn btn-warning btn-sm me-3"
+                                name="edit"
+                                //     onChange={handleChange}
+                              >
+                                แก้ไข
+                              </button>
+                              <button
+                                className="btn btn-danger btn-sm"
+                                //    onChange={handleChange}
+                                onClick={() => handleRemove(item.id)}
+                              >
+                                ลบ
+                              </button>
+                            </td>
+                          </>
+                        </tr>
+                      ))}
                     </tbody>
+
+                    {/**=================body================= */}
                   </table>
                 </div>
               </div>
