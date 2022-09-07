@@ -111,7 +111,7 @@ const HeaderApp = () => {
             <Link to="/register">Register</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/admin">Admin</Link>
+            <Link to="/admin/*">Admin</Link>
           </Menu.Item>
         </Menu>
       </Drawer>

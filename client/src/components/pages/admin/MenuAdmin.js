@@ -26,7 +26,7 @@ const items = [
   getItem(
     "หน้าหลัก",
     "ha",
-    <Link to="/admin">
+    <Link to="/admin/*">
       <NumberOutlined />
     </Link>
   ),
