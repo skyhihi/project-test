@@ -23,7 +23,7 @@ const DetailTypes = () => {
 
   const [ListType, setListType] = useState([]);
   const loadData = () => {
-    type()
+    type()     
       .then((res) => {
         setListType(res.data);
       })
