@@ -1,9 +1,10 @@
-import { Select, Input,} from "antd";
-import { UserOutlined, NumberOutlined,} from "@ant-design/icons";
-import React from "react";
+import { Select, Input } from "antd";
+import { UserOutlined, NumberOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import RadioBtn from "./RadioBtn";
-//import Data from "./Data";
+
+import { listQuestions } from "../../functions/question";
 
 const { Option } = Select;
 
@@ -12,7 +13,20 @@ const Test = () => {
     console.log(`selected ${value}`);
   };
 
-  //Data.map(item, index);
+  const [questions, setQuestions] = useState([]);
+  const loadData = () => {
+    listQuestions()
+      .then((res) => {
+        setQuestions(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    loadData();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -78,87 +92,32 @@ const Test = () => {
           <br />
           <hr />
 
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันเรียนหมอและเก่งวิชาคณิตศาสตร์</h5>
-              <RadioBtn />
-            </center>
-          </div>
+          {questions.map((item, index) => (
+            <>
+              <div className="test__qu">
+                <br />
+                <center>
+                  <label>{index + 1}. </label>
+                  <h5>{item.detail}</h5>
+                  <RadioBtn />
+                </center>
+              </div>
+            </>
+          ))}
 
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันชอบเขียนคำสั่งโปรแกรมคอมพิวเตอร์</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันเรียนแพทย์แต่เล่นหุ้น ลงทุนทองคำ เลือกซื้อกองทุนเป็น</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันเรียนหมอและชอบลงพื้นที่ไปพูดคุยกับชาวบ้าน</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันฝันอยากเป็นหมอและครูสอนหมอ</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันสนใจเรียนหมอเพื่อดูแลรักษาคนไข้ที่โรงพยาบาล</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันสนใจกลไกทำงานข้างในอุปกรณ์การแพทย์</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันสนใจระบบรักษาความปลอดภัยของข้อมูลในคอมพิวเตอร์</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>
-                ฉันชอบดูโฆษณา รายการส่งเสริมการค้าใหม่ๆ
-                เพื่อจำวิธีนำเสนอที่ติดหูติดใจ
-              </h5>
-              <RadioBtn />
-            </center>
-          </div>
-          <div className="test__qu">
-            <br />
-            <center>
-              <h5>ฉันเชื่อว่าหมอให้ความรู้ป้องกันโรคสำคัญกว่าหมอรักษาโรค</h5>
-              <RadioBtn />
-            </center>
-          </div>
-          
-         
-            <Link to="/result">
-            <button type="button" className="btn btn-secondary" style={{float:"right",marginTop:"1rem",marginBottom:"5rem"}} >คำนวณผลลัพธ์  <i className="bi bi-arrow-right"></i></button>
-            </Link>
-        
-         
+          <Link to="/result">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{
+                float: "right",
+                marginTop: "1rem",
+                marginBottom: "5rem",
+              }}
+            >
+              คำนวณผลลัพธ์ <i className="bi bi-arrow-right"></i>
+            </button>
+          </Link>
         </div>
 
         <div className="col-lg-2"></div>
