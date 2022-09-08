@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import MenuAdmin from "../MenuAdmin";
-import { message, Popconfirm } from "antd";
+import { Button, Modal, Input, message, Popconfirm } from "antd";
 //import { useDispatch } from "react-redux";
 //import { useNavigate } from "react-router-dom";
+import { FontSizeOutlined } from "@ant-design/icons";
 
 import {
   type,
   //create_type,
   delete_type,
-  //edit_typeName,
-  //edit_typeSym,
+  edit_typeName,
+  edit_typeSym,
 } from "../../../functions/type.js";
 
 import { toast } from "react-toastify";
 
 const DetailTypes = () => {
-  {/**--------------------ลิสหมวดหมู่--------------- */}
+  /**--------------------ลิสหมวดหมู่--------------- */
   const [ListType, setListType] = useState([]);
   const loadData = () => {
     type()
@@ -26,12 +27,12 @@ const DetailTypes = () => {
         console.log(err);
       });
   };
-{/**----------------------------------- */}
+  /**----------------------------------- */
   useEffect(() => {
     loadData();
     // eslint-disable-next-line
   }, []);
-{/**--------------------ตุ่มลบ--------------- */}
+  /**--------------------ตุ่มลบ--------------- */
   const buttonDelete = (type_id) => {
     delete_type(type_id)
       .then((res) => {
@@ -42,34 +43,84 @@ const DetailTypes = () => {
         toast.error(err.response.data.error);
       });
   };
-{/**----------------------------------- */}
+  /**----------------------------------- */
   const cancel = () => {
     //console.log(e);
     message.error("Message was not deleted");
   };
 
-  {/**--------------------popup--------------- */}
-  const showModal = (id, detail, name) => {
+  /**--------------------popup--------------- */
+
+  const [editType, setEditType] = useState({
+    type_id: "",
+    name: "",
+  });
+  const [editTypeSym, setEditSymbol] = useState({
+    type_id: "",
+    symbol: "",
+  });
+
+  const showModal = (type_id, name, type_sym) => {
     setIsModalOpen(true);
-    setEditDetail({ ...editDetail, id: id });
-    setDetailOld(detail);
-    setDetailTypeOld(name);
-    setEditTypeDetail({ ...editTypeDetail, id: id });
-    //console.log(id);
+    setEditType({ ...editType, type_id: type_id, name: name });
+    setOriginalType(name);
+    setOriginalSymbol(type_sym);
+    setEditSymbol({ ...editTypeSym, type_id: type_id, symbol: type_sym });
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false); {/** ปิด popup */}
+  const [isModalOpen, setIsModalOpen] = useState(false); /** ปิด popup */
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  const [editDetail, setEditDetail] = useState({
-    id: "",
-    detail: "",
-  });
+  //-------------------<button>กดปุ่มเพื่อเปลี่ยน-------------------//
+  const handleSubmitChange = () => {
+    console.log(editType);
+    edit_typeName(editType)
+      .then((res) => {
+        //console.log(res.data.status);
+        toast.success(res.data.status);
+        loadData();
 
-  const [detailOld, setDetailOld] = useState();
-  const [detailTypeOld, setDetailTypeOld] = useState();
+        setIsModalOpen(false);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
+  //----------------------------------------------------------//
+  //-------------------<Input>ที่ต้องการเปลี่ยน-------------------//
+  const handleChangeType = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setEditType({ ...editType, [e.target.name]: e.target.value });
+  };
+  //----------------------------------------------------------//
+  const [originalType, setOriginalType] = useState();
+  const [originalSymbol, setOriginalSymbol] = useState();
+
+  const handleChangeTypeSym = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setEditSymbol({ ...editTypeSym, symbol: e.target.value });
+  };
+
+  const handleSubmitSymbolType = () => {
+    console.log(editTypeSym);
+    edit_typeSym(editTypeSym)
+      .then((res) => {
+        console.log(res.data.status);
+        toast.success(res.data.status);
+        loadData();
+
+        setIsModalOpen(false);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
 
   return (
     <>
@@ -101,9 +152,10 @@ const DetailTypes = () => {
                   <table class="table table-striped">
                     <thead>
                       <tr>
+                        <th scope="col"></th>
                         <th scope="col">no.</th>
-                        <th scope="col">symbol</th>
                         <th scope="col">ชื่อหมวด</th>
+                        <th scope="col">symbol</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
@@ -114,40 +166,49 @@ const DetailTypes = () => {
                       {ListType.map((item, index) => (
                         <tr key={index}>
                           <>
-                            <th scope="row">{index + 1}</th>
-                            <td>{item.type_sym}</td>
+                          <th scope="col"></th>
+                            <th scope="row">{index + 1}</th>{" "}
                             <td>{item.name}</td>
+                            <td>{item.type_sym}</td>
                             <td>
-                              <button className="btn btn-info btn-sm me-3 text-light" name="add" >
-                              <i class="bi bi-plus"></i> เพิ่มรายละเอียด</button>
+                              <button
+                                className="btn btn-info btn-sm me-3 text-light"
+                                name="add"
+                              >
+                                <i class="bi bi-plus"></i> เพิ่มรายละเอียด
+                              </button>
                               <button
                                 className="btn btn-warning btn-sm me-3 "
                                 name="edit"
+                                onClick={() =>
+                                  showModal(
+                                    item.type_id,
+                                    item.name,
+                                    item.type_sym
+                                  )
+                                }
                               >
                                 แก้ไข
                               </button>
 
                               {/*-------------------------------*/}
 
-                              
-                                
-                                  <Popconfirm
-                                    placement="topRight"
-                                    title="Are you sure?"
-                                    onConfirm={() => buttonDelete(item.type_id)}
-                                    onCancel={cancel}
-                                    okText="Yes"
-                                    cancelText="No"
-                                  >
-                                    <button
-                                      className="btn btn-danger btn-sm "
-                                      type="text"
-                                      style={{ marginLeft: "1rem" }}
-                                    >
-                                      ลบ
-                                    </button>
-                                  </Popconfirm>
-                               
+                              <Popconfirm
+                                placement="topRight"
+                                title="Are you sure?"
+                                onConfirm={() => buttonDelete(item.type_id)}
+                                onCancel={cancel}
+                                okText="Yes"
+                                cancelText="No"
+                              >
+                                <button
+                                  className="btn btn-danger btn-sm "
+                                  type="text"
+                                  style={{ marginLeft: "1rem" }}
+                                >
+                                  ลบ
+                                </button>
+                              </Popconfirm>
 
                               {/*-------------------------------*/}
                             </td>
@@ -158,6 +219,68 @@ const DetailTypes = () => {
 
                     {/**=================body================= */}
                   </table>
+
+                  {/*-------------popup------------------*/}
+                  <Modal
+                    title="แก้ไขชื่อหมวดหมู่"
+                    open={isModalOpen}
+                    footer={null}
+                    onCancel={handleCancel}
+                  >
+                    <label>
+                      <b>หมวดหมู่ : {originalType}</b>
+                    </label>
+                    <br />
+                    <br />
+                    <Input
+                      type="text"
+                      name="name"
+                      placeholder={" แก้ไขหมวดหมู่"}
+                      onChange={handleChangeType}
+                      prefix={
+                        <FontSizeOutlined className="site-form-item-icon" />
+                      }
+                    />
+                    <Button
+                      type="primary"
+                      style={{ marginTop: "0.5rem" }}
+                      onClick={handleSubmitChange}
+                    >
+                      เปลี่ยน
+                    </Button>
+                    <br />
+                    <br />
+                    <hr />
+
+                    <label>
+                      <b>อักษรย่อ : {originalSymbol}</b>
+                    </label>
+                    <br />
+                    <br />
+                    <Input
+                      type="text"
+                      name="symbol" //ควรเป็นชื่อเดียวกันกับในuseState
+                      maxLength={1}
+                      placeholder={
+                        " แก้ไขอักษรย่อ ( กรุณาใส่ตัวอักษรเพียงหนึ่งตัวอักษร )"
+                      }
+                      onChange={handleChangeTypeSym}
+                      prefix={
+                        <FontSizeOutlined className="site-form-item-icon" />
+                      }
+                    />
+                    <Button
+                      type="primary"
+                      style={{ marginTop: "0.5rem" }}
+                      onClick={handleSubmitSymbolType}
+                    >
+                      เปลี่ยน
+                    </Button>
+                    <br />
+                    <br />
+                  </Modal>
+
+                  {/*-------------popup------------------*/}
                 </div>
               </div>
             </div>
