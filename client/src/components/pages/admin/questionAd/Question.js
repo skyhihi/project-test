@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MenuAdmin from "../MenuAdmin";
-import {
-  Select,
-  Input,
-  Tooltip,
-  Button,
-  Modal,
-  message,
-  Popconfirm,
-} from "antd";
+import { Select, Input, Button, Modal, message, Popconfirm } from "antd";
 import {
   listQuestions,
   removeQuestion,
@@ -19,7 +11,7 @@ import {
 
 import { type } from "../../../functions/type";
 
-import { FormOutlined, FontSizeOutlined } from "@ant-design/icons";
+import { FontSizeOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 const { Option } = Select;
 
@@ -252,16 +244,10 @@ const Question = () => {
                         name="detail"
                         //size="large"
                         placeholder=" เพิ่มคำถาม"
+                        allowClear
                         onChange={onChange}
                         prefix={
                           <FontSizeOutlined className="site-form-item-icon" />
-                        }
-                        suffix={
-                          <Tooltip title="Extra Information">
-                            <FormOutlined
-                              style={{ color: "rgba(0,0,0,.45)" }}
-                            />
-                          </Tooltip>
                         }
                       />
                     </div>
@@ -299,7 +285,18 @@ const Question = () => {
                     ))}
                   </Select>
 
-                  <Button onClick={clearSelected}>Clear Selected</Button>
+                  <Button
+                    type="primary"
+                    style={{
+                      marginRight: "1rem",
+                      backgroundColor: "#1C91B6",
+                      borderStyle: "none",
+                      color: "while",
+                    }}
+                    onClick={clearSelected}
+                  >
+                    Clear Selected
+                  </Button>
                   <br />
                   <br />
                   <table class="table table-striped">
@@ -323,7 +320,12 @@ const Question = () => {
                               <td>
                                 <Button
                                   type="primary"
-                                  style={{ marginRight: "1rem" }}
+                                  style={{
+                                    marginRight: "1rem",
+                                    backgroundColor: "#ffe71a",
+                                    borderStyle: "none",
+                                    color: "black",
+                                  }}
                                   onClick={() =>
                                     showModal(item.id, item.detail, item.name)
                                   }
@@ -368,7 +370,12 @@ const Question = () => {
                               <td>
                                 <Button
                                   type="primary"
-                                  style={{ marginRight: "1rem" }}
+                                  style={{
+                                    marginRight: "1rem",
+                                    backgroundColor: "#ffe71a",
+                                    borderStyle: "none",
+                                    color: "black",
+                                  }}
                                   onClick={() =>
                                     showModal(item.id, item.detail, item.name)
                                   }
