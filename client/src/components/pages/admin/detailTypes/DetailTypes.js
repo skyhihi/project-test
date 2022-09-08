@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from "react";
 import MenuAdmin from "../MenuAdmin";
-
+import { message, Popconfirm } from "antd";
 //import { useDispatch } from "react-redux";
 //import { useNavigate } from "react-router-dom";
 
 import {
   type,
-  create_type,
+  //create_type,
   delete_type,
-  edit_typeName,
-  edit_typeSym,
+  //edit_typeName,
+  //edit_typeSym,
 } from "../../../functions/type.js";
 
 import { toast } from "react-toastify";
 
 const DetailTypes = () => {
-  //const [value, setValue] = useState({
-    //type_id: "",
-    //name: "",
-   // type_sym: "",
-  //});
-
+  {/**--------------------ลิสหมวดหมู่--------------- */}
   const [ListType, setListType] = useState([]);
   const loadData = () => {
-    type()     
+    type()
       .then((res) => {
         setListType(res.data);
       })
@@ -31,29 +26,50 @@ const DetailTypes = () => {
         console.log(err);
       });
   };
+{/**----------------------------------- */}
   useEffect(() => {
     loadData();
     // eslint-disable-next-line
   }, []);
-
-  
-  const handleRemove = (id) => {
-    if (window.confirm("Are You Sure Delete")) {
-      delete_type(id)
-        .then((res) => {
-          console.log(res.data.status);
-          toast.success(res.data.status);
-          loadData();
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
-    }
+{/**--------------------ตุ่มลบ--------------- */}
+  const buttonDelete = (type_id) => {
+    delete_type(type_id)
+      .then((res) => {
+        toast.success(res.data.status);
+        loadData();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
+  };
+{/**----------------------------------- */}
+  const cancel = () => {
+    //console.log(e);
+    message.error("Message was not deleted");
   };
 
-  //useEffect(() => {
-  //loadData();
-  //}, []);
+  {/**--------------------popup--------------- */}
+  const showModal = (id, detail, name) => {
+    setIsModalOpen(true);
+    setEditDetail({ ...editDetail, id: id });
+    setDetailOld(detail);
+    setDetailTypeOld(name);
+    setEditTypeDetail({ ...editTypeDetail, id: id });
+    //console.log(id);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false); {/** ปิด popup */}
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const [editDetail, setEditDetail] = useState({
+    id: "",
+    detail: "",
+  });
+
+  const [detailOld, setDetailOld] = useState();
+  const [detailTypeOld, setDetailTypeOld] = useState();
 
   return (
     <>
@@ -102,20 +118,38 @@ const DetailTypes = () => {
                             <td>{item.type_sym}</td>
                             <td>{item.name}</td>
                             <td>
+                              <button className="btn btn-info btn-sm me-3 text-light" name="add" >
+                              <i class="bi bi-plus"></i> เพิ่มรายละเอียด</button>
                               <button
-                                className="btn btn-warning btn-sm me-3"
+                                className="btn btn-warning btn-sm me-3 "
                                 name="edit"
-                                //     onChange={handleChange}
                               >
                                 แก้ไข
                               </button>
-                              <button
-                                className="btn btn-danger btn-sm"
-                                //    onChange={handleChange}
-                                onClick={() => handleRemove(item.id)}
-                              >
-                                ลบ
-                              </button>
+
+                              {/*-------------------------------*/}
+
+                              
+                                
+                                  <Popconfirm
+                                    placement="topRight"
+                                    title="Are you sure?"
+                                    onConfirm={() => buttonDelete(item.type_id)}
+                                    onCancel={cancel}
+                                    okText="Yes"
+                                    cancelText="No"
+                                  >
+                                    <button
+                                      className="btn btn-danger btn-sm "
+                                      type="text"
+                                      style={{ marginLeft: "1rem" }}
+                                    >
+                                      ลบ
+                                    </button>
+                                  </Popconfirm>
+                               
+
+                              {/*-------------------------------*/}
                             </td>
                           </>
                         </tr>
