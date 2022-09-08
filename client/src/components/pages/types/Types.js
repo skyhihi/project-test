@@ -6,6 +6,7 @@ import { details_type } from "../../functions/details";
 const Type = () => {
   const [listType, setListType] = useState([]);
   const [listDetailType, setListDetailType] = useState([]);
+
   const loadData = () => {
     details_type()
       .then((res) => {
@@ -15,8 +16,7 @@ const Type = () => {
         console.log(err);
       });
 
-
-      typeData()
+    typeData()
       .then((res) => {
         setListType(res.data);
       })
@@ -24,6 +24,7 @@ const Type = () => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     loadData();
     // eslint-disable-next-line
@@ -36,14 +37,32 @@ const Type = () => {
           <div className="col-lg-1"></div>
           <div className="col-lg-10">
             {listType.map((item, index) => (
-             <p>{item.name}</p>
+              <>
+                <div className="typeBox">
+                  <div className="type-icon">
+                    <span>
+                      <i className="bi bi-info-circle"></i>
+                      <h3 className="type__name">{item.name}</h3>
+                    </span>
+                  </div>
+                  {listDetailType.map((it, index) => (
+                    <>
+                      {it.details_t_id === item.type_id ? (
+                        <>
+                          <div className="type__content">
+                            <p className="description_header">{it.title} :</p>
+                            <p className="description">{it.details}</p>
+                          </div>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  ))}
+                </div>
+              </>
             ))}
-            {listDetailType.map((item, index) => (
-             <p>{item.title}</p>
-            ))}
-
-            {/**====================================================================== */}
-
+            {/**
             <div className="typeBox">
               <div className="type-icon">
                 <span>
@@ -51,7 +70,6 @@ const Type = () => {
                   <h3 className="type__name">วิศวกร</h3>
                 </span>
               </div>
-              {/** <h3 className="title">วิศวกร</h3> */}
               <div className="type__content">
                 <p className="description_header">เงินเดือน :</p>
                 <p className="description">
@@ -75,173 +93,7 @@ const Type = () => {
                   sequi unde ab!
                 </p>
               </div>
-            </div>
-            {/* ================================== */}
-            <div className="typeBox green">
-              <div className="type-icon">
-                <span>
-                  <i className="fa fa-laptop-code"></i>
-
-                  <h3 className="type__name">นักเทคโนโลยีสารสนเทศ</h3>
-                </span>
-              </div>
-              {/** <h3 class="title">นักเทคโนโลยีสารสนเทศ</h3>*/}
-              <div className="type__content">
-                <p className="description_header">เงินเดือน :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-
-                <p className="description_header">รายละเอียด :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-              </div>
-            </div>
-            {/* ================================== */}
-            <div className="typeBox blue">
-              <div className="type-icon">
-                <span>
-                  <i className="fa fa-comments-dollar"></i>
-                  <h3 className="type__name">นักการตลาดการจัดการ</h3>
-                </span>
-              </div>
-              {/** <h3 class="title">นักการตลาดการจัดการ</h3>*/}
-              <div className="type__content">
-                <p className="description_header">เงินเดือน :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-
-                <p className="description_header">รายละเอียด :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-              </div>
-            </div>
-            {/* ================================== */}
-            <div className="typeBox yellow">
-              <div className="type-icon">
-                <span>
-                  <i className="fa fa-school"></i>
-                  <h3 className="type__name">นักสาธารณสุข</h3>
-                </span>
-              </div>
-              {/** <h3 class="title">นักการตลาดการจัดการ</h3>*/}
-              <div className="type__content">
-                <p className="description_header">เงินเดือน :</p>
-                <p class="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-
-                <p className="description_header">รายละเอียด :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-              </div>
-            </div>
-            {/* ================================== */}
-            <div className="typeBox red">
-              <div className="type-icon">
-                <span>
-                  <i className="fa fa-chalkboard-user"></i>
-                  <h3 className="type__name">อาจารย์แพทย์</h3>
-                </span>
-              </div>
-              {/** <h3 class="title">นักการตลาดการจัดการ</h3>*/}
-              <div className="type__content">
-                <p className="description_header">เงินเดือน :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-
-                <p className="description_header">รายละเอียด :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-              </div>
-            </div>
-            {/* ================================== */}
-            <div className="typeBox navy">
-              <div className="type-icon">
-                <span>
-                  <i className="fa fa-kit-medical"></i>
-                  <h3 className="type__name">แพทย์</h3>
-                </span>
-              </div>
-              {/** <h3 class="title">นักการตลาดการจัดการ</h3>*/}
-              <div className="type__content">
-                <p className="description_header">เงินเดือน :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-
-                <p className="description_header">รายละเอียด :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-              </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="col-lg-1"></div>
