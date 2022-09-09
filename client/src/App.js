@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { currentUser } from "./components/functions/auth";
 //redux
 import { useDispatch } from "react-redux";
+import CreateDetail from "./components/pages/admin/detailTypes/CreateDetail";
 
 const { Header, Content } = Layout;
 function App() {
@@ -84,6 +85,7 @@ function App() {
             <Route path="/admin/*" element={<HomeAm />} />
             <Route path="/admin/question" element={<Question />} />
             <Route path="/admin/detail-types" element={<DetailTypes />} />
+            <Route path="/admin/detail-types/:id" element={<CreateDetail />} />
 
             <Route path="/admin/student-i" element={<StudentIn />} />
             <Route path="/admin/genral" element={<General />} />
