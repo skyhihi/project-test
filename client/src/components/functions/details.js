@@ -6,6 +6,9 @@ export const details_type = async () =>
 export const details_typeID = async (value) =>
   await axios.post(process.env.REACT_APP_API + "/details-type-id", value);
 
+export const details_ID = async (id) =>
+  await axios.post(process.env.REACT_APP_API + "/details-type/" + id);
+
 export const createDetail_type = async () =>
   await axios.post(process.env.REACT_APP_API + "/create-type");
 

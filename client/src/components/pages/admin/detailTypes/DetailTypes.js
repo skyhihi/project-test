@@ -15,7 +15,9 @@ import {
 import { toast } from "react-toastify";
 
 const DetailTypes = () => {
-  {/**--------------------ลิสหมวดหมู่--------------- */}
+  {
+    /**--------------------ลิสหมวดหมู่--------------- */
+  }
   const [ListType, setListType] = useState([]);
   const loadData = () => {
     type()
@@ -26,12 +28,16 @@ const DetailTypes = () => {
         console.log(err);
       });
   };
-{/**----------------------------------- */}
+  {
+    /**----------------------------------- */
+  }
   useEffect(() => {
     loadData();
     // eslint-disable-next-line
   }, []);
-{/**--------------------ตุ่มลบ--------------- */}
+  {
+    /**--------------------ตุ่มลบ--------------- */
+  }
   const buttonDelete = (type_id) => {
     delete_type(type_id)
       .then((res) => {
@@ -42,13 +48,17 @@ const DetailTypes = () => {
         toast.error(err.response.data.error);
       });
   };
-{/**----------------------------------- */}
+  {
+    /**----------------------------------- */
+  }
   const cancel = () => {
     //console.log(e);
     message.error("Message was not deleted");
   };
 
-  {/**--------------------popup--------------- */}
+  {
+    /**--------------------popup--------------- */
+  }
   const showModal = (id, detail, name) => {
     setIsModalOpen(true);
     setEditDetail({ ...editDetail, id: id });
@@ -58,7 +68,10 @@ const DetailTypes = () => {
     //console.log(id);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false); {/** ปิด popup */}
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  {
+    /** ปิด popup */
+  }
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -118,8 +131,12 @@ const DetailTypes = () => {
                             <td>{item.type_sym}</td>
                             <td>{item.name}</td>
                             <td>
-                              <button className="btn btn-info btn-sm me-3 text-light" name="add" >
-                              <i class="bi bi-plus"></i> เพิ่มรายละเอียด</button>
+                              <button
+                                className="btn btn-info btn-sm me-3 text-light"
+                                name="add"
+                              >
+                                <i class="bi bi-plus"></i> เพิ่มรายละเอียด
+                              </button>
                               <button
                                 className="btn btn-warning btn-sm me-3 "
                                 name="edit"
@@ -129,25 +146,22 @@ const DetailTypes = () => {
 
                               {/*-------------------------------*/}
 
-                              
-                                
-                                  <Popconfirm
-                                    placement="topRight"
-                                    title="Are you sure?"
-                                    onConfirm={() => buttonDelete(item.type_id)}
-                                    onCancel={cancel}
-                                    okText="Yes"
-                                    cancelText="No"
-                                  >
-                                    <button
-                                      className="btn btn-danger btn-sm "
-                                      type="text"
-                                      style={{ marginLeft: "1rem" }}
-                                    >
-                                      ลบ
-                                    </button>
-                                  </Popconfirm>
-                               
+                              <Popconfirm
+                                placement="topRight"
+                                title="Are you sure?"
+                                onConfirm={() => buttonDelete(item.type_id)}
+                                onCancel={cancel}
+                                okText="Yes"
+                                cancelText="No"
+                              >
+                                <button
+                                  className="btn btn-danger btn-sm "
+                                  type="text"
+                                  style={{ marginLeft: "1rem" }}
+                                >
+                                  ลบ
+                                </button>
+                              </Popconfirm>
 
                               {/*-------------------------------*/}
                             </td>
