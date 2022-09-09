@@ -72,6 +72,8 @@ const Question = () => {
     //console.log(value);
   };
 
+
+  //button press//
   const onClick = (e) => {
     e.preventDefault(); //
     //console.log(value);

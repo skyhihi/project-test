@@ -7,7 +7,7 @@ import { FontSizeOutlined } from "@ant-design/icons";
 
 import {
   type,
-  //create_type,
+  create_type,
   delete_type,
   edit_typeName,
   edit_typeSym,
@@ -44,36 +44,40 @@ const DetailTypes = () => {
       });
   };
   /**----------------------------------- */
+
   const cancel = () => {
     //console.log(e);
     message.error("Message was not deleted");
   };
 
-  /**--------------------popup--------------- */
-
   const [editType, setEditType] = useState({
     type_id: "",
     name: "",
-  });
+  }); //แก้ไขหมวดหมู่
   const [editTypeSym, setEditSymbol] = useState({
     type_id: "",
     symbol: "",
+  }); //แก้ไขตัวย่อหมวดหมู่
+  const [value, setValue] = useState({
+    name: "",
+    type_sym: "",
   });
 
+  /**--------------------popup--------------- */
   const showModal = (type_id, name, type_sym) => {
     setIsModalOpen(true);
     setEditType({ ...editType, type_id: type_id, name: name });
     setOriginalType(name);
     setOriginalSymbol(type_sym);
     setEditSymbol({ ...editTypeSym, type_id: type_id, symbol: type_sym });
-  };
+  }; /**--------------------popup--------------- */
 
   const [isModalOpen, setIsModalOpen] = useState(false); /** ปิด popup */
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  //-------------------<button>กดปุ่มเพื่อเปลี่ยน-------------------//
+  //-------------------<button>กดปุ่มเพื่อเปลี่ยนหมวดหมู่-------------------//
   const handleSubmitChange = () => {
     console.log(editType);
     edit_typeName(editType)
@@ -88,24 +92,24 @@ const DetailTypes = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-  };
-  //----------------------------------------------------------//
-  //-------------------<Input>ที่ต้องการเปลี่ยน-------------------//
+  }; //-------------------<button>กดปุ่มเพื่อเปลี่ยนหมวดหมู่-------------------//
+
+  //-------------------รับ<Input>หมวดหมู่ที่ต้องการเปลี่ยน-------------------//
   const handleChangeType = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     setEditType({ ...editType, [e.target.name]: e.target.value });
-  };
-  //----------------------------------------------------------//
-  const [originalType, setOriginalType] = useState();
-  const [originalSymbol, setOriginalSymbol] = useState();
+  }; //-------------------รับ<Input>หมวดหมู่ที่ต้องการเปลี่ยน-------------------//
 
+  const [originalType, setOriginalType] = useState(); //แสดงค่าหมวดหมู่เดิม
+  const [originalSymbol, setOriginalSymbol] = useState(); //แสดงค่าตัวย่อหมวดหมู่เดิม
+
+  //-------------------รับ<Input>ตัวย่อหมวดหมู่ที่ต้องการเปลี่ยน-------------------//
   const handleChangeTypeSym = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setEditSymbol({ ...editTypeSym, symbol: e.target.value });
-  };
+  }; //-------------------รับ<Input>ตัวย่อหมวดหมู่ที่ต้องการเปลี่ยน-------------------//
 
+  //-------------------<button>กดปุ่มเพื่อเปลี่ยนตัวย่อหมวดหมู่-------------------//
   const handleSubmitSymbolType = () => {
     console.log(editTypeSym);
     edit_typeSym(editTypeSym)
@@ -115,6 +119,37 @@ const DetailTypes = () => {
         loadData();
 
         setIsModalOpen(false);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  }; //<button>กดปุ่มเพื่อเปลี่ยนตัวย่อหมวดหมู่//
+
+  //
+  const onChangeType = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setValue({ ...value, [e.target.name]: e.target.value });
+    //console.log(value);
+  };
+  const onChangeTypeSym = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setValue({ ...value, [e.target.name]: e.target.value });
+    //console.log(value);
+  };
+
+  //button press//
+  const onClick = (e) => {
+    e.preventDefault(); //
+    console.log(value);
+
+    create_type(value)
+      .then((res) => {
+        //console.log(res.data);
+        toast.success(res.data.status);
+        loadData();
       })
       .catch((err) => {
         //console.log(err.response.data.error);
@@ -133,16 +168,49 @@ const DetailTypes = () => {
               <tr>
                 <td>
                   <h5 style={{ paddingLeft: "1rem" }}>ข้อมูลหมวดหมู่</h5>
+                  <br />
                 </td>
-                <td>
-                  <button
-                    className="btn btn-outline-success btn-sm"
-                    type="text"
-                    style={{ marginLeft: "1rem" }}
-                  >
-                    <i class="bi bi-plus-circle"></i> เพิ่มหมวดหมู่
-                  </button>
-                </td>
+                <tr>
+                  <td style={{ paddingLeft: "1rem" }}>
+                    <label>หมวดหมู่</label>
+                    <Input
+                      type="text"
+                      name="name"
+                      //size="large"
+                      placeholder=" เพิ่มหมวดหมู่"
+                      allowClear
+                      onChange={onChangeType}
+                      prefix={
+                        <FontSizeOutlined className="site-form-item-icon" />
+                      }
+                    />
+                  </td>
+                  <td style={{ paddingLeft: "1rem" }}>
+                    <label>อักษรย่อหมวดหมู่</label>
+                    <Input
+                      type="text"
+                      name="type_sym"
+                      maxLength={1}
+                      placeholder=" เพิ่มอักษรย่อ ( ใส่ตัวอักษรเพียงหนึ่งตัว )"
+                      allowClear
+                      onChange={onChangeTypeSym}
+                      prefix={
+                        <FontSizeOutlined className="site-form-item-icon" />
+                      }
+                    />
+                  </td>
+                  <td>
+                    <br />
+                    <button
+                      className="btn btn-outline-success btn-sm"
+                      type="text"
+                      onClick={onClick}
+                      style={{ marginLeft: "1rem" }}
+                    >
+                      <i class="bi bi-plus-circle"></i> เพิ่มหมวดหมู่
+                    </button>
+                  </td>
+                </tr>
               </tr>
 
               <div className="card-body">
@@ -166,7 +234,7 @@ const DetailTypes = () => {
                       {ListType.map((item, index) => (
                         <tr key={index}>
                           <>
-                          <th scope="col"></th>
+                            <th scope="col"></th>
                             <th scope="row">{index + 1}</th>{" "}
                             <td>{item.name}</td>
                             <td>{item.type_sym}</td>
