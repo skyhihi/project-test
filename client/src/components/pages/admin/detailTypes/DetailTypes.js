@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 
 const DetailTypes = () => {
   /**--------------------ลิสหมวดหมู่--------------- */
-
   const [ListType, setListType] = useState([]);
   const loadData = () => {
     type()
@@ -29,16 +28,12 @@ const DetailTypes = () => {
         console.log(err);
       });
   };
-
   /**----------------------------------- */
-
   useEffect(() => {
     loadData();
     // eslint-disable-next-line
   }, []);
-
   /**--------------------ตุ่มลบ--------------- */
-
   const buttonDelete = (type_id) => {
     delete_type(type_id)
       .then((res) => {
@@ -79,7 +74,6 @@ const DetailTypes = () => {
   }; /**--------------------popup--------------- */
 
   const [isModalOpen, setIsModalOpen] = useState(false); /** ปิด popup */
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -246,14 +240,14 @@ const DetailTypes = () => {
                             <td>{item.name}</td>
                             <td>{item.type_sym}</td>
                             <td>
-                              <Link to={`/admin/detail-types/${item.type_id}`}>
-                                <button
-                                  className="btn btn-info btn-sm me-3 text-light"
-                                  name="add"
-                                >
-                                  <i class="bi bi-plus"></i> เพิ่มรายละเอียด
-                                </button>
-                              </Link>
+                            <Link to={`/admin/detail-types/${item.type_id}`}>
+                              <button
+                                className="btn btn-info btn-sm me-3 text-light"
+                                name="add"
+                              >
+                                <i class="bi bi-plus"></i> เพิ่มรายละเอียด
+                              </button>
+                             </Link>
                               <button
                                 className="btn btn-warning btn-sm me-3 "
                                 name="edit"
