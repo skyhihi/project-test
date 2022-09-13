@@ -172,13 +172,16 @@ const DetailTypes = () => {
           <div className="col-lg-12">
             <div className="card">
               <br />
+
+              {/**=========================== */}
               <tr>
                 <td>
                   <h5 style={{ paddingLeft: "1rem" }}>ข้อมูลหมวดหมู่</h5>
                   <br />
                 </td>
-                <tr>
-                  <td style={{ paddingLeft: "1rem" }}>
+
+                <div className="row" style={{ paddingLeft: "1rem" }}>
+                  <div className="col-md-6">
                     <label>หมวดหมู่</label>
                     <Input
                       type="text"
@@ -191,33 +194,33 @@ const DetailTypes = () => {
                         <FontSizeOutlined className="site-form-item-icon" />
                       }
                     />
-                  </td>
-                  <td style={{ paddingLeft: "1rem" }}>
+                  </div>
+                  <div className="col-md-3">
                     <label>อักษรย่อหมวดหมู่</label>
                     <Input
                       type="text"
                       name="type_sym"
                       maxLength={1}
-                      placeholder=" เพิ่มอักษรย่อ ( ใส่ตัวอักษรเพียงหนึ่งตัว )"
+                      placeholder=" ใส่ตัวอักษรเพียงหนึ่งตัว"
                       allowClear
                       onChange={onChangeTypeSym}
                       prefix={
                         <FontSizeOutlined className="site-form-item-icon" />
                       }
                     />
-                  </td>
-                  <td>
+                  </div>
+                  <div className="col-md-3">
                     <br />
                     <button
                       className="btn btn-outline-success btn-sm"
                       type="text"
                       onClick={onClick}
-                      style={{ marginLeft: "1rem" }}
+                      //style={{ marginLeft: "1rem" }}
                     >
                       <i class="bi bi-plus-circle"></i> เพิ่มหมวดหมู่
                     </button>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               </tr>
 
               <div className="card-body">
