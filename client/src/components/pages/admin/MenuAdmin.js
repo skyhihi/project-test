@@ -7,6 +7,7 @@ import {
   DatabaseOutlined,
   ProfileOutlined,
   UserOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import React from "react";
@@ -26,8 +27,15 @@ const items = [
   getItem(
     "หน้าหลัก",
     "ha",
-    <Link to="/admin/*">
+    <Link to="/admin/">
       <NumberOutlined />
+    </Link>
+  ),
+  getItem(
+    "จัดการฟอร์ม",
+    "mf",
+    <Link to="/admin/manage-form">
+      <FormOutlined />
     </Link>
   ),
   getItem(
