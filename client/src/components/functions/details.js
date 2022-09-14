@@ -9,11 +9,11 @@ export const details_typeID = async (value) =>
 export const details_ID = async (id) =>
   await axios.get(process.env.REACT_APP_API + "/details-type/" + id);
 
-export const createDetail_type = async () =>
-  await axios.post(process.env.REACT_APP_API + "/create-type");
+export const createDetail_type = async (value) =>
+  await axios.post(process.env.REACT_APP_API + "/createDetails-type", value);
 
-export const delete_type = async () =>
-  await axios.delete(process.env.REACT_APP_API + "/delete-type");
+export const deleteDetail_type = async (id) =>
+  await axios.delete(process.env.REACT_APP_API + "/deleteDetail-type" + id);
 
 export const editTitle_type = async (value) =>
   await axios.put(process.env.REACT_APP_API + "/editTitle-type", value);
