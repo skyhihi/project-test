@@ -72,7 +72,6 @@ const Question = () => {
     //console.log(value);
   };
 
-
   //button press//
   const onClick = (e) => {
     e.preventDefault(); //
@@ -215,12 +214,7 @@ const Question = () => {
                   </button>
                   <br />
                   <br />
-                  {/** 
-                  <h5>
-                    <span className="badge badge-pill bg-secondary">
-                      เพิ่มคำถาม :
-                    </span>
-                  </h5>*/}
+
                   <div className="row">
                     <div className="col-md-3">
                       <Select

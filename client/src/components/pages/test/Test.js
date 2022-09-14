@@ -3,8 +3,9 @@ import { UserOutlined, NumberOutlined } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import RadioBtn from "./RadioBtn";
-
 import { listQuestions } from "../../functions/question";
+import { listUniversity } from "../../functions/university";
+import { listYears } from "../../functions/year";
 
 const { Option } = Select;
 
@@ -14,10 +15,26 @@ const Test = () => {
   };
 
   const [questions, setQuestions] = useState([]);
+  const [university, setUniversity] = useState([]);
+  const [year, setYears] = useState([]);
   const loadData = () => {
     listQuestions()
       .then((res) => {
         setQuestions(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    listUniversity()
+      .then((res) => {
+        setUniversity(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    listYears()
+      .then((res) => {
+        setYears(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -44,12 +61,23 @@ const Test = () => {
                 }}
                 onChange={handleChange}
               >
+                {university.map((item, index) => (
+                  <Option
+                    value={item.id}
+                    key={index}
+                    style={{ fontSize: "18px" }}
+                  >
+                    {item.university}
+                  </Option>
+                ))}
+                {/** 
                 <Option value="jack" style={{ fontSize: "18px" }}>
                   มหาวิทยาลัยมหิดล
                 </Option>
                 <Option value="lucy" style={{ fontSize: "18px" }}>
                   มหาวิทยาลัย...
                 </Option>
+                */}
               </Select>
             </div>
             <div className="col-sm-6">
@@ -61,6 +89,16 @@ const Test = () => {
                   width: "100%",
                 }}
               >
+                {year.map((item, index) => (
+                  <Option
+                    value={item.id}
+                    key={index}
+                    style={{ fontSize: "18px" }}
+                  >
+                    {item.year}
+                  </Option>
+                ))}
+                {/** 
                 <Option value="lucy" style={{ fontSize: "18px" }}>
                   2565
                 </Option>
@@ -70,6 +108,7 @@ const Test = () => {
                 <Option value="lucy" style={{ fontSize: "18px" }}>
                   2563
                 </Option>
+                */}
               </Select>
             </div>
           </div>

@@ -1,23 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Input, Table } from "antd";
-//import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
 import MenuAdmin from "../MenuAdmin";
 
-//import { listUser } from "../../../../../../../../serverPJ/server/controllers/users"
-
 const StudentIn = () => {
-
-  //const loadData = () =>{
-    //listUser()
-    //.then((res) => {
-      //console.log(res)
-    //}).catch((err)=> {
-      //console.log(err)
-    //}); 
-  //}
-//---------------------------------------------------------//
   const data = [
     {
       key: "1",
@@ -25,7 +12,7 @@ const StudentIn = () => {
       ID: "6203051613204",
       year: "2562",
       uni: "Mahidol",
-   },
+    },
     {
       key: "2",
       name: "ปาณิสรา",
@@ -41,15 +28,15 @@ const StudentIn = () => {
       uni: "Mahidol",
     },
     {
-     key: "4",
-     name: "ปุณรัตน์",
-     ID: "6203051613212",
-     year: "2562",
-     uni: "Mahidol",
+      key: "4",
+      name: "ปุณรัตน์",
+      ID: "6203051613212",
+      year: "2562",
+      uni: "Mahidol",
     },
   ];
-  
-//-----------------------------------------//
+
+  //-----------------------------------------//
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -139,8 +126,6 @@ const StudentIn = () => {
       key: "year",
       ...getColumnSearchProps("year"),
     },
-    
-    
   ];
 
   return (
@@ -162,6 +147,7 @@ const StudentIn = () => {
             </div>
           </div>
         </div>
+        <br />
       </div>
     </>
   );
