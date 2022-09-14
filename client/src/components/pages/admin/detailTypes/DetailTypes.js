@@ -365,7 +365,6 @@ const DetailTypes = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-1"></div>
         </div>
       </div>
     </>
