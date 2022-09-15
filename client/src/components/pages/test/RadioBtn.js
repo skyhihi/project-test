@@ -8,6 +8,7 @@ const RadioBtn = () => {
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
+    console.log(e.target.name);
   };
   return (
     <div>
@@ -17,6 +18,7 @@ const RadioBtn = () => {
             buttonStyle="solid"
             size="large"
             onChange={onChange}
+            name="โย่ว"
             value={value}
             //style={{ marginTop: "20px" }}
           >

@@ -10,10 +10,6 @@ import { listYears } from "../../functions/year";
 const { Option } = Select;
 
 const Test = () => {
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
   const [questions, setQuestions] = useState([]);
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
@@ -45,6 +41,27 @@ const Test = () => {
     // eslint-disable-next-line
   }, []);
 
+  //==============เก็บข้อมูล===================
+
+  const [ansValues, setAnsValues] = useState({});
+
+  const handleChangeName = (e) => {
+    setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+    console.log(ansValues);
+  };
+  const handleChangeUniversity = (value) => {
+    setAnsValues({ ...ansValues, university_id: value });
+    console.log(ansValues);
+  };
+  const handleChangeYear = (value) => {
+    setAnsValues({ ...ansValues, year_id: value });
+    console.log(ansValues);
+  };
+  const handleChangeStudentID = (e) => {
+    setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+    console.log(ansValues);
+  };
+
   return (
     <>
       <div className="row">
@@ -59,7 +76,7 @@ const Test = () => {
                   fontSize: "18px",
                   width: "100%",
                 }}
-                onChange={handleChange}
+                onChange={handleChangeUniversity}
               >
                 {university.map((item, index) => (
                   <Option
@@ -70,14 +87,6 @@ const Test = () => {
                     {item.university}
                   </Option>
                 ))}
-                {/** 
-                <Option value="jack" style={{ fontSize: "18px" }}>
-                  มหาวิทยาลัยมหิดล
-                </Option>
-                <Option value="lucy" style={{ fontSize: "18px" }}>
-                  มหาวิทยาลัย...
-                </Option>
-                */}
               </Select>
             </div>
             <div className="col-sm-6">
@@ -88,44 +97,42 @@ const Test = () => {
                   fontSize: "18px",
                   width: "100%",
                 }}
+                name="year"
+                onChange={handleChangeYear}
               >
                 {year.map((item, index) => (
                   <Option
                     value={item.id}
+                    name="year"
                     key={index}
                     style={{ fontSize: "18px" }}
                   >
                     {item.year}
                   </Option>
                 ))}
-                {/** 
-                <Option value="lucy" style={{ fontSize: "18px" }}>
-                  2565
-                </Option>
-                <Option value="lucy" style={{ fontSize: "18px" }}>
-                  2564
-                </Option>
-                <Option value="lucy" style={{ fontSize: "18px" }}>
-                  2563
-                </Option>
-                */}
               </Select>
             </div>
           </div>
           <br />
           <label> ชื่อ - นามสกุล</label>
           <Input
+            type="text"
             size="large"
             placeholder="ชื่อ นามสกุล"
+            name="name"
             prefix={<UserOutlined />}
+            onChange={handleChangeName}
           />
           <br />
           <br />
           <label>รหัสนักศึกษา</label>
           <Input
+            type="text"
             size="large"
+            name="student_id"
             placeholder="รหัสนักศึกษา"
             prefix={<NumberOutlined />}
+            onChange={handleChangeStudentID}
           />
           <br />
           <br />
