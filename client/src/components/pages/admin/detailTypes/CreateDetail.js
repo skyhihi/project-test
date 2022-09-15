@@ -82,7 +82,7 @@ const CreateDetail = () => {
   };
 
   const SubmitDetailsChange = () => {
-    //console.log(editDetails);
+    console.log(editDetails);
     editDetail_type(editDetails)
       .then((res) => {
         //console.log(res.data.status);
@@ -113,13 +113,6 @@ const CreateDetail = () => {
       .catch((err) => {
         console.log(err);
       });
-    //  createDetail_type()
-    //    .then((res) => {
-    //      setCreateDetails(res.data);
-    //    })
-    //   .catch((err) => {
-    //      console.log(err);
-    //    });
   };
 
   useEffect(() => {
@@ -131,10 +124,9 @@ const CreateDetail = () => {
   const onClick = (e) => {
     e.preventDefault(); //
     console.log(value);
-
     createDetail_type(value)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         toast.success(res.data.status);
         loadData(type_id);
       })
@@ -145,6 +137,7 @@ const CreateDetail = () => {
   }; //-----button press-----//
 
   const buttonDelete = (detail_id) => {
+    //console.log(detail_id);
     deleteDetail_type(detail_id)
       .then((res) => {
         toast.success(res.data.status);
@@ -208,14 +201,14 @@ const CreateDetail = () => {
 
             <div className="row" style={{ paddingLeft: "1rem" }}>
               <div className="col-lg-4">
-                <label> Title : </label>
+                <label> หัวข้อ : </label>
                 <br />
-                <br />
+
                 <Input
                   type="text"
                   name="title"
                   //size="large"
-                  placeholder=" edit title"
+                  placeholder=" เพิ่มหัวข้อ"
                   allowClear
                   onChange={onChangeTitle}
                   prefix={<FontSizeOutlined className="site-form-item-icon" />}
@@ -225,9 +218,9 @@ const CreateDetail = () => {
               <div className="row">
                 <div className="col-10">
                   <br />
-                  <label> Details : </label>
+                  <label> รายละเอียด : </label>
                   <br />
-                  <br />
+
                   <TextArea
                     name="details"
                     style={{
@@ -235,7 +228,7 @@ const CreateDetail = () => {
                       height: "150px",
                       marginRight: "1.5rem",
                     }}
-                    placeholder="insert details"
+                    placeholder="เพิ่มรายละเอียด"
                     onChange={onChangeDetails}
                   />
                 </div>
