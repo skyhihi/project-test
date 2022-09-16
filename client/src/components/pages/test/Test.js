@@ -1,8 +1,9 @@
-import { Select, Input } from "antd";
+import { Select, Input, Radio } from "antd";
 import { UserOutlined, NumberOutlined } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import RadioBtn from "./RadioBtn";
+//import RadioBtn from "./RadioBtn";
+import "./radioBtn.css";
 import { listQuestions } from "../../functions/question";
 import { listUniversity } from "../../functions/university";
 import { listYears } from "../../functions/year";
@@ -62,18 +63,28 @@ const Test = () => {
     console.log(ansValues);
   };
 
+  //=======เก็บคำตอบ==========
+  const onChange = (e) => {
+    //console.log(e.target.name, "checked" + e.target.value);
+    setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+    console.log(ansValues);
+  };
+
   return (
     <>
       <div className="row">
         <div className="col-lg-2"></div>
         <div className="col-lg-8">
           <div className="row">
-            <div className="col-sm-6" style={{ marginBottom: "1rem" }}>
+            <div
+              className="col-sm-6 input-text"
+              style={{ marginBottom: "1rem" }}
+            >
               <label>มหาวิทยาลัย</label>
               <Select
                 defaultValue="มหาวิทยาลัย"
                 style={{
-                  fontSize: "18px",
+                  //   fontSize: "18px",
                   width: "100%",
                 }}
                 onChange={handleChangeUniversity}
@@ -82,7 +93,7 @@ const Test = () => {
                   <Option
                     value={item.id}
                     key={index}
-                    style={{ fontSize: "18px" }}
+                    //  style={{ fontSize: "18px" }}
                   >
                     {item.university}
                   </Option>
@@ -94,7 +105,7 @@ const Test = () => {
               <Select
                 defaultValue="ปีการศึกษา"
                 style={{
-                  fontSize: "18px",
+                  //   fontSize: "18px",
                   width: "100%",
                 }}
                 name="year"
@@ -117,7 +128,7 @@ const Test = () => {
           <label> ชื่อ - นามสกุล</label>
           <Input
             type="text"
-            size="large"
+            //size="large"
             placeholder="ชื่อ นามสกุล"
             name="name"
             prefix={<UserOutlined />}
@@ -128,7 +139,7 @@ const Test = () => {
           <label>รหัสนักศึกษา</label>
           <Input
             type="text"
-            size="large"
+            //size="large"
             name="student_id"
             placeholder="รหัสนักศึกษา"
             prefix={<NumberOutlined />}
@@ -145,8 +156,47 @@ const Test = () => {
                 <center>
                   <label>{index + 1}. </label>
                   <h5>{item.detail}</h5>
-                  <RadioBtn />
+
+                  {/**
+                   * <RadioBtn onClick={onChange} name={item.id} value={value} />
+                   *
+                   */}
+
+                  <Radio.Group
+                    buttonStyle="solid"
+                    size="large"
+                    className="normal"
+                    name={"qaId_" + item.id}
+                    onChange={onChange}
+                  >
+                    <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
+                    <Radio.Button value={2}>น้อย</Radio.Button>
+                    <Radio.Button value={3}>ปานกลาง</Radio.Button>
+                    <Radio.Button value={4}>มาก</Radio.Button>
+                    <Radio.Button value={5}>มากที่สุด</Radio.Button>
+                  </Radio.Group>
+
+                  <Radio.Group
+                    key={index}
+                    buttonStyle="solid"
+                    size="small"
+                    style={{
+                      marginTop: 16,
+                    }}
+                    className="mobile-btn"
+                    name={"qaId_" + item.id}
+                    onChange={onChange}
+                  >
+                    <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
+                    <Radio.Button value={2}>น้อย</Radio.Button>
+                    <Radio.Button value={3}>ปานกลาง</Radio.Button>
+                    <Radio.Button value={4}>มาก</Radio.Button>
+                    <Radio.Button value={5}>มากที่สุด</Radio.Button>
+                  </Radio.Group>
                 </center>
+                <br />
+
+                <hr />
               </div>
             </>
           ))}

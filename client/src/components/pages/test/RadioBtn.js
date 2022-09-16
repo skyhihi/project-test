@@ -3,13 +3,14 @@ import "./radioBtn.css";
 import { Radio } from "antd";
 
 const RadioBtn = () => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState([]);
 
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
-    setValue(e.target.value);
     console.log(e.target.name);
+    //setValue(e.target.value);
   };
+
   return (
     <div>
       <div className="normal">
