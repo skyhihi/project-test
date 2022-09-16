@@ -1,7 +1,7 @@
 import { Select, Input, Radio, Form, Button } from "antd";
 import { UserOutlined, NumberOutlined } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 //import RadioBtn from "./RadioBtn";
 import "./radioBtn.css";
 import { listQuestions } from "../../functions/question";
@@ -265,23 +265,20 @@ const Test = () => {
                 </div>
               </>
             ))}
-            <Button type="primary" htmlType="submit">
-              Submit
+            <Button
+              type="primary"
+              size="large"
+              htmlType="submit"
+              style={{
+                float: "right",
+                marginTop: "1rem",
+                marginBottom: "5rem",
+                background: "#6c757d",
+                border: "none",
+              }}
+            >
+              คำนวณผลลัพธ์
             </Button>
-
-            <Link to="/result">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                style={{
-                  float: "right",
-                  marginTop: "1rem",
-                  marginBottom: "5rem",
-                }}
-              >
-                คำนวณผลลัพธ์ <i className="bi bi-arrow-right"></i>
-              </button>
-            </Link>
           </Form>
         </div>
 
