@@ -68,7 +68,10 @@ const Test = () => {
     //console.log(e.target.name, "checked" + e.target.value);
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     console.log(ansValues);
+    setValue({ ...value, [e.target.name]: e.target.value });
   };
+
+  const [value, setValue] = useState({});
 
   return (
     <>
@@ -196,6 +199,7 @@ const Test = () => {
                   <center>
                     <label>{index + 1}. </label>
                     <h5>{item.detail}</h5>
+                    {/*<h1>{item.type_id}</h1>*/}
 
                     {/**
                      * <RadioBtn onClick={onChange} name={item.id} value={value} />
@@ -227,6 +231,11 @@ const Test = () => {
                         <Radio.Button value={3}>ปานกลาง</Radio.Button>
                         <Radio.Button value={4}>มาก</Radio.Button>
                         <Radio.Button value={5}>มากที่สุด</Radio.Button>
+                        {item.type_id === 1 ? (
+                          <h1>{"value " + item.id}</h1>
+                        ) : (
+                          <></>
+                        )}
                       </Radio.Group>
                     </Form.Item>
 
