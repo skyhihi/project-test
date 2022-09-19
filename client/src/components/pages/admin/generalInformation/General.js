@@ -1,207 +1,98 @@
-import React, { useRef, useState } from "react";
-import { Select, Input, Table } from "antd";
+import React, { /*useRef ,*/ useState, useEffect } from "react";
+import { Select /*Input, Tabl*/ } from "antd";
 import MenuAdmin from "../MenuAdmin";
-import Highlighter from "react-highlight-words";
+//import Highlighter from "react-highlight-words";
+import { readAns } from "../../../functions/ans_all";
 
 const { Option } = Select;
 
-const data = [
-  {
-    key: "1",
-    name: "ชวมนต์",
-    ID: "6203051613204",
-    year: "2562",
-    uni: "Mahidol",
-    e: "2.3",
-    i: "2.3",
-    b: "2.3",
-    p: "2.3",
-    t: "2.3",
-    d: "2.3",
-  },
-  {
-    key: "2",
-    name: "ปาณิสรา",
-    ID: "6203051613212",
-    year: "2562",
-    uni: "Mahidol",
-    e: "1.5",
-    i: "4.1",
-    b: "2.8",
-    p: "3.2",
-    t: "2.3",
-    d: "2.3",
-  },
-  {
-    key: "3",
-    name: "วริศรา",
-    ID: "6203051613212",
-    year: "2562",
-    uni: "Mahidol",
-    e: "2.1",
-    i: "5",
-    b: "2.3",
-    p: "1.5",
-    t: "2.3",
-    d: "0.3",
-  },
-  {
-    key: "4",
-    name: "ปุณรัตน์",
-    ID: "6203051613212",
-    year: "2562",
-    uni: "Mahidol",
-    e: "4.6",
-    i: "2.3",
-    b: "2.3",
-    p: "2.8",
-    t: "2.3",
-    d: "5",
-  },
-];
-
 const General = () => {
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  const [dataAns_all, setdataAns_all] = useState([]);
+
+  const loadData = () => {
+    readAns()
+      .then((res) => {
+        setdataAns_all(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  const searchInput = useRef(null);
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      //clearFilters,
-    }) => (
-      <div
-        style={{
-          padding: 8,
-        }}
-      >
-        <Input
-          ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{
-            marginBottom: 8,
-            display: "block",
-          }}
-        />
-      </div>
-    ),
-
-    onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.current?.select(), 100);
-      }
-    },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          //highlightStyle={{
-          // backgroundColor: '#ffc069',
-          // padding: 0,
-          // }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  const columns = [
-    {
-      title: "รหัสนักศึกษา",
-      dataIndex: "ID",
-      key: "ID",
-      width: "10%",
-      ...getColumnSearchProps("ID"),
-    },
-    {
-      title: "ชื่อ นามสกุล",
-      dataIndex: "name",
-      key: "name",
-      width: "10%",
-      ...getColumnSearchProps("name"),
-    },
-    {
-      title: "มหาวิทยาลัย",
-      dataIndex: "uni",
-      key: "uni",
-      width: "10%",
-      ...getColumnSearchProps("uni"),
-    },
-    {
-      title: "ปีการศึกษา",
-      dataIndex: "year",
-      key: "year",
-      ...getColumnSearchProps("year"),
-    },
-    {
-      title: "e",
-      dataIndex: "e",
-      key: "e",
-      width: "10%",
-      ...getColumnSearchProps("e"),
-    },
-    {
-      title: "i",
-      dataIndex: "i",
-      key: "i",
-      width: "10%",
-      ...getColumnSearchProps("i"),
-    },
-    {
-      title: "b",
-      dataIndex: "b",
-      key: "b",
-      width: "10%",
-      ...getColumnSearchProps("b"),
-    },
-    {
-      title: "p",
-      dataIndex: "p",
-      key: "p",
-      width: "10%",
-      ...getColumnSearchProps("p"),
-    },
-    {
-      title: "t",
-      dataIndex: "t",
-      key: "t",
-      width: "10%",
-      ...getColumnSearchProps("t"),
-    },
-    {
-      title: "d",
-      dataIndex: "d",
-      key: "d",
-      width: "10%",
-      ...getColumnSearchProps("d"),
-    },
-  ];
+  useEffect(() => {
+    loadData();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
       <MenuAdmin />
 
       <div style={{ paddingLeft: "200px" }}>
+        <div class="card">
+          <div class="card-body">
+            <div className="row">
+              <div className="col-lg-2"></div>
+              <div className="col-lg-8">
+                <div className="row"></div>
+              </div>
+              <h5>ข้อมูลทั้งหมด</h5>
+              <div className="col-sm-5" style={{ marginBottom: "1rem" }}>
+                <Select
+                  defaultValue="มหาวิทยาลัย"
+                  style={{
+                    fontSize: "18px",
+                    width: "100%",
+                  }}
+                  // onChange={handleChange}
+                >
+                  <Option value="jack" style={{ fontSize: "18px" }}>
+                    มหาวิทยาลัยมหิดล
+                  </Option>
+                  <Option value="lucy" style={{ fontSize: "18px" }}>
+                    มหาวิทยาลัย...
+                  </Option>
+                </Select>
+              </div>
+              <div className="col-sm-5">
+                <Select
+                  defaultValue="ปีการศึกษา"
+                  style={{
+                    fontSize: "18px",
+                    width: "100%",
+                  }}
+                >
+                  <Option value="lucy" style={{ fontSize: "18px" }}>
+                    2565
+                  </Option>
+                  <Option value="lucy" style={{ fontSize: "18px" }}>
+                    2564
+                  </Option>
+                  <Option value="lucy" style={{ fontSize: "18px" }}>
+                    2563
+                  </Option>
+                </Select>
+              </div>
+              <div className="col-lg-2">
+                <button className="btn btn-outline-success btn-sm">
+                  <i class="bi bi-file-earmark-arrow-down"></i> ดาวน์โหลดเอกสาร
+                </button>
+              </div>
+            </div>
+            {/** code here */}
+            {dataAns_all.map((item, index) => (
+              <>
+                <p>{item.ans.name}</p>
+                <p>{item.ans.student_id}</p>
+                <p>{item.ans.university}</p>
+                <p>{item.ans.year}</p>
+              </>
+            ))}
+          </div>
+        </div>
+
+        {/** ============= v ของเก่า ================*/}
+
+        {/** 
         <div class="card">
           <div class="card-body">
             <div className="row">
@@ -262,6 +153,7 @@ const General = () => {
             />
           </div>
         </div>
+        */}
       </div>
     </>
   );
