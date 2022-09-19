@@ -7,6 +7,8 @@ import "./radioBtn.css";
 import { listQuestions } from "../../functions/question";
 import { listUniversity } from "../../functions/university";
 import { listYears } from "../../functions/year";
+import { submitAns } from "../../functions/ans_all";
+import { toast } from "react-toastify";
 
 const { Option } = Select;
 
@@ -48,26 +50,44 @@ const Test = () => {
 
   const handleChangeName = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    console.log(ansValues);
+    //console.log(ansValues);
   };
   const handleChangeUniversity = (value) => {
-    setAnsValues({ ...ansValues, university_id: value });
-    console.log(ansValues);
+    setAnsValues({ ...ansValues, university: value });
+    //console.log(ansValues);
   };
   const handleChangeYear = (value) => {
-    setAnsValues({ ...ansValues, year_id: value });
-    console.log(ansValues);
+    setAnsValues({ ...ansValues, year: value });
+    //console.log(ansValues);
   };
   const handleChangeStudentID = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    console.log(ansValues);
+    //console.log(ansValues);
   };
 
   //=======เก็บคำตอบ==========
   const onChange = (e) => {
     //console.log(e.target.name, "checked" + e.target.value);
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    console.log(ansValues);
+    //console.log(ansValues);
+  };
+
+  //=======กดบันทึก=========
+
+  const handleSubmitAns = () => {
+    //console.log(editDetail);
+    submitAns(ansValues)
+      .then((res) => {
+        //console.log(res.data.status);
+        toast.success(res.data.status);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
+  const onFinishFailed = (errorInfo) => {
+    toast.error("กรุณากรอกข้อมูลหรือคำถามให้ครบ");
   };
 
   return (
@@ -75,7 +95,11 @@ const Test = () => {
       <div className="row">
         <div className="col-lg-2"></div>
         <div className="col-lg-8">
-          <Form>
+          <Form
+            onFinish={handleSubmitAns}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
             <div className="row">
               <div
                 className="col-sm-6 input-text"
@@ -101,7 +125,7 @@ const Test = () => {
                   >
                     {university.map((item, index) => (
                       <Option
-                        value={item.id}
+                        value={item.university}
                         key={index}
                         //  style={{ fontSize: "18px" }}
                       >
@@ -133,7 +157,7 @@ const Test = () => {
                   >
                     {year.map((item, index) => (
                       <Option
-                        value={item.id}
+                        value={item.year}
                         name="year"
                         key={index}
                         style={{ fontSize: "18px" }}
@@ -177,10 +201,10 @@ const Test = () => {
               ]}
             >
               <Input
-                type="text"
+                type="number"
                 //size="large"
                 name="student_id"
-                placeholder="รหัสนักศึกษา"
+                placeholder="รหัสนักศึกษา (ตัวเลข)"
                 prefix={<NumberOutlined />}
                 onChange={handleChangeStudentID}
               />
@@ -265,6 +289,7 @@ const Test = () => {
                 </div>
               </>
             ))}
+
             <Button
               type="primary"
               size="large"
@@ -277,7 +302,7 @@ const Test = () => {
                 border: "none",
               }}
             >
-              คำนวณผลลัพธ์
+              คำนวนคำตอบ
             </Button>
           </Form>
         </div>
