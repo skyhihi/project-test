@@ -444,7 +444,7 @@ const Test = () => {
                         }}
                         //   className="mobile-btn"
                         name={"qaId_" + item.id}
-                        onChange={(e) => onChange(e, item.type_id)}
+                        onChange={(e) => onChange(e, item.type_id, item.id)}
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
