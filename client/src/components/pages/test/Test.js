@@ -74,44 +74,172 @@ const Test = () => {
 
   //=======เก็บคำตอบ==========
   //const [ansResult, setAnsResult] = useState({});
-  const [sumType1, setSumType1] = useState(0);
-  const [sumType2, setSumType2] = useState(0);
-  const [sumType3, setSumType3] = useState(0);
-  const [sumType4, setSumType4] = useState(0);
-  const [sumType5, setSumType5] = useState(0);
-  const [sumType6, setSumType6] = useState(0);
-  const onChange = (e, value) => {
-    //console.log(e.target.name, "checked" + e.target.value);
+
+  const [type1, setType1] = useState([]);
+  const [type2, setType2] = useState([]);
+  const [type3, setType3] = useState([]);
+  const [type4, setType4] = useState([]);
+  const [type5, setType5] = useState([]);
+  const [type6, setType6] = useState([]);
+
+  const onChange = (e, type_id, id) => {
+    const idf = id;
+
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    //console.log(ansValues);
-    //console.log(value);
-    // console.log(e.target.name + ":" + e.target.value + " type:" + value);
-    if ((value = 1)) {
-      setSumType1(sumType1 + e.target.value);
-    } else if ((value = 2)) {
-      setSumType2(sumType2 + e.target.value);
-    } else if ((value = 3)) {
-      setSumType3(sumType3 + e.target.value);
-    } else if ((value = 4)) {
-      setSumType4(sumType4 + e.target.value);
-    } else if ((value = 5)) {
-      setSumType5(sumType5 + e.target.value);
-    } else if ((value = 6)) {
-      setSumType6(sumType6 + e.target.value);
+
+    //========แต่ละหมวด==========
+
+    if (type_id === 1) {
+      const find = type1.find(({ id }) => id === idf);
+      if (find === undefined) {
+        setType1([...type1, { id: id, value: e.target.value }]);
+      } else {
+        for (const obj of type1) {
+          if (obj.id === idf) {
+            obj.value = e.target.value;
+
+            break;
+          }
+        }
+      }
+      console.log(
+        "typq1: ",
+        type1.reduce((n, { value }) => n + value, 0)
+      );
+    } else if (type_id === 2) {
+      const find = type2.find(({ id }) => id === idf);
+      if (find === undefined) {
+        setType2([...type2, { id: id, value: e.target.value }]);
+      } else {
+        for (const obj of type2) {
+          if (obj.id === idf) {
+            obj.value = e.target.value;
+
+            break;
+          }
+        }
+      }
+      console.log(
+        "typq2: ",
+        type2.reduce((n, { value }) => n + value, 0)
+      );
+    } else if (type_id === 3) {
+      const find = type3.find(({ id }) => id === idf);
+      if (find === undefined) {
+        setType3([...type3, { id: id, value: e.target.value }]);
+      } else {
+        for (const obj of type3) {
+          if (obj.id === idf) {
+            obj.value = e.target.value;
+
+            break;
+          }
+        }
+      }
+      console.log(
+        "typq3: ",
+        type3.reduce((n, { value }) => n + value, 0)
+      );
+    } else if (type_id === 4) {
+      const find = type4.find(({ id }) => id === idf);
+      if (find === undefined) {
+        setType4([...type4, { id: id, value: e.target.value }]);
+      } else {
+        for (const obj of type4) {
+          if (obj.id === idf) {
+            obj.value = e.target.value;
+
+            break;
+          }
+        }
+      }
+      console.log(
+        "typq4: ",
+        type4.reduce((n, { value }) => n + value, 0)
+      );
+    } else if (type_id === 5) {
+      const find = type5.find(({ id }) => id === idf);
+      if (find === undefined) {
+        setType5([...type5, { id: id, value: e.target.value }]);
+      } else {
+        for (const obj of type5) {
+          if (obj.id === idf) {
+            obj.value = e.target.value;
+
+            break;
+          }
+        }
+      }
+      console.log(
+        "typq5: ",
+        type5.reduce((n, { value }) => n + value, 0)
+      );
+    } else if (type_id === 6) {
+      const find = type6.find(({ id }) => id === idf);
+      if (find === undefined) {
+        setType6([...type6, { id: id, value: e.target.value }]);
+      } else {
+        for (const obj of type6) {
+          if (obj.id === idf) {
+            obj.value = e.target.value;
+            break;
+          }
+        }
+      }
+      console.log(
+        "typq6: ",
+        type6.reduce((n, { value }) => n + value, 0)
+      );
     }
   };
-  console.log("sum T1 = " + sumType1);
-  console.log("sum T2 = " + sumType2);
-  console.log("sum T3 = " + sumType3);
-  console.log("sum T4 = " + sumType4);
-  console.log("sum T5 = " + sumType5);
-  console.log("sum T6 = " + sumType6);
+  /*
+  console.log("type1:", type1);
+  
+  console.log("type2:", type2);
+  console.log("type3:", type3);
+  console.log("type4:", type4);
+  console.log("type5:", type5);
+  console.log("type6:", type6);
+  */
+  /*
+  console.log(
+    "typq1: ",
+    type1.reduce((n, { value }) => n + value, 0)
+  );
+  console.log(
+    "typq2: ",
+    type2.reduce((n, { value }) => n + value, 0)
+  );
+  console.log(
+    "typq3: ",
+    type3.reduce((n, { value }) => n + value, 0)
+  );
+  console.log(
+    "typq4: ",
+    type4.reduce((n, { value }) => n + value, 0)
+  );
+  console.log(
+    "typq5: ",
+    type5.reduce((n, { value }) => n + value, 0)
+  );
+  console.log(
+    "typq6: ",
+    type6.reduce((n, { value }) => n + value, 0)
+  );
+*/
 
+  /*
+  const sum = type1.reduce((accumulator, object) => {
+    return accumulator + object;
+  }, 0);
+  console.log(sum);
+  */
   //=======กดบันทึก=========
 
   const handleSubmitAns = () => {
     //console.log(editDetail);
     toast.success("ok ค่า ลงแล้ว");
+    console.log(ansValues);
     /*
     submitAns(ansValues)
       .then((res) => {
@@ -285,7 +413,7 @@ const Test = () => {
                         style={{
                           marginTop: 16,
                         }}
-                        onChange={(e) => onChange(e, item.type_id)}
+                        onChange={(e) => onChange(e, item.type_id, item.id)}
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
@@ -316,7 +444,7 @@ const Test = () => {
                         }}
                         //   className="mobile-btn"
                         name={"qaId_" + item.id}
-                        onChange={() => onChange(item.type_id)}
+                        onChange={(e) => onChange(e, item.type_id)}
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
