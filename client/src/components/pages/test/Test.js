@@ -44,6 +44,13 @@ const Test = () => {
     // eslint-disable-next-line
   }, []);
 
+  //=============นับคำถาม===================
+
+  /*
+  const [count, setCount] = useState(0);
+  console.log(questions);
+  */
+
   //==============เก็บข้อมูล===================
 
   const [ansValues, setAnsValues] = useState({});
@@ -66,16 +73,46 @@ const Test = () => {
   };
 
   //=======เก็บคำตอบ==========
-  const onChange = (e) => {
+  //const [ansResult, setAnsResult] = useState({});
+  const [sumType1, setSumType1] = useState(0);
+  const [sumType2, setSumType2] = useState(0);
+  const [sumType3, setSumType3] = useState(0);
+  const [sumType4, setSumType4] = useState(0);
+  const [sumType5, setSumType5] = useState(0);
+  const [sumType6, setSumType6] = useState(0);
+  const onChange = (e, value) => {
     //console.log(e.target.name, "checked" + e.target.value);
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     //console.log(ansValues);
+    //console.log(value);
+    // console.log(e.target.name + ":" + e.target.value + " type:" + value);
+    if ((value = 1)) {
+      setSumType1(sumType1 + e.target.value);
+    } else if ((value = 2)) {
+      setSumType2(sumType2 + e.target.value);
+    } else if ((value = 3)) {
+      setSumType3(sumType3 + e.target.value);
+    } else if ((value = 4)) {
+      setSumType4(sumType4 + e.target.value);
+    } else if ((value = 5)) {
+      setSumType5(sumType5 + e.target.value);
+    } else if ((value = 6)) {
+      setSumType6(sumType6 + e.target.value);
+    }
   };
+  console.log("sum T1 = " + sumType1);
+  console.log("sum T2 = " + sumType2);
+  console.log("sum T3 = " + sumType3);
+  console.log("sum T4 = " + sumType4);
+  console.log("sum T5 = " + sumType5);
+  console.log("sum T6 = " + sumType6);
 
   //=======กดบันทึก=========
 
   const handleSubmitAns = () => {
     //console.log(editDetail);
+    toast.success("ok ค่า ลงแล้ว");
+    /*
     submitAns(ansValues)
       .then((res) => {
         //console.log(res.data.status);
@@ -85,6 +122,7 @@ const Test = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
+      */
   };
   const onFinishFailed = (errorInfo) => {
     toast.error("กรุณากรอกข้อมูลหรือคำถามให้ครบ");
@@ -203,6 +241,7 @@ const Test = () => {
               <Input
                 type="number"
                 //size="large"
+                min={0}
                 name="student_id"
                 placeholder="รหัสนักศึกษา (ตัวเลข)"
                 prefix={<NumberOutlined />}
@@ -222,6 +261,8 @@ const Test = () => {
                     <h5>{item.detail}</h5>
 
                     {/**
+                     *
+                     * {console.log(item.type_id)}
                      * <RadioBtn onClick={onChange} name={item.id} value={value} />
                      *
                      */}
@@ -244,7 +285,7 @@ const Test = () => {
                         style={{
                           marginTop: 16,
                         }}
-                        onChange={onChange}
+                        onChange={(e) => onChange(e, item.type_id)}
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
@@ -253,6 +294,8 @@ const Test = () => {
                         <Radio.Button value={5}>มากที่สุด</Radio.Button>
                       </Radio.Group>
                     </Form.Item>
+
+                    {/**=================== mobile =================================== */}
 
                     <Form.Item
                       name={index}
@@ -273,7 +316,7 @@ const Test = () => {
                         }}
                         //   className="mobile-btn"
                         name={"qaId_" + item.id}
-                        onChange={onChange}
+                        onChange={() => onChange(item.type_id)}
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
