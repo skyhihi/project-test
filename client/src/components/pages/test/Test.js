@@ -102,10 +102,12 @@ const Test = () => {
           }
         }
       }
+      /*
       console.log(
         "typq1: ",
         type1.reduce((n, { value }) => n + value, 0)
       );
+      */
     } else if (type_id === 2) {
       const find = type2.find(({ id }) => id === idf);
       if (find === undefined) {
@@ -119,10 +121,12 @@ const Test = () => {
           }
         }
       }
+      /*
       console.log(
         "typq2: ",
         type2.reduce((n, { value }) => n + value, 0)
       );
+      */
     } else if (type_id === 3) {
       const find = type3.find(({ id }) => id === idf);
       if (find === undefined) {
@@ -136,10 +140,12 @@ const Test = () => {
           }
         }
       }
+      /*
       console.log(
         "typq3: ",
         type3.reduce((n, { value }) => n + value, 0)
       );
+      */
     } else if (type_id === 4) {
       const find = type4.find(({ id }) => id === idf);
       if (find === undefined) {
@@ -153,10 +159,12 @@ const Test = () => {
           }
         }
       }
+      /*
       console.log(
         "typq4: ",
         type4.reduce((n, { value }) => n + value, 0)
       );
+      */
     } else if (type_id === 5) {
       const find = type5.find(({ id }) => id === idf);
       if (find === undefined) {
@@ -170,10 +178,12 @@ const Test = () => {
           }
         }
       }
+      /*
       console.log(
         "typq5: ",
         type5.reduce((n, { value }) => n + value, 0)
       );
+      */
     } else if (type_id === 6) {
       const find = type6.find(({ id }) => id === idf);
       if (find === undefined) {
@@ -186,10 +196,12 @@ const Test = () => {
           }
         }
       }
+      /*
       console.log(
         "typq6: ",
         type6.reduce((n, { value }) => n + value, 0)
       );
+      */
     }
   };
   /*
@@ -201,32 +213,32 @@ const Test = () => {
   console.log("type5:", type5);
   console.log("type6:", type6);
   */
-  /*
+
   console.log(
     "typq1: ",
-    type1.reduce((n, { value }) => n + value, 0)
+    type1.reduce((n, { value }) => n + value, 0) / type1.length
   );
+  //console.log(type1.length);
   console.log(
     "typq2: ",
-    type2.reduce((n, { value }) => n + value, 0)
+    type2.reduce((n, { value }) => n + value, 0) / type2.length
   );
   console.log(
     "typq3: ",
-    type3.reduce((n, { value }) => n + value, 0)
+    type3.reduce((n, { value }) => n + value, 0) / type3.length
   );
   console.log(
     "typq4: ",
-    type4.reduce((n, { value }) => n + value, 0)
+    type4.reduce((n, { value }) => n + value, 0) / type4.length
   );
   console.log(
     "typq5: ",
-    type5.reduce((n, { value }) => n + value, 0)
+    type5.reduce((n, { value }) => n + value, 0) / type5.length
   );
   console.log(
     "typq6: ",
-    type6.reduce((n, { value }) => n + value, 0)
+    type6.reduce((n, { value }) => n + value, 0) / type6.length
   );
-*/
 
   /*
   const sum = type1.reduce((accumulator, object) => {
