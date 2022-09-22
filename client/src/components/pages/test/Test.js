@@ -8,6 +8,7 @@ import { listQuestions } from "../../functions/question";
 import { listUniversity } from "../../functions/university";
 import { listYears } from "../../functions/year";
 import { submitAns } from "../../functions/ans_all";
+import { submitAnsRs } from "../../functions/ans_result";
 import { toast } from "react-toastify";
 
 const { Option } = Select;
@@ -54,21 +55,28 @@ const Test = () => {
   //==============เก็บข้อมูล===================
 
   const [ansValues, setAnsValues] = useState({});
+  const [ansResult, setAnsResult] = useState({});
+
+  //setType6([...type6, { id: id, value: e.target.value }]);
 
   const handleChangeName = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+    setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
     //console.log(ansValues);
   };
   const handleChangeUniversity = (value) => {
     setAnsValues({ ...ansValues, university: value });
+    setAnsResult({ ...ansValues, university: value });
     //console.log(ansValues);
   };
   const handleChangeYear = (value) => {
     setAnsValues({ ...ansValues, year: value });
+    setAnsResult({ ...ansValues, year: value });
     //console.log(ansValues);
   };
   const handleChangeStudentID = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+    setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
     //console.log(ansValues);
   };
 
@@ -82,17 +90,48 @@ const Test = () => {
   const [type5, setType5] = useState([]);
   const [type6, setType6] = useState([]);
 
+  /*
+  let e = "วิศวกร";
+  let i = "นักเทคโนโลยีสารสนเทศ";
+  let b = "นักการตลาดการจัดการ";
+  let p = "นักสาธารณสุข";
+  let t = "อาจารย์แพทย์";
+  let d = "แพทย์";*/
+
+  let sum1, sum2, sum3, sum4, sum5, sum6;
+  sum1 = type1.reduce((n, { value }) => n + value, 0) / type1.length;
+  console.log("วิดวะ", sum1);
+  sum2 = type2.reduce((n, { value }) => n + value, 0) / type2.length;
+  console.log("เทคโน", sum2);
+  sum3 = type3.reduce((n, { value }) => n + value, 0) / type3.length;
+  console.log("ตลาด", sum3);
+  sum4 = type4.reduce((n, { value }) => n + value, 0) / type4.length;
+  console.log("สาธารณะ", sum4);
+  sum5 = type5.reduce((n, { value }) => n + value, 0) / type5.length;
+  console.log("ครู", sum5);
+  sum6 = type6.reduce((n, { value }) => n + value, 0) / type6.length;
+  console.log("หมอ", sum6);
+
   const onChange = (e, type_id, id) => {
     const idf = id;
 
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-
+    setAnsResult({
+      ...ansResult,
+      sum1,
+      sum2,
+      sum3,
+      sum4,
+      sum5,
+      sum6,
+    });
     //========แต่ละหมวด==========
 
     if (type_id === 1) {
       const find = type1.find(({ id }) => id === idf);
       if (find === undefined) {
         setType1([...type1, { id: id, value: e.target.value }]);
+        //setAnsResult([...ansResult,{}])
       } else {
         for (const obj of type1) {
           if (obj.id === idf) {
@@ -214,7 +253,7 @@ const Test = () => {
   console.log("type6:", type6);
   */
 
-  console.log(
+  /*console.log(
     "typq1: ",
     type1.reduce((n, { value }) => n + value, 0) / type1.length
   );
@@ -238,7 +277,7 @@ const Test = () => {
   console.log(
     "typq6: ",
     type6.reduce((n, { value }) => n + value, 0) / type6.length
-  );
+  );*/
 
   /*
   const sum = type1.reduce((accumulator, object) => {
@@ -252,18 +291,29 @@ const Test = () => {
     //console.log(editDetail);
     toast.success("ok ค่า ลงแล้ว");
     console.log(ansValues);
-    /*
+    console.log(ansResult);
+
     submitAns(ansValues)
       .then((res) => {
-        //console.log(res.data.status);
+        console.log(res.data.status);
         toast.success(res.data.status);
       })
       .catch((err) => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-      */
+
+    submitAnsRs(ansResult)
+      .then((res) => {
+        //console.log(res.data.status);
+        //toast.success(res.data.status);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
   };
+
   const onFinishFailed = (errorInfo) => {
     toast.error("กรุณากรอกข้อมูลหรือคำถามให้ครบ");
   };
