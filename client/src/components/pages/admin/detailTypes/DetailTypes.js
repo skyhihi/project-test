@@ -243,14 +243,14 @@ const DetailTypes = () => {
                             <td>{item.name}</td>
                             <td>{item.type_sym}</td>
                             <td>
-                            <Link to={`/admin/detail-types/${item.type_id}`}>
-                              <button
-                                className="btn btn-info btn-sm me-3 text-light"
-                                name="add"
-                              >
-                                <i class="bi bi-plus"></i> เพิ่มรายละเอียด
-                              </button>
-                             </Link>
+                              <Link to={`/admin/detail-types/${item.type_id}`}>
+                                <button
+                                  className="btn btn-info btn-sm me-3 text-light"
+                                  name="add"
+                                >
+                                  <i class="bi bi-plus"></i> เพิ่มรายละเอียด
+                                </button>
+                              </Link>
                               <button
                                 className="btn btn-warning btn-sm me-3 "
                                 name="edit"

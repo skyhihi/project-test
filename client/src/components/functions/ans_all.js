@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const readAns = async () =>
+export const readAns = async (value) =>
   await axios.get(process.env.REACT_APP_API + "/read-ans");
 
 export const submitAns = async (value) =>
