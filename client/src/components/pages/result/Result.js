@@ -1,129 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RadarChart } from "./RadarChart";
 import "./result.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { type as typeData } from "../../functions/type";
+import { details_type } from "../../functions/details";
 
 const Result = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  if (state) {
+    var data = state.data;
+  }
+  const [listType, setListType] = useState([]);
+  const [listDetailType, setListDetailType] = useState([]);
+
+  const loadData = () => {
+    details_type()
+      .then((res) => {
+        setListDetailType(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    typeData()
+      .then((res) => {
+        setListType(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    //code
+
+    if (!state) {
+      navigate("/test");
+    }
+    loadData();
+
+    // eslint-disable-next-line
+  }, []);
+  //const [data, setData] = useState();
+
+  console.log(data);
+
   return (
     <>
       <div className="container-fuild result__page">
         <div className="row">
           <div className="col-lg-6 result__chart-card">
             <div className="result__chart-ch">
-              <RadarChart />
+              <RadarChart data={data} />
             </div>
           </div>
           <div className="col-lg-6 result__info container">
-            <div className="card_r box-red">
-              <div className="result__info-header red">แพทย์</div>
-              <div className="result__info-body">
-                <div className="result__info-title">เงินเดือน :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-                <div className="result__info-title">รายละเอียด :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-              </div>
-            </div>
+            {listType.map((item, index) => (
+              <>
+                <div className="card_r box-result">
+                  <div className="result__info-header">{item.name}</div>
 
-            <div className="card_r box-blue">
-              <div className="result__info-header blue">อาจารย์แพทย์</div>
-              <div className="result__info-body">
-                <div className="result__info-title">เงินเดือน :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-                <div className="result__info-title">รายละเอียด :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-              </div>
-            </div>
-
-            <div className="card_r box-red">
-              <div className="result__info-header red">นักสาธารณสุข</div>
-              <div className="result__info-body">
-                <div className="result__info-title">เงินเดือน :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-                <div className="result__info-title">รายละเอียด :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-              </div>
-            </div>
-
-            <div className="card_r box-blue">
-              <div className="result__info-header blue">วิศวกร</div>
-              <div className="result__info-body">
-                <div className="result__info-title">เงินเดือน :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-                <div className="result__info-title">รายละเอียด :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-              </div>
-            </div>
-
-            <div className="card_r box-red">
-              <div className="result__info-header red">
-                นักเทคโนโลยีสารสนเทศ
-              </div>
-              <div className="result__info-body">
-                <div className="result__info-title">เงินเดือน :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-                <div className="result__info-title">รายละเอียด :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-              </div>
-            </div>
-
-            <div className="card_r box-blue">
-              <div className="result__info-header blue">
-                นักการตลาดการจัดการ
-              </div>
-              <div className="result__info-body">
-                <div className="result__info-title">เงินเดือน :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-                <div className="result__info-title">รายละเอียด :</div>
-                <p>
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                </p>
-              </div>
-            </div>
+                  {listDetailType.map((it, index) => (
+                    <>
+                      {it.details_t_id === item.type_id ? (
+                        <>
+                          <div className="result__info-title">{it.title} :</div>
+                          <p>{it.details}</p>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  ))}
+                </div>
+              </>
+            ))}
+            {/**============================================ */}
           </div>
         </div>
       </div>

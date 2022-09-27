@@ -10,10 +10,12 @@ import { listYears } from "../../functions/year";
 import { submitAns } from "../../functions/ans_all";
 import { submitAnsRs } from "../../functions/ans_result";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 const Test = () => {
+  const navigate = useNavigate();
+
   const [questions, setQuestions] = useState([]);
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
@@ -45,19 +47,10 @@ const Test = () => {
     // eslint-disable-next-line
   }, []);
 
-  //=============นับคำถาม===================
-
-  /*
-  const [count, setCount] = useState(0);
-  console.log(questions);
-  */
-
   //==============เก็บข้อมูล===================
 
   const [ansValues, setAnsValues] = useState({});
   const [ansResult, setAnsResult] = useState({});
-
-  //setType6([...type6, { id: id, value: e.target.value }]);
 
   const handleChangeName = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
@@ -89,14 +82,6 @@ const Test = () => {
   const [type4, setType4] = useState([]);
   const [type5, setType5] = useState([]);
   const [type6, setType6] = useState([]);
-
-  /*
-  let e = "วิศวกร";
-  let i = "นักเทคโนโลยีสารสนเทศ";
-  let b = "นักการตลาดการจัดการ";
-  let p = "นักสาธารณสุข";
-  let t = "อาจารย์แพทย์";
-  let d = "แพทย์";*/
 
   let sum1, sum2, sum3, sum4, sum5, sum6;
   sum1 = type1.reduce((n, { value }) => n + value, 0) / type1.length;
@@ -290,13 +275,13 @@ const Test = () => {
   const handleSubmitAns = () => {
     //console.log(editDetail);
     toast.success("ok ค่า ลงแล้ว");
-    console.log(ansValues);
-    console.log(ansResult);
-
+    //console.log(ansValues);
+    //console.log(ansResult);
+    /*
     submitAns(ansValues)
       .then((res) => {
-        console.log(res.data.status);
-        toast.success(res.data.status);
+        //console.log(res.data.status);
+        //toast.success(res.data.status);
       })
       .catch((err) => {
         //console.log(err.response.data.error);
@@ -312,11 +297,15 @@ const Test = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
+      */
+    navigate("/result", { state: { data: data } });
   };
 
   const onFinishFailed = (errorInfo) => {
     toast.error("กรุณากรอกข้อมูลหรือคำถามให้ครบ");
   };
+
+  const data = [sum1, sum2, sum3, sum4, sum5, sum6];
 
   return (
     <>
