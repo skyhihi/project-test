@@ -13,9 +13,10 @@ const General = () => {
   const [data, setData] = useState([]);
 
   const loadData = () => {
-    readAns()
+    readAns(data)
       .then((res) => {
         setDataAns_all(res.data);
+
         //setData(res.data);
       })
       .catch((err) => {
@@ -34,7 +35,7 @@ const General = () => {
     loadData();
     // eslint-disable-next-line
   }, []);
-  //console.log("dataAll", dataAns_all);
+  console.log("dataAll", dataAns_all[0]);
   //console.log("data", data);
   //const dataF = Object.keys(dataAns_all);
   //console.log("dataF", dataF);
@@ -44,42 +45,110 @@ const General = () => {
     { label: "Name", key: "result.name" },
     { label: "University", key: "result.university" },
     { label: "Years", key: "result.year" },
-    { label: "e", key: "result.วิศวกร" },
+    {
+      label: "ฉันเรียนหมอและเก่งวิชาคณิตศาสตร์",
+      key: "",
+    },
+    { label: "ฉันชอบเขียนคำสั่งโปรแกรมคอมพิวเตอร์", key: "result.แพทย์" },
+    {
+      label: "ฉันเรียนแพทย์แต่เล่นหุ้น ลงทุนทองคำ เลือกซื้อกองทุนเป็น",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันเรียนหมอและชอบลงพื้นที่ไปพูดคุยกับชาวบ้าน",
+      key: "result.แพทย์",
+    },
+    { label: "ฉันฝันอยากเป็นหมอและครูสอนหมอ", key: "result.แพทย์" },
+    {
+      label: "ฉันสนใจเรียนหมอเพื่อดูแลรักษาคนไข้ที่โรงพยาบาล",
+      key: "result.แพทย์",
+    },
+    { label: "ฉันสนใจกลไกทำงานข้างในอุปกรณ์การแพทย์", key: "result.แพทย์" },
+    {
+      label: "ฉันสนใจระบบรักษาความปลอดภัยของข้อมูลในคอมพิวเตอร์",
+      key: "result.แพทย์",
+    },
+    {
+      label:
+        "ฉันชอบดูโฆษณา รายการส่งเสริมการค้าใหม่ๆ เพื่อจำวิธีนำเสนอที่ติดหูติดใจ",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันเชื่อว่าหมอให้ความรู้ป้องกันโรคสำคัญกว่าหมอรักษาโรค",
+      key: "result.แพทย์",
+    },
+    { label: "ฉันชอบงานสอนและอธิบายความรู้ให้คนอื่น", key: "result.แพทย์" },
+    { label: "ความสุขของฉันคือเป็นหมอช่วยชีวิตคนป่วย", key: "result.แพทย์" },
+    { label: "ฉันจะลงมือซ่อมมือถือเองก่อนส่งให้ช่าง", key: "result.แพทย์" },
+    {
+      label: "ฉันจัดประเภทไฟล์ข้อมูล สร้างเป็นแฟ้มงานต่างๆ ในคอมพิวเตอร์",
+      key: "result.แพทย์",
+    },
+    { label: "ฉันฝันอยากเป็นหมอและนักธุรกิจไปพร้อมๆ กัน", key: "result.แพทย์" },
+    {
+      label: "ฉันชอบทำงานที่ได้พบปะพูดคุยกับผู้คนที่หลากหลาย",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันคิดว่าหมอที่ดีต้องสามารถถ่ายทอดความรู้ได้",
+      key: "result.แพทย์",
+    },
+    { label: "ฉันอยากเรียนจบเร็วๆ เพื่อไปดูแลผู้ป่วย", key: "result.แพทย์" },
+    { label: "ฉันอยากสร้างเครื่องมือทางการแพทย์", key: "result.แพทย์" },
+    {
+      label: "ฉันอยากสร้างโปรแกรมซอฟต์แวร์เพื่อการวินิจฉัยโรค",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันยินดีเป็นคนกลางช่วยเจรจาเมื่อเพื่อนในกลุ่มทะเลาะกัน",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันคิดว่าหมอกับคนในชุมชนต้องทำงานดูแลสุขภาพร่วมกัน",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันมีอาจารย์แพทย์ในดวงใจที่ตั้งใจสอนลูกศิษย์",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันเชื่อว่าแพทย์เป็นอาชีพที่มั่นคง ไม่ตกงาน",
+      key: "result.แพทย์",
+    },
+    {
+      label:
+        "ฉันใช้เครื่องวัดความดันหลายทีต่อครั้งเพื่อเช็คว่าตัวเลขใกล้เคียงกัน",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันเขียนข้อเสนอแนะเพื่อพัฒนาโปรแกรมเป็นประจำ",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันชอบวิเคราะห์แนวโน้มเศรษฐกิจที่จะเกิดขึ้นในอนาคต",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันว่าคนเป็นหมอต้องจูงใจเก่งให้ผู้ป่วยเปลี่ยนพฤติกรรม",
+      key: "result.แพทย์",
+    },
+    {
+      label: "ฉันรู้ว่าอาจารย์แพทย์เป็นงานที่หนักแต่มีความสุข",
+      key: "result.แพทย์",
+    },
+    { label: "ฉันคิดว่าจะทำอาชีพแพทย์ไปตลอดชีวิต", key: "result.แพทย์" },
+    /*{ label: "e", key: "result.วิศวกร" },
     { label: "i", key: "result.นักเทคโนโลยีสารสนเทศ" },
     { label: "b", key: "result.นักการตลาดการจัดการ" },
     { label: "p", key: "result.นักสาธารณสุข" },
     { label: "t", key: "result.อาจารย์แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-    { label: "d", key: "result.แพทย์" },
+    { label: "d", key: "result.แพทย์" },*/
+    { label: "e", key: "result.sum1" },
+    { label: "i", key: "result.sum2" },
+    { label: "b", key: "result.sum3" },
+    { label: "p", key: "result.sum4" },
+    { label: "t", key: "result.sum5" },
+    { label: "d", key: "result.sum6" },
   ];
 
   return (
