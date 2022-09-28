@@ -11,6 +11,7 @@ import { submitAns } from "../../functions/ans_all";
 import { submitAnsRs } from "../../functions/ans_result";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { type } from "../../functions/type";
 const { Option } = Select;
 
 const Test = () => {
@@ -85,31 +86,60 @@ const Test = () => {
 
   let sum1, sum2, sum3, sum4, sum5, sum6;
   sum1 = type1.reduce((n, { value }) => n + value, 0) / type1.length;
-  console.log("วิดวะ", sum1);
+  //console.log("วิดวะ", sum1);
   sum2 = type2.reduce((n, { value }) => n + value, 0) / type2.length;
-  console.log("เทคโน", sum2);
+  //console.log("เทคโน", sum2);
   sum3 = type3.reduce((n, { value }) => n + value, 0) / type3.length;
-  console.log("ตลาด", sum3);
+  //console.log("ตลาด", sum3);
   sum4 = type4.reduce((n, { value }) => n + value, 0) / type4.length;
-  console.log("สาธารณะ", sum4);
+  //console.log("สาธารณะ", sum4);
   sum5 = type5.reduce((n, { value }) => n + value, 0) / type5.length;
-  console.log("ครู", sum5);
+  //console.log("ครู", sum5);
   sum6 = type6.reduce((n, { value }) => n + value, 0) / type6.length;
-  console.log("หมอ", sum6);
+  //console.log("หมอ", sum6);
 
-  const onChange = (e, type_id, id) => {
+  const onChange = (e, type_id, id, name_type) => {
     const idf = id;
 
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsResult({
-      ...ansResult,
-      sum1,
-      sum2,
-      sum3,
-      sum4,
-      sum5,
-      sum6,
-    });
+    if (type_id === 1) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum1,
+      });
+    } else if (type_id === 2) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum2,
+      });
+    } else if (type_id === 3) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum3,
+      });
+    } else if (type_id === 4) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum4,
+      });
+    } else if (type_id === 5) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum5,
+      });
+    } else if (type_id === 6) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum6,
+      });
+    }
+
     //========แต่ละหมวด==========
 
     if (type_id === 1) {
@@ -228,6 +258,7 @@ const Test = () => {
       */
     }
   };
+
   /*
   console.log("type1:", type1);
   
@@ -275,12 +306,12 @@ const Test = () => {
   const handleSubmitAns = () => {
     //console.log(editDetail);
     toast.success("ok ค่า ลงแล้ว");
-    //console.log(ansValues);
-    //console.log(ansResult);
+    console.log(ansValues);
+    console.log(ansResult);
 
     submitAns(ansValues)
       .then((res) => {
-        console.log(res.data.status);
+        //console.log(res.data.status);
         //toast.success(res.data.status);
       })
       .catch((err) => {
@@ -290,15 +321,15 @@ const Test = () => {
 
     submitAnsRs(ansResult)
       .then((res) => {
-        console.log(res.data.status);
+        //console.log(res.data.status);
         //toast.success(res.data.status);
       })
       .catch((err) => {
-        console.log(err.response.data.error);
+        //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
 
-    navigate("/result", { state: { data: data } });
+    //navigate("/result", { state: { data: data } });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -460,11 +491,13 @@ const Test = () => {
                         buttonStyle="solid"
                         size="large"
                         //   className="normal"
-                        name={item.detail}
+                        name={"qaId_" + item.id}
                         style={{
                           marginTop: 16,
                         }}
-                        onChange={(e) => onChange(e, item.type_id, item.id)}
+                        onChange={(e) =>
+                          onChange(e, item.type_id, item.id, item.name)
+                        }
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
@@ -494,8 +527,10 @@ const Test = () => {
                           marginTop: 16,
                         }}
                         //   className="mobile-btn"
-                        name={item.detail}
-                        onChange={(e) => onChange(e, item.type_id, item.id)}
+                        name={"qaId_" + item.id}
+                        onChange={(e) =>
+                          onChange(e, item.type_id, item.id, item.name)
+                        }
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
