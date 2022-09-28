@@ -55,6 +55,7 @@ const Result = () => {
             </div>
           </div>
           <div className="col-lg-6 result__info container">
+            <p>กรุณาถ่ายภาพหน้าจอแสดงผลเพื่อใช้ในการเรียนการสอนต่อไป</p>
             {listType.map((item, index) => (
               <>
                 <div className="card_r box-result">

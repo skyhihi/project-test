@@ -15,10 +15,17 @@ import {
   editUniversity as pushUniversity,
   deleteUniversity,
 } from "../../../functions/university";
+import {
+  listFaculty,
+  createFaculty,
+  editFaculty as pushFaculty,
+  deleteFaculty,
+} from "../../../functions/faculty";
 
 const ManageForm = () => {
   const [years, setYears] = useState([]);
   const [university, setUniversity] = useState([]);
+  const [faculty, setFaculty] = useState([]);
 
   const loadData = () => {
     listYears()
@@ -31,6 +38,13 @@ const ManageForm = () => {
     listUniversity()
       .then((res) => {
         setUniversity(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    listFaculty()
+      .then((res) => {
+        setFaculty(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -92,6 +106,36 @@ const ManageForm = () => {
     //console.log(value);
 
     createYear(valueYear)
+      .then((res) => {
+        //console.log(res.data);
+        toast.success(res.data.status);
+        loadData();
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
+
+  //==========add Faculty=============
+  const [valueFaculty, setValueFaculty] = useState({
+    faculty: "",
+  });
+
+  const onChangeFaculty = (e) => {
+    //console.log(e.target.name);
+    //console.log(e.target.value);
+    setValueFaculty({
+      ...valueFaculty,
+      [e.target.name]: e.target.value,
+    });
+    //console.log(value);
+  };
+  const onClickAddFaculty = (e) => {
+    e.preventDefault(); //
+    //console.log(value);
+
+    createFaculty(valueFaculty)
       .then((res) => {
         //console.log(res.data);
         toast.success(res.data.status);
@@ -186,6 +230,48 @@ const ManageForm = () => {
       });
   };
 
+  //==========edit Faculty=============
+
+  const [editFaculty, setEditFaculty] = useState({
+    id: "",
+    faculty: "",
+  });
+  const [facultyOld, setFacultyOld] = useState();
+
+  const [isModalOpenF, setIsModalOpenF] = useState(false);
+
+  const showModalFaculty = (id, faculty) => {
+    //console.log(id);
+    setIsModalOpenF(true);
+    setEditFaculty({ ...editFaculty, id: id });
+    setFacultyOld(faculty);
+  };
+
+  const handleCancelF = () => {
+    setIsModalOpenF(false);
+  };
+  const handleChangeFaculty = (e) => {
+    //console.log(e.target.name);
+    //console.log(e.target.value);
+    setEditFaculty({ ...editFaculty, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmitFaculty = () => {
+    //console.log(editDetail);
+    pushFaculty(editFaculty)
+      .then((res) => {
+        //console.log(res.data.status);
+        toast.success(res.data.status);
+        loadData();
+
+        setIsModalOpenF(false);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
+
   //==========delete university===============
   const confirmUniversity = (id) => {
     //console.log(e);
@@ -224,6 +310,25 @@ const ManageForm = () => {
     //console.log(e);
     message.error("Click on No");
   };
+  //==========delete Faculty===============
+  const confirmFaculty = (id) => {
+    //console.log(e);
+    //message.success("Click on Yes");
+    deleteFaculty(id)
+      .then((res) => {
+        //console.log(res.data.status);
+        toast.success(res.data.status);
+        loadData();
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
+  const cancelFaculty = (e) => {
+    //console.log(e);
+    message.error("Click on No");
+  };
 
   return (
     <>
@@ -232,10 +337,10 @@ const ManageForm = () => {
         <div class="card">
           <div class="card-body">
             <div className="row">
-              <h5 style={{ textAlign: "center" }}>--- รายละเอียดฟอร์ม ---</h5>
+              <h5 style={{ textAlign: "center" }}>รายละเอียดฟอร์ม</h5>
               <br />
               <br />
-              <div className="col-lg-6">
+              <div className="col-lg-12">
                 <div className="card">
                   <div className="card-body">
                     <h4>
@@ -244,6 +349,7 @@ const ManageForm = () => {
                       </span>
                     </h4>
                     <hr />
+
                     <div className="row">
                       <div className="col-md-10">
                         <Input
@@ -265,13 +371,13 @@ const ManageForm = () => {
                           เพิ่ม
                         </button>
                       </div>
-                      {/**=========================== */}
+                      {/**==============table============= */}
                       <table className="table table-striped">
                         <thead>
                           <tr>
-                            <th scope="col">No.</th>
+                            <th scope="col"></th>
                             <th scope="col">ชื่อมหาวิทยาลัย</th>
-                            <th scope="col">action</th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -355,7 +461,9 @@ const ManageForm = () => {
                 </div>
                 <br />
               </div>
-              <div className="col-lg-6">
+
+              {/**==============ปีการศึกษา============= */}
+              <div className="col-lg-12">
                 <div className="card">
                   <div className="card-body">
                     <h4>
@@ -387,13 +495,13 @@ const ManageForm = () => {
                         </button>
                       </div>
                     </div>
-                    {/**=========================== */}
+                    {/**==============table============= */}
                     <table className="table table-striped">
                       <thead>
                         <tr>
-                          <th scope="col">No.</th>
+                          <th scope="col"></th>
                           <th scope="col">ปีการศึกษา</th>
-                          <th scope="col">action</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -462,6 +570,124 @@ const ManageForm = () => {
                         type="primary"
                         style={{ marginTop: "0.5rem" }}
                         onClick={handleSubmitYear}
+                      >
+                        เปลี่ยน
+                      </Button>
+                      <br />
+                      <br />
+                      <hr />
+                    </Modal>
+                  </div>
+                </div>
+                <br />
+              </div>
+
+              {/**==============คณะ============= */}
+              <div className="col-lg-12">
+                <div className="card">
+                  <div className="card-body">
+                    <h4>คณะ</h4>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-md-10">
+                        <Input
+                          type="text"
+                          name="faculty"
+                          //size="large"
+                          allowClear
+                          placeholder=" เพิ่มคณะ"
+                          onChange={onChangeFaculty}
+                        />
+                      </div>
+                      <div className="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                          onClick={onClickAddFaculty}
+                        >
+                          <i class="bi bi-plus-square me-2"></i>
+                          เพิ่ม
+                        </button>
+                      </div>
+                    </div>
+
+                    {/**==============table============= */}
+
+                    <table className="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">คณะ</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {faculty.map((item, index) => (
+                          <>
+                            <tr key={index}>
+                              <th scope="row">{index + 1}</th>
+                              <td>{item.faculty}</td>
+                              <td>
+                                <Button
+                                  type="primary"
+                                  style={{
+                                    marginRight: "1rem",
+                                    backgroundColor: "#ffe71a",
+                                    borderStyle: "none",
+                                    color: "black",
+                                  }}
+                                  onClick={() =>
+                                    showModalFaculty(item.id, item.faculty)
+                                  }
+                                >
+                                  แก้ไข
+                                </Button>
+                                <Popconfirm
+                                  placement="topRight"
+                                  title="Are you sure?"
+                                  onConfirm={() => confirmFaculty(item.id)}
+                                  onCancel={cancelFaculty}
+                                  okText="Yes"
+                                  cancelText="No"
+                                >
+                                  <button
+                                    className="btn btn-danger btn-sm"
+                                    //onClick={() => handleRemove(item.id)}
+                                  >
+                                    ลบ
+                                  </button>
+                                </Popconfirm>
+                              </td>
+                            </tr>
+                          </>
+                        ))}
+                      </tbody>
+                    </table>
+                    <Modal
+                      title="แก้ไข"
+                      open={isModalOpenF}
+                      footer={null}
+                      onCancel={handleCancelF}
+                    >
+                      <label>
+                        <b>คณะ : {facultyOld}</b>
+                      </label>
+                      <br />
+                      <br />
+                      <Input
+                        type="text"
+                        name="faculty"
+                        placeholder={" แก้ไขคณะ"}
+                        onChange={handleChangeFaculty}
+                        prefix={
+                          <FontSizeOutlined className="site-form-item-icon" />
+                        }
+                      />
+                      <Button
+                        type="primary"
+                        style={{ marginTop: "0.5rem" }}
+                        onClick={handleSubmitFaculty}
                       >
                         เปลี่ยน
                       </Button>

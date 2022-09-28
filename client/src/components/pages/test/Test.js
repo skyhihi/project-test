@@ -7,10 +7,12 @@ import "./radioBtn.css";
 import { listQuestions } from "../../functions/question";
 import { listUniversity } from "../../functions/university";
 import { listYears } from "../../functions/year";
+import { listFaculty } from "../../functions/faculty";
 import { submitAns } from "../../functions/ans_all";
 import { submitAnsRs } from "../../functions/ans_result";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { type } from "../../functions/type";
 const { Option } = Select;
 
 const Test = () => {
@@ -19,6 +21,7 @@ const Test = () => {
   const [questions, setQuestions] = useState([]);
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
+  const [faculty, setFaculty] = useState([]);
   const loadData = () => {
     listQuestions()
       .then((res) => {
@@ -37,6 +40,13 @@ const Test = () => {
     listYears()
       .then((res) => {
         setYears(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    listFaculty()
+      .then((res) => {
+        setFaculty(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -72,6 +82,10 @@ const Test = () => {
     setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
     //console.log(ansValues);
   };
+  const handleChangeFaculty = (value) => {
+    setAnsValues({ ...ansValues, faculty: value });
+    setAnsResult({ ...ansValues, university: value });
+  };
 
   //=======เก็บคำตอบ==========
   //const [ansResult, setAnsResult] = useState({});
@@ -97,19 +111,48 @@ const Test = () => {
   sum6 = type6.reduce((n, { value }) => n + value, 0) / type6.length;
   console.log("หมอ", sum6);
 
-  const onChange = (e, type_id, id) => {
+  const onChange = (e, type_id, id, name_type) => {
     const idf = id;
 
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsResult({
-      ...ansResult,
-      sum1,
-      sum2,
-      sum3,
-      sum4,
-      sum5,
-      sum6,
-    });
+    if (type_id === 1) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum1,
+      });
+    } else if (type_id === 2) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum2,
+      });
+    } else if (type_id === 3) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum3,
+      });
+    } else if (type_id === 4) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum4,
+      });
+    } else if (type_id === 5) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum5,
+      });
+    } else if (type_id === 6) {
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum6,
+      });
+    }
+
     //========แต่ละหมวด==========
 
     if (type_id === 1) {
@@ -228,6 +271,7 @@ const Test = () => {
       */
     }
   };
+
   /*
   console.log("type1:", type1);
   
@@ -275,12 +319,12 @@ const Test = () => {
   const handleSubmitAns = () => {
     //console.log(editDetail);
     //toast.success("OK ค่าลงแร้ว");
-    //console.log(ansValues);
-    //console.log(ansResult);
+    console.log(ansValues);
+    console.log(ansResult);
 
     submitAns(ansValues)
       .then((res) => {
-        console.log(res.data.status);
+        //console.log(res.data.status);
         //toast.success(res.data.status);
       })
       .catch((err) => {
@@ -290,11 +334,11 @@ const Test = () => {
 
     submitAnsRs(ansResult)
       .then((res) => {
-        console.log(res.data.status);
+        //console.log(res.data.status);
         //toast.success(res.data.status);
       })
       .catch((err) => {
-        console.log(err.response.data.error);
+        //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
 
@@ -319,7 +363,7 @@ const Test = () => {
           >
             <div className="row">
               <div
-                className="col-sm-6 input-text"
+                className="col-sm-4 input-text"
                 style={{ marginBottom: "1rem" }}
               >
                 <label>มหาวิทยาลัย</label>
@@ -352,7 +396,43 @@ const Test = () => {
                   </Select>
                 </Form.Item>
               </div>
-              <div className="col-sm-6">
+              {/** --------------------faculty----------------- */}
+              <div
+                className="col-sm-4 input-text"
+                style={{ marginBottom: "1rem" }}
+              >
+                <label>คณะ</label>
+                <Form.Item
+                  name="faculty"
+                  rules={[
+                    {
+                      required: true,
+                      message: "กรุณาเลือกคณะ",
+                    },
+                  ]}
+                >
+                  <Select
+                    defaultValue="คณะ"
+                    style={{
+                      //   fontSize: "18px",
+                      width: "100%",
+                    }}
+                    onChange={handleChangeFaculty}
+                  >
+                    {faculty.map((item, index) => (
+                      <Option
+                        value={item.faculty}
+                        key={index}
+                        //  style={{ fontSize: "18px" }}
+                      >
+                        {item.faculty}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </div>
+
+              <div className="col-sm-4">
                 <label>ปีการศึกษา</label>
                 <Form.Item
                   name="year"
@@ -460,11 +540,13 @@ const Test = () => {
                         buttonStyle="solid"
                         size="large"
                         //   className="normal"
-                        name={item.detail}
+                        name={"qaId_" + item.id}
                         style={{
                           marginTop: 16,
                         }}
-                        onChange={(e) => onChange(e, item.type_id, item.id)}
+                        onChange={(e) =>
+                          onChange(e, item.type_id, item.id, item.name)
+                        }
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
@@ -494,8 +576,10 @@ const Test = () => {
                           marginTop: 16,
                         }}
                         //   className="mobile-btn"
-                        name={item.detail}
-                        onChange={(e) => onChange(e, item.type_id, item.id)}
+                        name={"qaId_" + item.id}
+                        onChange={(e) =>
+                          onChange(e, item.type_id, item.id, item.name)
+                        }
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
