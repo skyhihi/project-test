@@ -277,10 +277,10 @@ const Test = () => {
     toast.success("ok ค่า ลงแล้ว");
     //console.log(ansValues);
     //console.log(ansResult);
-    /*
+
     submitAns(ansValues)
       .then((res) => {
-        //console.log(res.data.status);
+        console.log(res.data.status);
         //toast.success(res.data.status);
       })
       .catch((err) => {
@@ -290,14 +290,14 @@ const Test = () => {
 
     submitAnsRs(ansResult)
       .then((res) => {
-        //console.log(res.data.status);
+        console.log(res.data.status);
         //toast.success(res.data.status);
       })
       .catch((err) => {
-        //console.log(err.response.data.error);
+        console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-      */
+
     navigate("/result", { state: { data: data } });
   };
 
@@ -460,7 +460,7 @@ const Test = () => {
                         buttonStyle="solid"
                         size="large"
                         //   className="normal"
-                        name={"qaId_" + item.id}
+                        name={item.detail}
                         style={{
                           marginTop: 16,
                         }}
@@ -494,7 +494,7 @@ const Test = () => {
                           marginTop: 16,
                         }}
                         //   className="mobile-btn"
-                        name={"qaId_" + item.id}
+                        name={item.detail}
                         onChange={(e) => onChange(e, item.type_id, item.id)}
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
