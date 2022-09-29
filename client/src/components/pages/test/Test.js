@@ -1,6 +1,6 @@
 import { Select, Input, Radio, Form, Button } from "antd";
 import { UserOutlined, NumberOutlined } from "@ant-design/icons";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 //import { Link } from "react-router-dom";
 //import RadioBtn from "./RadioBtn";
 import "./radioBtn.css";
@@ -13,6 +13,7 @@ import { submitAnsRs } from "../../functions/ans_result";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type } from "../../functions/type";
+import emailjs from "@emailjs/browser";
 const { Option } = Select;
 
 const Test = () => {
@@ -22,6 +23,10 @@ const Test = () => {
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
   const [faculty, setFaculty] = useState([]);
+  const form = useRef();
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+
   const loadData = () => {
     listQuestions()
       .then((res) => {
@@ -66,6 +71,7 @@ const Test = () => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
     //console.log(ansValues);
+    setUserName(e.target.value);
   };
   const handleChangeUniversity = (value) => {
     setAnsValues({ ...ansValues, university: value });
@@ -85,6 +91,9 @@ const Test = () => {
   const handleChangeFaculty = (value) => {
     setAnsValues({ ...ansValues, faculty: value });
     setAnsResult({ ...ansValues, university: value });
+  };
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
   };
 
   //=======เก็บคำตอบ==========
@@ -115,7 +124,8 @@ const Test = () => {
     const idf = id;
 
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    if (type_id === 1) {
+
+    /* if (type_id === 1) {
       setAnsResult({
         ...ansResult,
 
@@ -152,7 +162,7 @@ const Test = () => {
         [name_type]: sum6,
       });
     }
-
+*/
     //========แต่ละหมวด==========
 
     if (type_id === 1) {
@@ -168,6 +178,11 @@ const Test = () => {
             break;
           }
         }
+        setAnsResult({
+          ...ansResult,
+
+          [name_type]: sum1,
+        });
       }
       /*
       console.log(
@@ -188,6 +203,11 @@ const Test = () => {
           }
         }
       }
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum2,
+      });
       /*
       console.log(
         "typq2: ",
@@ -207,6 +227,11 @@ const Test = () => {
           }
         }
       }
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum3,
+      });
       /*
       console.log(
         "typq3: ",
@@ -226,6 +251,11 @@ const Test = () => {
           }
         }
       }
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum4,
+      });
       /*
       console.log(
         "typq4: ",
@@ -245,6 +275,11 @@ const Test = () => {
           }
         }
       }
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum5,
+      });
       /*
       console.log(
         "typq5: ",
@@ -263,6 +298,11 @@ const Test = () => {
           }
         }
       }
+      setAnsResult({
+        ...ansResult,
+
+        [name_type]: sum6,
+      });
       /*
       console.log(
         "typq6: ",
@@ -321,7 +361,7 @@ const Test = () => {
     //toast.success("OK ค่าลงแร้ว");
     console.log(ansValues);
     console.log(ansResult);
-
+    /*
     submitAns(ansValues)
       .then((res) => {
         //console.log(res.data.status);
@@ -331,7 +371,7 @@ const Test = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-
+  */
     submitAnsRs(ansResult)
       .then((res) => {
         //console.log(res.data.status);
@@ -342,7 +382,22 @@ const Test = () => {
         toast.error(err.response.data.error);
       });
 
-    navigate("/result", { state: { data: data } });
+    emailjs
+      .sendForm(
+        "service_hnph8ya",
+        "template_n53n8mf",
+        form.current,
+        "OJYC73mol6Kizu0PC"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    //navigate("/result", { state: { data: data } });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -507,6 +562,26 @@ const Test = () => {
                 onChange={handleChangeStudentID}
               />
             </Form.Item>
+            <label>email</label>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "กรุณากรอกรหัสนักศึกษา",
+                },
+              ]}
+            >
+              <Input
+                type="email"
+                //size="large"
+
+                name="email"
+                placeholder="กรอกอีเมล"
+                prefix={<NumberOutlined />}
+                onChange={handleChangeEmail}
+              />
+            </Form.Item>
             <br />
 
             <hr />
@@ -596,6 +671,16 @@ const Test = () => {
               </>
             ))}
 
+            <form ref={form}>
+              <input type="hidden" name="user_name" value={userName} />
+              <input type="hidden" name="user_email" value={email} />
+              <input type="hidden" name="engineering" value={sum1} />
+              <input type="hidden" name="it" value={sum2} />
+              <input type="hidden" name="business" value={sum3} />
+              <input type="hidden" name="ph" value={sum4} />
+              <input type="hidden" name="teacher" value={sum4} />
+              <input type="hidden" name="doctor" value={sum4} />
+            </form>
             <Button
               type="primary"
               size="large"
