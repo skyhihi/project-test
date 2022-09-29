@@ -145,8 +145,8 @@ const Test = () => {
       แพทย์: sumArray(doc),
     };
 
-    console.log(request);
-    console.log(ansValues);
+    //console.log(request);
+    //console.log(ansValues);
 
     var templateParams = {
       user_name: userName,
@@ -173,22 +173,6 @@ const Test = () => {
           console.log(error.text);
         }
       );
-
-    //console.log(editDetail);
-    //toast.success("OK ค่าลงแร้ว");
-    //console.log(request);
-    //console.log(ansResult);
-    /*
-    submitAns(request)
-      .then((res) => {
-        //console.log(res.data.status);
-        //toast.success(res.data.status);
-      })
-      .catch((err) => {
-        //console.log(err.response.data.error);
-        toast.error(err.response.data.error);
-      });
-  */
 
     submitAnsRs(request)
       .then((res) => {
