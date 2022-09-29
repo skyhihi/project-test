@@ -96,6 +96,11 @@ const Test = () => {
     setEmail(e.target.value);
   };
 
+  const onChange = (e) => {
+    console.log(e.target.value);
+    setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+  };
+
   //=======กดบันทึก=========
 
   function sumArray(array) {
@@ -107,12 +112,12 @@ const Test = () => {
   }
 
   const handleSubmitAns = async (values) => {
-    let doc = [];
-    let tech = [];
     let engineer = [];
+    let tech = [];
     let business = [];
     let ph = [];
     let teacher = [];
+    let doc = [];
 
     for (let i = 0; i < questions.length; i++) {
       if (questions[i].type_id === 1) {
@@ -129,6 +134,34 @@ const Test = () => {
         doc.push(values[`${i}`]);
       }
     }
+    let maxName = "";
+
+    let sum = [
+      sumArray(engineer),
+      sumArray(tech),
+      sumArray(business),
+      sumArray(business),
+      sumArray(ph),
+      sumArray(teacher),
+      sumArray(doc),
+    ];
+
+    const max = Math.max(...sum);
+    const index = sum.indexOf(max);
+
+    if (index === 1) {
+      maxName = "วิศวกร";
+    } else if (index === 2) {
+      maxName = "นักเทคโนโลยีสารสนเทศ";
+    } else if (index === 3) {
+      maxName = "นักการตลาดการจัดการ";
+    } else if (index === 4) {
+      maxName = "นักสาธารณสุข";
+    } else if (index === 5) {
+      maxName = "อาจารย์แพทย์";
+    } else {
+      maxName = "แพทย์";
+    }
 
     //console.log(values)
     const request = {
@@ -143,10 +176,11 @@ const Test = () => {
       นักสาธารณสุข: sumArray(ph),
       อาจารย์แพทย์: sumArray(teacher),
       แพทย์: sumArray(doc),
+      result: maxName,
     };
 
-    //console.log(request);
-    //console.log(ansValues);
+    console.log(request);
+    console.log(ansValues);
 
     var templateParams = {
       user_name: userName,
@@ -405,6 +439,7 @@ const Test = () => {
                         },
                       ]}
                       className="normal"
+                      onChange={onChange}
                     >
                       <Radio.Group
                         buttonStyle="solid"
@@ -434,6 +469,7 @@ const Test = () => {
                         },
                       ]}
                       className="mobile-btn"
+                      onChange={onChange}
                     >
                       <Radio.Group
                         key={index}
