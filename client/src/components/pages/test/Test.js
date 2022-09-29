@@ -1,6 +1,6 @@
 import { Select, Input, Radio, Form, Button } from "antd";
 import { UserOutlined, NumberOutlined } from "@ant-design/icons";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 //import { Link } from "react-router-dom";
 //import RadioBtn from "./RadioBtn";
 import "./radioBtn.css";
@@ -13,6 +13,7 @@ import { submitAnsRs } from "../../functions/ans_result";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type } from "../../functions/type";
+import emailjs from "@emailjs/browser";
 const { Option } = Select;
 
 const Test = () => {
@@ -22,6 +23,10 @@ const Test = () => {
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
   const [faculty, setFaculty] = useState([]);
+  const form = useRef();
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+
   const loadData = () => {
     listQuestions()
       .then((res) => {
@@ -66,6 +71,7 @@ const Test = () => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
     //console.log(ansValues);
+    setUserName(e.target.value);
   };
   const handleChangeUniversity = (value) => {
     setAnsValues({ ...ansValues, university: value });
@@ -86,241 +92,113 @@ const Test = () => {
     setAnsValues({ ...ansValues, faculty: value });
     setAnsResult({ ...ansValues, university: value });
   };
-
-  //=======เก็บคำตอบ==========
-  //const [ansResult, setAnsResult] = useState({});
-
-  const [type1, setType1] = useState([]);
-  const [type2, setType2] = useState([]);
-  const [type3, setType3] = useState([]);
-  const [type4, setType4] = useState([]);
-  const [type5, setType5] = useState([]);
-  const [type6, setType6] = useState([]);
-
-  let sum1, sum2, sum3, sum4, sum5, sum6;
-  sum1 = type1.reduce((n, { value }) => n + value, 0) / type1.length;
-  console.log("วิดวะ", sum1);
-  sum2 = type2.reduce((n, { value }) => n + value, 0) / type2.length;
-  console.log("เทคโน", sum2);
-  sum3 = type3.reduce((n, { value }) => n + value, 0) / type3.length;
-  console.log("ตลาด", sum3);
-  sum4 = type4.reduce((n, { value }) => n + value, 0) / type4.length;
-  console.log("สาธารณะ", sum4);
-  sum5 = type5.reduce((n, { value }) => n + value, 0) / type5.length;
-  console.log("ครู", sum5);
-  sum6 = type6.reduce((n, { value }) => n + value, 0) / type6.length;
-  console.log("หมอ", sum6);
-
-  const onChange = (e, type_id, id, name_type) => {
-    const idf = id;
-
-    setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    if (type_id === 1) {
-      setAnsResult({
-        ...ansResult,
-
-        [name_type]: sum1,
-      });
-    } else if (type_id === 2) {
-      setAnsResult({
-        ...ansResult,
-
-        [name_type]: sum2,
-      });
-    } else if (type_id === 3) {
-      setAnsResult({
-        ...ansResult,
-
-        [name_type]: sum3,
-      });
-    } else if (type_id === 4) {
-      setAnsResult({
-        ...ansResult,
-
-        [name_type]: sum4,
-      });
-    } else if (type_id === 5) {
-      setAnsResult({
-        ...ansResult,
-
-        [name_type]: sum5,
-      });
-    } else if (type_id === 6) {
-      setAnsResult({
-        ...ansResult,
-
-        [name_type]: sum6,
-      });
-    }
-
-    //========แต่ละหมวด==========
-
-    if (type_id === 1) {
-      const find = type1.find(({ id }) => id === idf);
-      if (find === undefined) {
-        setType1([...type1, { id: id, value: e.target.value }]);
-        //setAnsResult([...ansResult,{}])
-      } else {
-        for (const obj of type1) {
-          if (obj.id === idf) {
-            obj.value = e.target.value;
-
-            break;
-          }
-        }
-      }
-      /*
-      console.log(
-        "typq1: ",
-        type1.reduce((n, { value }) => n + value, 0)
-      );
-      */
-    } else if (type_id === 2) {
-      const find = type2.find(({ id }) => id === idf);
-      if (find === undefined) {
-        setType2([...type2, { id: id, value: e.target.value }]);
-      } else {
-        for (const obj of type2) {
-          if (obj.id === idf) {
-            obj.value = e.target.value;
-
-            break;
-          }
-        }
-      }
-      /*
-      console.log(
-        "typq2: ",
-        type2.reduce((n, { value }) => n + value, 0)
-      );
-      */
-    } else if (type_id === 3) {
-      const find = type3.find(({ id }) => id === idf);
-      if (find === undefined) {
-        setType3([...type3, { id: id, value: e.target.value }]);
-      } else {
-        for (const obj of type3) {
-          if (obj.id === idf) {
-            obj.value = e.target.value;
-
-            break;
-          }
-        }
-      }
-      /*
-      console.log(
-        "typq3: ",
-        type3.reduce((n, { value }) => n + value, 0)
-      );
-      */
-    } else if (type_id === 4) {
-      const find = type4.find(({ id }) => id === idf);
-      if (find === undefined) {
-        setType4([...type4, { id: id, value: e.target.value }]);
-      } else {
-        for (const obj of type4) {
-          if (obj.id === idf) {
-            obj.value = e.target.value;
-
-            break;
-          }
-        }
-      }
-      /*
-      console.log(
-        "typq4: ",
-        type4.reduce((n, { value }) => n + value, 0)
-      );
-      */
-    } else if (type_id === 5) {
-      const find = type5.find(({ id }) => id === idf);
-      if (find === undefined) {
-        setType5([...type5, { id: id, value: e.target.value }]);
-      } else {
-        for (const obj of type5) {
-          if (obj.id === idf) {
-            obj.value = e.target.value;
-
-            break;
-          }
-        }
-      }
-      /*
-      console.log(
-        "typq5: ",
-        type5.reduce((n, { value }) => n + value, 0)
-      );
-      */
-    } else if (type_id === 6) {
-      const find = type6.find(({ id }) => id === idf);
-      if (find === undefined) {
-        setType6([...type6, { id: id, value: e.target.value }]);
-      } else {
-        for (const obj of type6) {
-          if (obj.id === idf) {
-            obj.value = e.target.value;
-            break;
-          }
-        }
-      }
-      /*
-      console.log(
-        "typq6: ",
-        type6.reduce((n, { value }) => n + value, 0)
-      );
-      */
-    }
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
   };
 
-  /*
-  console.log("type1:", type1);
-  
-  console.log("type2:", type2);
-  console.log("type3:", type3);
-  console.log("type4:", type4);
-  console.log("type5:", type5);
-  console.log("type6:", type6);
-  */
-
-  /*console.log(
-    "typq1: ",
-    type1.reduce((n, { value }) => n + value, 0) / type1.length
-  );
-  //console.log(type1.length);
-  console.log(
-    "typq2: ",
-    type2.reduce((n, { value }) => n + value, 0) / type2.length
-  );
-  console.log(
-    "typq3: ",
-    type3.reduce((n, { value }) => n + value, 0) / type3.length
-  );
-  console.log(
-    "typq4: ",
-    type4.reduce((n, { value }) => n + value, 0) / type4.length
-  );
-  console.log(
-    "typq5: ",
-    type5.reduce((n, { value }) => n + value, 0) / type5.length
-  );
-  console.log(
-    "typq6: ",
-    type6.reduce((n, { value }) => n + value, 0) / type6.length
-  );*/
-
-  /*
-  const sum = type1.reduce((accumulator, object) => {
-    return accumulator + object;
-  }, 0);
-  console.log(sum);
-  */
   //=======กดบันทึก=========
 
-  const handleSubmitAns = () => {
+  function sumArray(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+      sum += array[i];
+    }
+    return sum / array.length;
+  }
+
+  const handleSubmitAns = async (values) => {
+    let doc = [];
+    let tech = [];
+    let engineer = [];
+    let business = [];
+    let ph = [];
+    let teacher = [];
+
+    for (let i = 0; i < questions.length; i++) {
+      if (questions[i].type_id === 1) {
+        engineer.push(values[`${i}`]);
+      } else if (questions[i].type_id === 2) {
+        tech.push(values[`${i}`]);
+      } else if (questions[i].type_id === 3) {
+        business.push(values[`${i}`]);
+      } else if (questions[i].type_id === 4) {
+        ph.push(values[`${i}`]);
+      } else if (questions[i].type_id === 5) {
+        teacher.push(values[`${i}`]);
+      } else {
+        doc.push(values[`${i}`]);
+      }
+    }
+
+    //console.log(values)
+    const request = {
+      faculty: values.faculty,
+      name: values.name,
+      year: values.year,
+      student_id: values.student_id,
+      university: values.university,
+      วิศวกร: sumArray(engineer),
+      นักเทคโนโลยีสารสนเทศ: sumArray(tech),
+      นักการตลาดการจัดการ: sumArray(business),
+      นักสาธารณสุข: sumArray(ph),
+      อาจารย์แพทย์: sumArray(teacher),
+      แพทย์: sumArray(doc),
+    };
+
+    console.log(request);
+    console.log(ansValues);
+
+    var templateParams = {
+      user_name: userName,
+      user_email: email,
+      engineering: sumArray(engineer),
+      it: sumArray(tech),
+      business: sumArray(business),
+      ph: sumArray(ph),
+      teacher: sumArray(teacher),
+      doctor: sumArray(doc),
+    };
+    emailjs
+      .send(
+        "service_hnph8ya",
+        "template_n53n8mf",
+        templateParams,
+        "OJYC73mol6Kizu0PC"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+
     //console.log(editDetail);
     //toast.success("OK ค่าลงแร้ว");
-    console.log(ansValues);
-    console.log(ansResult);
+    //console.log(request);
+    //console.log(ansResult);
+    /*
+    submitAns(request)
+      .then((res) => {
+        //console.log(res.data.status);
+        //toast.success(res.data.status);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  */
+
+    submitAnsRs(request)
+      .then((res) => {
+        //console.log(res.data.status);
+        //toast.success(res.data.status);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
 
     submitAns(ansValues)
       .then((res) => {
@@ -332,24 +210,12 @@ const Test = () => {
         toast.error(err.response.data.error);
       });
 
-    submitAnsRs(ansResult)
-      .then((res) => {
-        //console.log(res.data.status);
-        //toast.success(res.data.status);
-      })
-      .catch((err) => {
-        //console.log(err.response.data.error);
-        toast.error(err.response.data.error);
-      });
-
-    navigate("/result", { state: { data: data } });
+    //navigate("/result", { state: { data: data } });
   };
 
   const onFinishFailed = (errorInfo) => {
     toast.error("กรุณากรอกข้อมูลหรือคำถามให้ครบ");
   };
-
-  const data = [sum1, sum2, sum3, sum4, sum5, sum6];
 
   return (
     <>
@@ -507,6 +373,26 @@ const Test = () => {
                 onChange={handleChangeStudentID}
               />
             </Form.Item>
+            <label>email</label>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "กรุณากรอกรหัสนักศึกษา",
+                },
+              ]}
+            >
+              <Input
+                type="email"
+                //size="large"
+
+                name="email"
+                placeholder="กรอกอีเมล"
+                prefix={<NumberOutlined />}
+                onChange={handleChangeEmail}
+              />
+            </Form.Item>
             <br />
 
             <hr />
@@ -544,9 +430,6 @@ const Test = () => {
                         style={{
                           marginTop: 16,
                         }}
-                        onChange={(e) =>
-                          onChange(e, item.type_id, item.id, item.name)
-                        }
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
@@ -577,9 +460,6 @@ const Test = () => {
                         }}
                         //   className="mobile-btn"
                         name={"qaId_" + item.id}
-                        onChange={(e) =>
-                          onChange(e, item.type_id, item.id, item.name)
-                        }
                       >
                         <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
                         <Radio.Button value={2}>น้อย</Radio.Button>
@@ -595,7 +475,6 @@ const Test = () => {
                 </div>
               </>
             ))}
-
             <Button
               type="primary"
               size="large"
