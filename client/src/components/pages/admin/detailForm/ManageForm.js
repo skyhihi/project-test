@@ -123,8 +123,8 @@ const ManageForm = () => {
   });
 
   const onChangeFaculty = (e) => {
-    //console.log(e.target.name);
-    //console.log(e.target.value);
+    console.log(e.target.name);
+    console.log(e.target.value);
     setValueFaculty({
       ...valueFaculty,
       [e.target.name]: e.target.value,
@@ -133,11 +133,10 @@ const ManageForm = () => {
   };
   const onClickAddFaculty = (e) => {
     e.preventDefault(); //
-    //console.log(value);
 
     createFaculty(valueFaculty)
       .then((res) => {
-        //console.log(res.data);
+        console.log(res.data);
         toast.success(res.data.status);
         loadData();
       })

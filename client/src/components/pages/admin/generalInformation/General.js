@@ -11,6 +11,7 @@ const { Option } = Select;
 const General = () => {
   const [dataAns_all, setDataAns_all] = useState([]);
   const [data, setData] = useState([]);
+  //const [selected, setSelected] = useState("มหาวิทยาลัย");
 
   const loadData = () => {
     readAns()
@@ -150,14 +151,11 @@ const General = () => {
     { label: "t", key: "result.sum5" },
     { label: "d", key: "result.sum6" },*/
   ];
-  const header = [
-    { label: "e", key: "result.วิศวกร" },
-    { label: "i", key: "result.นักเทคโนโลยีสารสนเทศ" },
-    { label: "b", key: "result.นักการตลาดการจัดการ" },
-    { label: "p", key: "result.นักสาธารณสุข" },
-    { label: "t", key: "result.อาจารย์แพทย์" },
-    { label: "d", key: "result.แพทย์" },
-  ];
+
+  const test = data.values();
+  for (var i = 0; i < data.values.length; i++) {
+    console.log("test :", test);
+  }
 
   return (
     <>
@@ -173,7 +171,7 @@ const General = () => {
                 <h5>ข้อมูลทั้งหมด</h5>
                 <br />
                 <br />
-                <div className="col-sm-5" style={{ marginBottom: "1rem" }}>
+                <div className="col-sm-3" style={{ marginBottom: "1rem" }}>
                   <Select
                     defaultValue="มหาวิทยาลัย"
                     style={{
@@ -182,7 +180,7 @@ const General = () => {
                     }}
                     // onChange={handleChange}
                   >
-                    <Option value="jack" style={{ fontSize: "18px" }}>
+                    <Option value="" style={{ fontSize: "18px" }}>
                       มหาวิทยาลัยมหิดล
                     </Option>
                     <Option value="lucy" style={{ fontSize: "18px" }}>
@@ -190,7 +188,7 @@ const General = () => {
                     </Option>
                   </Select>
                 </div>
-                <div className="col-sm-5">
+                <div className="col-sm-3">
                   <Select
                     defaultValue="ปีการศึกษา"
                     style={{
@@ -233,6 +231,7 @@ const General = () => {
                           <th scope="col">Student ID</th>
                           <th scope="col">Name</th>
                           <th scope="col">University</th>
+                          <th scope="col">Faculty</th>
                           <th scope="col">Years</th>
                           <th scope="col">e</th>
                           <th scope="col">i</th>
@@ -240,6 +239,7 @@ const General = () => {
                           <th scope="col">p</th>
                           <th scope="col">t</th>
                           <th scope="col">d</th>
+                          <th scope="col">result</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -250,6 +250,7 @@ const General = () => {
                               <td>{item.result.student_id}</td>
                               <td>{item.result.name}</td>
                               <td>{item.result.university}</td>
+                              <td>{item.result.faculty}</td>
                               <td>{item.result.year}</td>
                               <td>{item.result.วิศวกร}</td>
                               <td>{item.result.นักเทคโนโลยีสารสนเทศ}</td>
@@ -260,20 +261,10 @@ const General = () => {
                             </>
                           </tr>
                         ))}
-                        {/** 
-                        {dataAns_all.map((item, index) => (
-                          <>
-                            <p>{item.ans}</p>
-                          </>
-                        ))}*/}
                       </tbody>
                     </table>
                   </div>
                 </div>
-
-                {dataAns_all.map((item, index) => (
-                  <></>
-                ))}
               </div>
             </div>
           </div>
