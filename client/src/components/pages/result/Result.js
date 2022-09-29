@@ -10,6 +10,8 @@ const Result = () => {
   const navigate = useNavigate();
   if (state) {
     var data = state.data;
+    console.log(data);
+    console.log(state.sum);
   }
   const [listType, setListType] = useState([]);
   const [listDetailType, setListDetailType] = useState([]);

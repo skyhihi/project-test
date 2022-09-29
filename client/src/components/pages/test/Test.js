@@ -97,7 +97,6 @@ const Test = () => {
   };
 
   const onChange = (e) => {
-    console.log(e.target.value);
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
   };
 
@@ -136,15 +135,14 @@ const Test = () => {
     }
     let maxName = "";
 
-    let sum = [
-      sumArray(engineer),
-      sumArray(tech),
-      sumArray(business),
-      sumArray(business),
-      sumArray(ph),
-      sumArray(teacher),
-      sumArray(doc),
-    ];
+    let sumEn = sumArray(engineer);
+    let sumTec = sumArray(tech);
+    let sumBu = sumArray(business);
+    let sumPh = sumArray(ph);
+    let sumTea = sumArray(teacher);
+    let sumDoc = sumArray(doc);
+
+    let sum = [sumEn, sumTec, sumBu, sumPh, sumTea, sumDoc];
 
     const max = Math.max(...sum);
     const index = sum.indexOf(max);
@@ -170,12 +168,12 @@ const Test = () => {
       year: values.year,
       student_id: values.student_id,
       university: values.university,
-      วิศวกร: sumArray(engineer),
-      นักเทคโนโลยีสารสนเทศ: sumArray(tech),
-      นักการตลาดการจัดการ: sumArray(business),
-      นักสาธารณสุข: sumArray(ph),
-      อาจารย์แพทย์: sumArray(teacher),
-      แพทย์: sumArray(doc),
+      วิศวกร: sumEn,
+      นักเทคโนโลยีสารสนเทศ: sumTec,
+      นักการตลาดการจัดการ: sumBu,
+      นักสาธารณสุข: sumPh,
+      อาจารย์แพทย์: sumTea,
+      แพทย์: sumDoc,
       result: maxName,
     };
 
@@ -185,13 +183,14 @@ const Test = () => {
     var templateParams = {
       user_name: userName,
       user_email: email,
-      engineering: sumArray(engineer),
-      it: sumArray(tech),
-      business: sumArray(business),
-      ph: sumArray(ph),
-      teacher: sumArray(teacher),
-      doctor: sumArray(doc),
+      engineering: sumEn,
+      it: sumTec,
+      business: sumBu,
+      ph: sumPh,
+      teacher: sumTea,
+      doctor: sumDoc,
     };
+    /*
     emailjs
       .send(
         "service_hnph8ya",
@@ -227,8 +226,16 @@ const Test = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-
-    //navigate("/result", { state: { data: data } });
+*/
+    let data = {
+      วิศวกร: sumEn,
+      นักเทคโนโลยีสารสนเทศ: sumTec,
+      นักการตลาดการจัดการ: sumBu,
+      นักสาธารณสุข: sumPh,
+      อาจารย์แพทย์: sumTea,
+      แพทย์: sumDoc,
+    };
+    navigate("/result", { state: { data: data, sum: sum } });
   };
 
   const onFinishFailed = (errorInfo) => {
