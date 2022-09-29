@@ -149,15 +149,15 @@ const Test = () => {
     const max = Math.max(...sum);
     const index = sum.indexOf(max);
 
-    if (index === 1) {
+    if (index === 0) {
       maxName = "วิศวกร";
-    } else if (index === 2) {
+    } else if (index === 1) {
       maxName = "นักเทคโนโลยีสารสนเทศ";
-    } else if (index === 3) {
+    } else if (index === 2) {
       maxName = "นักการตลาดการจัดการ";
-    } else if (index === 4) {
+    } else if (index === 3) {
       maxName = "นักสาธารณสุข";
-    } else if (index === 5) {
+    } else if (index === 4) {
       maxName = "อาจารย์แพทย์";
     } else {
       maxName = "แพทย์";
