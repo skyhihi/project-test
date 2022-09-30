@@ -4,13 +4,17 @@ import "./result.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { type as typeData } from "../../functions/type";
 import { details_type } from "../../functions/details";
+import { Alert, Modal } from "antd";
 
 const Result = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
   if (state) {
     var data = state.data;
     console.log(data);
+    var sum = state.sum;
     console.log(state.sum);
   }
   const [listType, setListType] = useState([]);
@@ -45,15 +49,28 @@ const Result = () => {
   }, []);
   //const [data, setData] = useState();
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   console.log(data);
 
   return (
     <>
+      <Modal
+        title="สำคัญ"
+        type="warning"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <b>email อยู่ในจดหมายขยะ</b>
+      </Modal>
       <div className="container-fuild result__page">
         <div className="row">
           <div className="col-lg-6 result__chart-card">
             <div className="result__chart-ch">
-              <RadarChart data={data} />
+              <RadarChart data={sum} />
             </div>
           </div>
           <div className="col-lg-6 result__info container">

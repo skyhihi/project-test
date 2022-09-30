@@ -91,6 +91,12 @@ export class RadarChart extends React.Component {
               family: "Prompt",
             },
           },
+          grid: {
+            color: "#414141",
+          },
+          angleLines: {
+            color: "#414141",
+          },
         },
       },
     };
