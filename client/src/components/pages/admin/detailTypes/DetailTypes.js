@@ -15,8 +15,11 @@ import {
 
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const DetailTypes = () => {
+  const { user } = useSelector((state) => ({ ...state }));
+
   /**--------------------ลิสหมวดหมู่--------------- */
   const [ListType, setListType] = useState([]);
   const loadData = () => {
@@ -35,7 +38,7 @@ const DetailTypes = () => {
   }, []);
   /**--------------------ตุ่มลบ--------------- */
   const buttonDelete = (type_id) => {
-    delete_type(type_id)
+    delete_type(user.token, type_id)
       .then((res) => {
         toast.success(res.data.status);
         loadData();
@@ -80,8 +83,8 @@ const DetailTypes = () => {
 
   //-------------------<button>กดปุ่มเพื่อเปลี่ยนหมวดหมู่-------------------//
   const handleSubmitChange = () => {
-    console.log(editType);
-    edit_typeName(editType)
+    //console.log(editType);
+    edit_typeName(user.token, editType)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -112,10 +115,10 @@ const DetailTypes = () => {
 
   //-------------------<button>กดปุ่มเพื่อเปลี่ยนตัวย่อหมวดหมู่-------------------//
   const handleSubmitSymbolType = () => {
-    console.log(editTypeSym);
-    edit_typeSym(editTypeSym)
+    //console.log(editTypeSym);
+    edit_typeSym(user.token, editTypeSym)
       .then((res) => {
-        console.log(res.data.status);
+        //console.log(res.data.status);
         toast.success(res.data.status);
         loadData();
 
@@ -129,14 +132,14 @@ const DetailTypes = () => {
 
   //
   const onChangeType = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setValue({ ...value, [e.target.name]: e.target.value });
     //console.log(value);
   };
   const onChangeTypeSym = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setValue({ ...value, [e.target.name]: e.target.value });
     //console.log(value);
   };
@@ -144,9 +147,9 @@ const DetailTypes = () => {
   //button press//
   const onClick = (e) => {
     e.preventDefault(); //
-    console.log(value);
+    //console.log(value);
 
-    create_type(value)
+    create_type(user.token, value)
       .then((res) => {
         //console.log(res.data);
         toast.success(res.data.status);

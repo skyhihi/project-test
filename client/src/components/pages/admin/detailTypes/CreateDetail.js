@@ -13,9 +13,12 @@ import { type as typeData } from "../../../functions/type";
 import { toast } from "react-toastify";
 import { Button, Input, Modal, Popconfirm, message } from "antd";
 import { FontSizeOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 const { TextArea } = Input;
+
 const CreateDetail = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const [details, setDetails] = useState([]);
   const [listType, setListType] = useState([]);
 
@@ -40,14 +43,14 @@ const CreateDetail = () => {
   };
 
   const handleChangeTitle = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setEditTitle({ ...editTitle, [e.target.name]: e.target.value });
   };
 
   const handleChangeDetail = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setEditDetails({ ...editDetails, [e.target.name]: e.target.value });
   };
 
@@ -67,7 +70,7 @@ const CreateDetail = () => {
   const SubmitTitleChange = () => {
     //console.log(editTitle);
 
-    editTitle_type(editTitle)
+    editTitle_type(user.token, editTitle)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -82,8 +85,8 @@ const CreateDetail = () => {
   };
 
   const SubmitDetailsChange = () => {
-    console.log(editDetails);
-    editDetail_type(editDetails)
+    //console.log(editDetails);
+    editDetail_type(user.token, editDetails)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -123,8 +126,8 @@ const CreateDetail = () => {
   //-----button press-----//
   const onClick = (e) => {
     e.preventDefault(); //
-    console.log(value);
-    createDetail_type(value)
+    //console.log(value);
+    createDetail_type(user.token, value)
       .then((res) => {
         //console.log(res.data);
         toast.success(res.data.status);
@@ -138,7 +141,7 @@ const CreateDetail = () => {
 
   const buttonDelete = (detail_id) => {
     //console.log(detail_id);
-    deleteDetail_type(detail_id)
+    deleteDetail_type(user.token, detail_id)
       .then((res) => {
         toast.success(res.data.status);
         loadData(type_id);
@@ -161,14 +164,14 @@ const CreateDetail = () => {
   });
 
   const onChangeTitle = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setValue({ ...value, [e.target.name]: e.target.value });
     //console.log(value);
   };
   const onChangeDetails = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setValue({ ...value, [e.target.name]: e.target.value });
     //console.log(value);
   };
