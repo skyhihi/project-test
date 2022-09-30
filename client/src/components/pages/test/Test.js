@@ -151,6 +151,7 @@ const Test = () => {
     let sumDoc = sumArray(doc);
 
     let sum = [sumEn, sumTec, sumBu, sumPh, sumTea, sumDoc];
+    let sumToResult = [sumTec, sumEn, sumPh, sumBu, sumTea, sumDoc];
 
     const max = Math.max(...sum);
     const index = sum.indexOf(max);
@@ -265,7 +266,7 @@ const Test = () => {
       อาจารย์แพทย์: sumTea,
       แพทย์: sumDoc,
     };
-    navigate("/result", { state: { data: data, sum: sum } });
+    navigate("/result", { state: { data: data, sum: sumToResult } });
   };
 
   const onFinishFailed = (errorInfo) => {

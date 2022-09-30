@@ -4,6 +4,7 @@ import "./result.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { type as typeData } from "../../functions/type";
 import { details_type } from "../../functions/details";
+import { readAnsRS } from "../../functions/ans_result";
 import { Alert, Modal } from "antd";
 
 const Result = () => {
@@ -13,12 +14,15 @@ const Result = () => {
 
   if (state) {
     var data = state.data;
-    console.log(data);
+    //console.log(data);
     var sum = state.sum;
-    console.log(state.sum);
+    var sumD = state.sum;
+    //console.log(state.sum);
   }
+
   const [listType, setListType] = useState([]);
   const [listDetailType, setListDetailType] = useState([]);
+  const [listAns, setListAns] = useState([]);
 
   const loadData = () => {
     details_type()
@@ -32,6 +36,14 @@ const Result = () => {
     typeData()
       .then((res) => {
         setListType(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    readAnsRS()
+      .then((res) => {
+        setListAns(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -53,18 +65,23 @@ const Result = () => {
     setIsModalOpen(false);
   };
 
-  console.log(data);
+  sumD.sort((a, b) => a.sumD > b.sumD);
+  console.log(sumD);
 
+  console.log(data);
+  console.log(sum);
   return (
     <>
       <Modal
-        title="สำคัญ"
+        title="สำคัญ!"
         type="warning"
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
       >
-        <b>email อยู่ในจดหมายขยะ</b>
+        <b>Email ของท่านอาจอยู่ในจดหมายขยะ</b>
+        <br />
+        <p> กรุณาถ่ายภาพหน้าจอแสดงผลเพื่อใช้ในการเรียนการสอนต่อไป</p>
       </Modal>
       <div className="container-fuild result__page">
         <div className="row">
@@ -74,7 +91,6 @@ const Result = () => {
             </div>
           </div>
           <div className="col-lg-6 result__info container">
-            <p>กรุณาถ่ายภาพหน้าจอแสดงผลเพื่อใช้ในการเรียนการสอนต่อไป</p>
             {listType.map((item, index) => (
               <>
                 <div className="card_r box-result">
@@ -82,14 +98,23 @@ const Result = () => {
 
                   {listDetailType.map((it, index) => (
                     <>
-                      {it.details_t_id === item.type_id ? (
+                      {sumD.map((i, index) => (
                         <>
-                          <div className="result__info-title">{it.title} :</div>
-                          <p>{it.details}</p>
+                          <p>{sumD},</p>
+                          {it.details_t_id === item.type_id ? (
+                            <>
+                              {/*
+                               */}
+                              <div className="result__info-title">
+                                {it.title}:
+                              </div>
+                              <p>{it.details}</p>
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </>
-                      ) : (
-                        <></>
-                      )}
+                      ))}
                     </>
                   ))}
                 </div>
