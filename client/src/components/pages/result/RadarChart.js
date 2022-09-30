@@ -53,10 +53,12 @@ export class RadarChart extends React.Component {
 
     this.RadarOptions = {
       scale: {
-        ticks: {
+        r: {
           min: 0,
           max: 5,
-          stepSize: 0.5,
+        },
+        ticks: {
+          stepSize: 1,
           showLabelBackdrop: false,
           backdropColor: "rgba(203, 197, 11, 1)",
           font: {
@@ -91,12 +93,13 @@ export class RadarChart extends React.Component {
               family: "Prompt",
             },
           },
-          grid: {
+          /*       grid: {
             color: "#414141",
           },
           angleLines: {
             color: "#414141",
           },
+          */
         },
       },
     };
