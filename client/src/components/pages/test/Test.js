@@ -15,48 +15,50 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type } from "../../functions/type";
 import emailjs from "@emailjs/browser";
+import { Skeleton } from "antd";
 const { Option } = Select;
 
 const Test = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
   const [faculty, setFaculty] = useState([]);
-  const form = useRef();
+
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
 
-  const loadData = () => {
-    listQuestions()
+  const loadData = async () => {
+    await listQuestions()
       .then((res) => {
         setQuestions(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    listUniversity()
+    await listUniversity()
       .then((res) => {
         setUniversity(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    listYears()
+    await listYears()
       .then((res) => {
         setYears(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    listFaculty()
+    await listFaculty()
       .then((res) => {
         setFaculty(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
   };
   useEffect(() => {
     loadData();
@@ -278,276 +280,283 @@ const Test = () => {
       <div className="row">
         <div className="col-lg-2"></div>
         <div className="col-lg-8">
-          <Form
-            onFinish={handleSubmitAns}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <div className="row">
-              <div
-                className="col-sm-4 input-text"
-                style={{ marginBottom: "1rem" }}
+          {loading ? (
+            <>
+              <Skeleton active />
+            </>
+          ) : (
+            <>
+              <Form
+                onFinish={handleSubmitAns}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
               >
-                <label>มหาวิทยาลัย</label>
-                <Form.Item
-                  name="university"
-                  rules={[
-                    {
-                      required: true,
-                      message: "กรุณาเลือกมหาลัย",
-                    },
-                  ]}
-                >
-                  <Select
-                    defaultValue="มหาวิทยาลัย"
-                    style={{
-                      //   fontSize: "18px",
-                      width: "100%",
-                    }}
-                    onChange={handleChangeUniversity}
+                <div className="row">
+                  <div
+                    className="col-sm-4 input-text"
+                    style={{ marginBottom: "1rem" }}
                   >
-                    {university.map((item, index) => (
-                      <Option
-                        value={item.university}
-                        key={index}
-                        //  style={{ fontSize: "18px" }}
+                    <label>มหาวิทยาลัย</label>
+                    <Form.Item
+                      name="university"
+                      rules={[
+                        {
+                          required: true,
+                          message: "กรุณาเลือกมหาลัย",
+                        },
+                      ]}
+                    >
+                      <Select
+                        defaultValue="มหาวิทยาลัย"
+                        style={{
+                          //   fontSize: "18px",
+                          width: "100%",
+                        }}
+                        onChange={handleChangeUniversity}
                       >
-                        {item.university}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </div>
-              {/** --------------------faculty----------------- */}
-              <div
-                className="col-sm-4 input-text"
-                style={{ marginBottom: "1rem" }}
-              >
-                <label>คณะ</label>
-                <Form.Item
-                  name="faculty"
-                  rules={[
-                    {
-                      required: true,
-                      message: "กรุณาเลือกคณะ",
-                    },
-                  ]}
-                >
-                  <Select
-                    defaultValue="คณะ"
-                    style={{
-                      //   fontSize: "18px",
-                      width: "100%",
-                    }}
-                    onChange={handleChangeFaculty}
+                        {university.map((item, index) => (
+                          <Option
+                            value={item.university}
+                            key={index}
+                            //  style={{ fontSize: "18px" }}
+                          >
+                            {item.university}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  {/** --------------------faculty----------------- */}
+                  <div
+                    className="col-sm-4 input-text"
+                    style={{ marginBottom: "1rem" }}
                   >
-                    {faculty.map((item, index) => (
-                      <Option
-                        value={item.faculty}
-                        key={index}
-                        //  style={{ fontSize: "18px" }}
+                    <label>คณะ</label>
+                    <Form.Item
+                      name="faculty"
+                      rules={[
+                        {
+                          required: true,
+                          message: "กรุณาเลือกคณะ",
+                        },
+                      ]}
+                    >
+                      <Select
+                        defaultValue="คณะ"
+                        style={{
+                          //   fontSize: "18px",
+                          width: "100%",
+                        }}
+                        onChange={handleChangeFaculty}
                       >
-                        {item.faculty}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </div>
+                        {faculty.map((item, index) => (
+                          <Option
+                            value={item.faculty}
+                            key={index}
+                            //  style={{ fontSize: "18px" }}
+                          >
+                            {item.faculty}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </div>
 
-              <div className="col-sm-4">
-                <label>ปีการศึกษา</label>
-                <Form.Item
-                  name="year"
-                  rules={[
-                    {
-                      required: true,
-                      message: "กรุณาเลือกปีการศึกษา",
-                    },
-                  ]}
-                >
-                  <Select
-                    defaultValue="ปีการศึกษา"
-                    style={{
-                      //   fontSize: "18px",
-                      width: "100%",
-                    }}
-                    name="year"
-                    onChange={handleChangeYear}
-                  >
-                    {year.map((item, index) => (
-                      <Option
-                        value={item.year}
+                  <div className="col-sm-4">
+                    <label>ปีการศึกษา</label>
+                    <Form.Item
+                      name="year"
+                      rules={[
+                        {
+                          required: true,
+                          message: "กรุณาเลือกปีการศึกษา",
+                        },
+                      ]}
+                    >
+                      <Select
+                        defaultValue="ปีการศึกษา"
+                        style={{
+                          //   fontSize: "18px",
+                          width: "100%",
+                        }}
                         name="year"
-                        key={index}
-                        style={{ fontSize: "18px" }}
+                        onChange={handleChangeYear}
                       >
-                        {item.year}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </div>
-            </div>
-
-            <label> ชื่อ - นามสกุล</label>
-            <Form.Item
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "กรุณากรอกชื่อ - นามสกุล",
-                },
-              ]}
-            >
-              <Input
-                type="text"
-                //size="large"
-                placeholder="ชื่อ นามสกุล"
-                name="name"
-                prefix={<UserOutlined />}
-                onChange={handleChangeName}
-              />
-            </Form.Item>
-
-            <label>รหัสนักศึกษา</label>
-            <Form.Item
-              name="student_id"
-              rules={[
-                {
-                  required: true,
-                  message: "กรุณากรอกรหัสนักศึกษา",
-                },
-              ]}
-            >
-              <Input
-                type="number"
-                //size="large"
-                min={0}
-                name="student_id"
-                placeholder="รหัสนักศึกษา (ตัวเลข)"
-                prefix={<NumberOutlined />}
-                onChange={handleChangeStudentID}
-              />
-            </Form.Item>
-            <label>email</label>
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "กรุณากรอกรหัสนักศึกษา",
-                },
-              ]}
-            >
-              <Input
-                type="email"
-                //size="large"
-
-                name="email"
-                placeholder="กรอกอีเมล"
-                prefix={<NumberOutlined />}
-                onChange={handleChangeEmail}
-              />
-            </Form.Item>
-            <br />
-
-            <hr />
-
-            {questions.map((item, index) => (
-              <>
-                <div className="test__qu">
-                  <br />
-                  <center>
-                    <label>{index + 1}. </label>
-                    <h5>{item.detail}</h5>
-
-                    {/**
-                     *
-                     * {console.log(item.type_id)}
-                     * <RadioBtn onClick={onChange} name={item.id} value={value} />
-                     *
-                     */}
-
-                    <Form.Item
-                      name={index}
-                      rules={[
-                        {
-                          required: true,
-                          message: "กรุณาเลือก",
-                        },
-                      ]}
-                      className="normal"
-                      onChange={onChange}
-                    >
-                      <Radio.Group
-                        buttonStyle="solid"
-                        size="large"
-                        //   className="normal"
-                        name={"qaId_" + item.id}
-                        style={{
-                          marginTop: 16,
-                        }}
-                      >
-                        <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
-                        <Radio.Button value={2}>น้อย</Radio.Button>
-                        <Radio.Button value={3}>ปานกลาง</Radio.Button>
-                        <Radio.Button value={4}>มาก</Radio.Button>
-                        <Radio.Button value={5}>มากที่สุด</Radio.Button>
-                      </Radio.Group>
+                        {year.map((item, index) => (
+                          <Option
+                            value={item.year}
+                            name="year"
+                            key={index}
+                            style={{ fontSize: "18px" }}
+                          >
+                            {item.year}
+                          </Option>
+                        ))}
+                      </Select>
                     </Form.Item>
-
-                    {/**=================== mobile =================================== */}
-
-                    <Form.Item
-                      name={index}
-                      rules={[
-                        {
-                          required: true,
-                          message: "กรุณาเลือก",
-                        },
-                      ]}
-                      className="mobile-btn"
-                      onChange={onChange}
-                    >
-                      <Radio.Group
-                        key={index}
-                        buttonStyle="solid"
-                        size="small"
-                        style={{
-                          marginTop: 16,
-                        }}
-                        //   className="mobile-btn"
-                        name={"qaId_" + item.id}
-                      >
-                        <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
-                        <Radio.Button value={2}>น้อย</Radio.Button>
-                        <Radio.Button value={3}>ปานกลาง</Radio.Button>
-                        <Radio.Button value={4}>มาก</Radio.Button>
-                        <Radio.Button value={5}>มากที่สุด</Radio.Button>
-                      </Radio.Group>
-                    </Form.Item>
-                  </center>
-                  <br />
-
-                  <hr />
+                  </div>
                 </div>
-              </>
-            ))}
-            <Button
-              type="primary"
-              size="large"
-              htmlType="submit"
-              style={{
-                float: "right",
-                marginTop: "1rem",
-                marginBottom: "5rem",
-                background: "#6c757d",
-                border: "none",
-              }}
-            >
-              คำนวนคำตอบ
-            </Button>
-          </Form>
+
+                <label> ชื่อ - นามสกุล</label>
+                <Form.Item
+                  name="name"
+                  rules={[
+                    {
+                      required: true,
+                      message: "กรุณากรอกชื่อ - นามสกุล",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="text"
+                    //size="large"
+                    placeholder="ชื่อ นามสกุล"
+                    name="name"
+                    prefix={<UserOutlined />}
+                    onChange={handleChangeName}
+                  />
+                </Form.Item>
+
+                <label>รหัสนักศึกษา</label>
+                <Form.Item
+                  name="student_id"
+                  rules={[
+                    {
+                      required: true,
+                      message: "กรุณากรอกรหัสนักศึกษา",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="number"
+                    //size="large"
+                    min={0}
+                    name="student_id"
+                    placeholder="รหัสนักศึกษา (ตัวเลข)"
+                    prefix={<NumberOutlined />}
+                    onChange={handleChangeStudentID}
+                  />
+                </Form.Item>
+                <label>email</label>
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: "กรุณากรอกรหัสนักศึกษา",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="email"
+                    //size="large"
+
+                    name="email"
+                    placeholder="กรอกอีเมล"
+                    prefix={<NumberOutlined />}
+                    onChange={handleChangeEmail}
+                  />
+                </Form.Item>
+                <br />
+
+                <hr />
+
+                {questions.map((item, index) => (
+                  <>
+                    <div className="test__qu">
+                      <br />
+                      <center>
+                        <h5>{item.detail}</h5>
+
+                        {/**
+                         *
+                         * {console.log(item.type_id)}
+                         * <RadioBtn onClick={onChange} name={item.id} value={value} />
+                         *
+                         */}
+
+                        <Form.Item
+                          name={index}
+                          rules={[
+                            {
+                              required: true,
+                              message: "กรุณาเลือก",
+                            },
+                          ]}
+                          className="normal"
+                          onChange={onChange}
+                        >
+                          <Radio.Group
+                            buttonStyle="solid"
+                            size="large"
+                            //   className="normal"
+                            name={"qaId_" + item.id}
+                            style={{
+                              marginTop: 16,
+                            }}
+                          >
+                            <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
+                            <Radio.Button value={2}>น้อย</Radio.Button>
+                            <Radio.Button value={3}>ปานกลาง</Radio.Button>
+                            <Radio.Button value={4}>มาก</Radio.Button>
+                            <Radio.Button value={5}>มากที่สุด</Radio.Button>
+                          </Radio.Group>
+                        </Form.Item>
+
+                        {/**=================== mobile =================================== */}
+
+                        <Form.Item
+                          name={index}
+                          rules={[
+                            {
+                              required: true,
+                              message: "กรุณาเลือก",
+                            },
+                          ]}
+                          className="mobile-btn"
+                          onChange={onChange}
+                        >
+                          <Radio.Group
+                            key={index}
+                            buttonStyle="solid"
+                            size="small"
+                            style={{
+                              marginTop: 16,
+                            }}
+                            //   className="mobile-btn"
+                            name={"qaId_" + item.id}
+                          >
+                            <Radio.Button value={1}>น้อยที่สุด</Radio.Button>
+                            <Radio.Button value={2}>น้อย</Radio.Button>
+                            <Radio.Button value={3}>ปานกลาง</Radio.Button>
+                            <Radio.Button value={4}>มาก</Radio.Button>
+                            <Radio.Button value={5}>มากที่สุด</Radio.Button>
+                          </Radio.Group>
+                        </Form.Item>
+                      </center>
+                      <br />
+
+                      <hr />
+                    </div>
+                  </>
+                ))}
+                <Button
+                  type="primary"
+                  size="large"
+                  htmlType="submit"
+                  style={{
+                    float: "right",
+                    marginTop: "1rem",
+                    marginBottom: "5rem",
+                    background: "#6c757d",
+                    border: "none",
+                  }}
+                >
+                  คำนวนคำตอบ
+                </Button>
+              </Form>
+            </>
+          )}
         </div>
 
         <div className="col-lg-2"></div>

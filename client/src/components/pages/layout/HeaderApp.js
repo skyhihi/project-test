@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Drawer } from "antd";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import "./header.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const HeaderApp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => ({ ...state }));
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -14,7 +19,13 @@ const HeaderApp = () => {
   const onClose = () => {
     setVisible(false);
   };
-
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    navigate("/");
+  };
   //const [toggle, showMenu] = useState(false);
   return (
     <>
@@ -59,18 +70,26 @@ const HeaderApp = () => {
         <Menu.Item className="menu-items" key="3">
           <Link to="/test">Test</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items" key="4">
-          <Link to="/login">Login</Link>
-        </Menu.Item>
         <Menu.Item className="menu-items" key="5">
           <Link to="/result">Result</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items" key="6">
-          <Link to="/register">Register</Link>
-        </Menu.Item>
-        <Menu.Item className="menu-items" key="7">
-          <Link to="/admin">Admin</Link>
-        </Menu.Item>
+        {!user && (
+          <>
+            <Menu.Item className="menu-items" key="4">
+              <Link to="/login">Login</Link>
+            </Menu.Item>
+          </>
+        )}
+        {user && (
+          <>
+            <Menu.Item className="menu-items" key="6">
+              <Link to="/register">Register</Link>
+            </Menu.Item>
+            <Menu.Item className="menu-items" key="8">
+              <Link to="/admin">Admin</Link>
+            </Menu.Item>
+          </>
+        )}
 
         <Button
           type="primary"
@@ -99,20 +118,28 @@ const HeaderApp = () => {
             <Link to="/types">Types</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/login">Login</Link>
-          </Menu.Item>
-          <Menu.Item>
             <Link to="/test">Test</Link>
           </Menu.Item>
           <Menu.Item>
             <Link to="/result">Result</Link>
           </Menu.Item>
-          <Menu.Item>
-            <Link to="/register">Register</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/admin">Admin</Link>
-          </Menu.Item>
+          {!user && (
+            <>
+              <Menu.Item>
+                <Link to="/login">Login</Link>
+              </Menu.Item>
+            </>
+          )}
+          {user && (
+            <>
+              <Menu.Item>
+                <Link to="/register">Register</Link>
+              </Menu.Item>
+              <Menu.Item>
+                <Link to="/admin">Admin</Link>
+              </Menu.Item>
+            </>
+          )}
         </Menu>
       </Drawer>
     </>

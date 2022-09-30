@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "antd";
 
 const LoadingToRedirect = () => {
   const [count, setCount] = useState(3);
@@ -17,7 +18,13 @@ const LoadingToRedirect = () => {
 
   return (
     <div>
-      <h1>No Permisssion, redirect in {count}</h1>
+      <Alert
+        message={`ไม่ได้รับอนุญาตให้เข้าถึง กลับไปหน้าหลักใน ` + count}
+        description=""
+        type="error"
+        showIcon
+        style={{ fontSize: "20px", margin: "2rem", padding: "2rem" }}
+      />
     </div>
   );
 };

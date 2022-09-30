@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./types.css";
 import { type as typeData } from "../../functions/type";
 import { details_type } from "../../functions/details";
+import { Skeleton } from "antd";
 
 const Type = () => {
   const [listType, setListType] = useState([]);
   const [listDetailType, setListDetailType] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const loadData = () => {
-    details_type()
+  const loadData = async () => {
+    await details_type()
       .then((res) => {
         setListDetailType(res.data);
       })
@@ -16,13 +18,14 @@ const Type = () => {
         console.log(err);
       });
 
-    typeData()
+    await typeData()
       .then((res) => {
         setListType(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -36,6 +39,14 @@ const Type = () => {
         <div className="row">
           <div className="col-lg-1"></div>
           <div className="col-lg-10">
+            {loading ? (
+              <>
+                <Skeleton active />
+              </>
+            ) : (
+              <></>
+            )}
+
             {listType.map((item, index) => (
               <>
                 <div className="typeBox">

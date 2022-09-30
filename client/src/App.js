@@ -26,6 +26,7 @@ import { currentUser } from "./components/functions/auth";
 import { useDispatch } from "react-redux";
 import CreateDetail from "./components/pages/admin/detailTypes/CreateDetail";
 import ManageForm from "./components/pages/admin/detailForm/ManageForm";
+import UserRoute from "./components/routes/UserRoute";
 
 const { Header, Content } = Layout;
 function App() {
@@ -81,15 +82,72 @@ function App() {
             <Route path="/login" element={<Login />} />
 
             <Route path="/result" element={<Result />} />
-            <Route path="/register" element={<Register />} />
+
             <Route path="/test" element={<Test />} />
-            <Route path="/admin/" element={<HomeAm />} />
-            <Route path="/admin/question" element={<Question />} />
-            <Route path="/admin/manage-form" element={<ManageForm />} />
-            <Route path="/admin/detail-types" element={<DetailTypes />} />
-            <Route path="/admin/detail-types/:id" element={<CreateDetail />} />
-            <Route path="/admin/student-i" element={<StudentIn />} />
-            <Route path="/admin/genral" element={<General />} />
+            <Route
+              path="/register"
+              element={
+                <UserRoute>
+                  <Register />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/"
+              element={
+                <UserRoute>
+                  <HomeAm />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/question"
+              element={
+                <UserRoute>
+                  <Question />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/manage-form"
+              element={
+                <UserRoute>
+                  <ManageForm />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/detail-types"
+              element={
+                <UserRoute>
+                  <DetailTypes />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/detail-types/:id"
+              element={
+                <UserRoute>
+                  <CreateDetail />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/student-i"
+              element={
+                <UserRoute>
+                  <StudentIn />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="/admin/genral"
+              element={
+                <UserRoute>
+                  <General />
+                </UserRoute>
+              }
+            />
           </Routes>
         </Content>
       </Layout>

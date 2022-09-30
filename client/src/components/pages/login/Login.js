@@ -18,20 +18,30 @@ import {
   EyeTwoTone,
   LockFilled,
   LoginOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
-import { Input, Tooltip, Button } from "antd";
+import { Input, Tooltip, Button, Spin } from "antd";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const [value, setValue] = useState({
     username: "",
     password: "",
   });
-
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 24,
+      }}
+      spin
+    />
+  );
   const roleBaseRedirect = (role) => {
-    console.log(role);
+    //console.log(role);
     if (role === "m" || role === "a") {
       navigate("/admin");
     } else {
@@ -41,8 +51,8 @@ const Login = () => {
 
   const handleChange = (e) => {
     //e = event
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setValue({
       ...value,
       [e.target.name]: e.target.value,
@@ -51,11 +61,13 @@ const Login = () => {
 
   //ตอนกดsubmit
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
-    console.log(value);
+    //console.log(value);
 
     login(value)
       .then((res) => {
+        setLoading(false);
         //console.log(res.data);
         toast.success(res.data.payload.user.username + " Login Success");
 
@@ -73,7 +85,8 @@ const Login = () => {
         roleBaseRedirect(res.data.payload.user.role);
       })
       .catch((err) => {
-        console.log(err.response.data.error);
+        setLoading(false);
+        //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
   };
@@ -86,7 +99,13 @@ const Login = () => {
           <div className="col-lg-4"></div>
           <div className="col-lg-4">
             <h1 className="login__text">
-              <span className="badge bg-secondary">LOGIN</span>
+              {loading ? (
+                <>
+                  Login <Spin indicator={antIcon} />
+                </>
+              ) : (
+                <>Login</>
+              )}
             </h1>
             <br />
 

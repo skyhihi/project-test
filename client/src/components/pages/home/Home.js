@@ -14,12 +14,6 @@ const Home = () => {
             <img src={Image1} alt="" />
             <div className="home__text">
               <h3>ยินดีต้อนรับ</h3>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                placeat fugiat adipisci ad! Magnam vel labore rem rerum ex
-                perspiciatis doloribus eaque, omnis nostrum! Culpa excepturi
-                dolores recusandae earum reprehenderit.
-              </p>
             </div>
             <div className="home__btn">
               <Link to="/test">
