@@ -10,6 +10,7 @@ import { listYears } from "../../functions/year";
 import { listFaculty } from "../../functions/faculty";
 import { submitAns } from "../../functions/ans_all";
 import { submitAnsRs } from "../../functions/ans_result";
+import { submitAll } from "../../functions/ans";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type } from "../../functions/type";
@@ -66,31 +67,37 @@ const Test = () => {
 
   const [ansValues, setAnsValues] = useState({});
   const [ansResult, setAnsResult] = useState({});
+  const [ansAll, setAnsAll] = useState({});
 
   const handleChangeName = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
+    setAnsAll({ ...ansAll, [e.target.name]: e.target.value });
     //console.log(ansValues);
     setUserName(e.target.value);
   };
   const handleChangeUniversity = (value) => {
     setAnsValues({ ...ansValues, university: value });
     setAnsResult({ ...ansValues, university: value });
+    setAnsAll({ ...ansAll, university: value });
     //console.log(ansValues);
   };
   const handleChangeYear = (value) => {
     setAnsValues({ ...ansValues, year: value });
     setAnsResult({ ...ansValues, year: value });
+    setAnsAll({ ...ansAll, year: value });
     //console.log(ansValues);
   };
   const handleChangeStudentID = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
+    setAnsAll({ ...ansAll, [e.target.name]: e.target.value });
     //console.log(ansValues);
   };
   const handleChangeFaculty = (value) => {
     setAnsValues({ ...ansValues, faculty: value });
-    setAnsResult({ ...ansValues, university: value });
+    setAnsResult({ ...ansValues, faculty: value });
+    setAnsAll({ ...ansAll, faculty: value });
   };
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -98,6 +105,7 @@ const Test = () => {
 
   const onChange = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
+    setAnsAll({ ...ansAll, [e.target.name]: e.target.value });
   };
 
   //=======กดบันทึก=========
@@ -190,7 +198,7 @@ const Test = () => {
       teacher: sumTea,
       doctor: sumDoc,
     };
-    /*
+
     emailjs
       .send(
         "service_hnph8ya",
@@ -206,7 +214,7 @@ const Test = () => {
           console.log(error.text);
         }
       );
-    
+
     submitAnsRs(request)
       .then((res) => {
         //console.log(res.data.status);
@@ -226,7 +234,29 @@ const Test = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-*/
+    submitAll(ansAll)
+      .then((res) => {
+        //console.log(res.data.status);
+        //toast.success(res.data.status);
+      })
+      .catch((err) => {
+        //console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+
+    await setAnsAll({
+      ...ansAll,
+      วิศวกร: sumEn,
+      นักเทคโนโลยีสารสนเทศ: sumTec,
+      นักการตลาดการจัดการ: sumBu,
+      นักสาธารณสุข: sumPh,
+      อาจารย์แพทย์: sumTea,
+      แพทย์: sumDoc,
+      result: maxName,
+    });
+
+    console.log("ansall", ansAll);
+
     let data = {
       วิศวกร: sumEn,
       นักเทคโนโลยีสารสนเทศ: sumTec,
