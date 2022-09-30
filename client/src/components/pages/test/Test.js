@@ -68,38 +68,30 @@ const Test = () => {
   //==============เก็บข้อมูล===================
 
   const [ansValues, setAnsValues] = useState({});
-  const [ansResult, setAnsResult] = useState({});
-  const [ansAll, setAnsAll] = useState({});
 
   const handleChangeName = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsAll({ ...ansAll, [e.target.name]: e.target.value });
+
     //console.log(ansValues);
     setUserName(e.target.value);
   };
   const handleChangeUniversity = (value) => {
     setAnsValues({ ...ansValues, university: value });
-    setAnsResult({ ...ansValues, university: value });
-    setAnsAll({ ...ansAll, university: value });
+
     //console.log(ansValues);
   };
   const handleChangeYear = (value) => {
     setAnsValues({ ...ansValues, year: value });
-    setAnsResult({ ...ansValues, year: value });
-    setAnsAll({ ...ansAll, year: value });
+
     //console.log(ansValues);
   };
   const handleChangeStudentID = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsResult({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsAll({ ...ansAll, [e.target.name]: e.target.value });
+
     //console.log(ansValues);
   };
   const handleChangeFaculty = (value) => {
     setAnsValues({ ...ansValues, faculty: value });
-    setAnsResult({ ...ansValues, faculty: value });
-    setAnsAll({ ...ansAll, faculty: value });
   };
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -107,7 +99,6 @@ const Test = () => {
 
   const onChange = (e) => {
     setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
-    setAnsAll({ ...ansAll, [e.target.name]: e.target.value });
   };
 
   //=======กดบันทึก=========
@@ -152,6 +143,19 @@ const Test = () => {
     let sumTea = sumArray(teacher);
     let sumDoc = sumArray(doc);
 
+    const result = {
+      วิศวกร: sumEn,
+      นักเทคโนโลยีสารสนเทศ: sumTec,
+      นักการตลาดการจัดการ: sumBu,
+      นักสาธารณสุข: sumPh,
+      อาจารย์แพทย์: sumTea,
+      แพทย์: sumDoc,
+      result: maxName,
+    };
+    const ansV = { ansValues, result };
+
+    //console.log("ansV", ansV);
+
     let sum = [sumEn, sumTec, sumBu, sumPh, sumTea, sumDoc];
     let sumToResult = [sumTec, sumEn, sumPh, sumBu, sumTea, sumDoc];
 
@@ -188,8 +192,8 @@ const Test = () => {
       result: maxName,
     };
 
-    console.log(request);
-    console.log(ansValues);
+    //console.log(request);
+    //console.log(ansValues);
 
     var templateParams = {
       user_name: userName,
@@ -237,7 +241,7 @@ const Test = () => {
         //console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
-    submitAll(ansAll)
+    submitAll(ansV)
       .then((res) => {
         //console.log(res.data.status);
         //toast.success(res.data.status);
@@ -247,27 +251,21 @@ const Test = () => {
         toast.error(err.response.data.error);
       });
 
-    await setAnsAll({
-      ...ansAll,
-      วิศวกร: sumEn,
-      นักเทคโนโลยีสารสนเทศ: sumTec,
-      นักการตลาดการจัดการ: sumBu,
-      นักสาธารณสุข: sumPh,
-      อาจารย์แพทย์: sumTea,
-      แพทย์: sumDoc,
-      result: maxName,
+    var data = [
+      { id: 1, name: "วิศวกร", value: sumEn },
+      { id: 2, name: "นักเทคโนโลยีสารสนเทศ", value: sumTec },
+      { id: 3, name: "นักการตลาดการจัดการ", value: sumBu },
+      { id: 4, name: "นักสาธารณสุข", value: sumPh },
+      { id: 5, name: "อาจารย์แพทย์", value: sumTea },
+      { id: 6, name: "แพทย์", value: sumDoc },
+    ];
+    data = data.sort((a, b) => {
+      if (a.value > b.value) {
+        return -1;
+      }
     });
+    console.log(data);
 
-    console.log("ansall", ansAll);
-
-    let data = {
-      วิศวกร: sumEn,
-      นักเทคโนโลยีสารสนเทศ: sumTec,
-      นักการตลาดการจัดการ: sumBu,
-      นักสาธารณสุข: sumPh,
-      อาจารย์แพทย์: sumTea,
-      แพทย์: sumDoc,
-    };
     navigate("/result", { state: { data: data, sum: sumToResult } });
   };
 

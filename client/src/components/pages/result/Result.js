@@ -5,49 +5,53 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { type as typeData } from "../../functions/type";
 import { details_type } from "../../functions/details";
 import { readAnsRS } from "../../functions/ans_result";
-import { Alert, Modal } from "antd";
+import { Modal, Skeleton } from "antd";
 
 const Result = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   if (state) {
     var data = state.data;
     //console.log(data);
     var sum = state.sum;
-    var sumD = state.sum;
     //console.log(state.sum);
+    //console.log("data", data);
   }
 
   const [listType, setListType] = useState([]);
   const [listDetailType, setListDetailType] = useState([]);
   const [listAns, setListAns] = useState([]);
 
-  const loadData = () => {
-    details_type()
+  //console.log(listAns);
+
+  const loadData = async () => {
+    await details_type()
       .then((res) => {
         setListDetailType(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
 
-    typeData()
+    await typeData()
       .then((res) => {
         setListType(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
 
-    readAnsRS()
+    await readAnsRS()
       .then((res) => {
         setListAns(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
+    setLoading(false);
   };
   useEffect(() => {
     //code
@@ -64,66 +68,74 @@ const Result = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  sumD.sort((a, b) => a.sumD > b.sumD);
-  console.log(sumD);
-
-  console.log(data);
-  console.log(sum);
+  //console.log(data);
+  //console.log(sum);
   return (
     <>
-      <Modal
-        title="สำคัญ!"
-        type="warning"
-        open={isModalOpen}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <b>Email ของท่านอาจอยู่ในจดหมายขยะ</b>
-        <br />
-        <p> กรุณาถ่ายภาพหน้าจอแสดงผลเพื่อใช้ในการเรียนการสอนต่อไป</p>
-      </Modal>
-      <div className="container-fuild result__page">
-        <div className="row">
-          <div className="col-lg-6 result__chart-card">
-            <div className="result__chart-ch">
-              <RadarChart data={sum} />
+      {loading ? (
+        <>
+          <Skeleton active />
+        </>
+      ) : (
+        <>
+          <Modal
+            title="สำคัญ!"
+            type="warning"
+            open={isModalOpen}
+            onCancel={handleCancel}
+            footer={null}
+          >
+            <b>Email ของท่านอาจอยู่ในจดหมายขยะ</b>
+            <br />
+            <p> กรุณาถ่ายภาพหน้าจอแสดงผลเพื่อใช้ในการเรียนการสอนต่อไป</p>
+          </Modal>
+          <div className="container-fuild result__page">
+            <div className="row">
+              <div className="col-lg-6 result__chart-card">
+                <div className="result__chart-ch">
+                  <RadarChart data={sum} />
+                </div>
+              </div>
+              <div className="col-lg-6 result__info container">
+                {data.map((item, index) => (
+                  <>
+                    {listType.map((itemT, index) => (
+                      <>
+                        {item.id === itemT.type_id ? (
+                          <>
+                            <div className="card_r box-result">
+                              <div className="result__info-header">
+                                {item.name} : {item.value}
+                              </div>
+
+                              {listDetailType.map((it, index) => (
+                                <>
+                                  {it.details_t_id === itemT.type_id ? (
+                                    <>
+                                      <div className="result__info-title">
+                                        {it.title}:
+                                      </div>
+                                      <p>{it.details}</p>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              ))}
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    ))}
+                  </>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="col-lg-6 result__info container">
-            {listType.map((item, index) => (
-              <>
-                <div className="card_r box-result">
-                  <div className="result__info-header">{item.name}</div>
-
-                  {listDetailType.map((it, index) => (
-                    <>
-                      {sumD.map((i, index) => (
-                        <>
-                          <p>{sumD},</p>
-                          {it.details_t_id === item.type_id ? (
-                            <>
-                              {/*
-                               */}
-                              <div className="result__info-title">
-                                {it.title}:
-                              </div>
-                              <p>{it.details}</p>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </>
-                      ))}
-                    </>
-                  ))}
-                </div>
-              </>
-            ))}
-            {/**============================================ */}
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };
