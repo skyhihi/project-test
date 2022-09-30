@@ -141,7 +141,7 @@ function App() {
               }
             />
             <Route
-              path="/admin/genral"
+              path="/admin/general"
               element={
                 <UserRoute>
                   <General />

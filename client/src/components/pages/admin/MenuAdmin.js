@@ -55,7 +55,7 @@ const items = [
   getItem(
     "ข้อมูลทั้งหมด",
     "ga",
-    <Link to="/admin/genral">
+    <Link to="/admin/general">
       <ProfileOutlined />
     </Link>
   ),

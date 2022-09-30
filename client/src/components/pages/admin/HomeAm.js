@@ -110,7 +110,7 @@ const HomeAm = () => {
 
             <Routes>
               <Route path="/admin/question" element={<Question />} />
-              <Route path="/admin/genral" element={<General />} />
+              <Route path="/admin/general" element={<General />} />
             </Routes>
           </div>
         </div>

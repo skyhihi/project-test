@@ -214,22 +214,7 @@ const General = () => {
                 <h5>ข้อมูลทั้งหมด</h5>
                 <br />
                 <br />
-                <div className="col-lg-8">
-                  <div class="input-group input-group-sm mb-3">
-                    <span
-                      class="input-group-text"
-                      id="inputGroup-sizing-default"
-                    >
-                      <b>ค้นหา</b>
-                    </span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
-                  </div>
-                </div>
+
                 <div className="col-lg-2">
                   <CSVLink
                     //data={data}
