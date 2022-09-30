@@ -3,10 +3,14 @@ import MenuAdmin from "./MenuAdmin";
 import { Routes, Route } from "react-router-dom";
 import Question from "./questionAd/Question";
 import General from "./generalInformation/General";
+import { Table } from "antd";
+import { listUsers } from "../../functions/user";
 
 import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+
 //useSelector คือการเข้าถึง store
 
 const HomeAm = () => {
@@ -23,40 +27,91 @@ const HomeAm = () => {
     });
     navigate("/");
   };
+
+  const addAdmin = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    navigate("/register");
+  };
+
+  const [list, setList] = useState([]);
+
+  const loadData = () => {
+    listUsers()
+      .then((res) => {
+        setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    loadData();
+    // eslint-disable-next-line
+  }, []);
+
+  const columns = [{ title: "Username" }];
+
   return (
     <>
       <MenuAdmin />
 
       <div className="admin__content" style={{ paddingLeft: "200px" }}>
         <div className="row">
-          <div className="col-lg-9">
+          <div className="row">
             {user && (
               <>
-                <button className="btn btn-sm bg-danger" onClick={logout}>
-                  LOGOUT
-                </button>
+                <div className="col-10" style={{ marginLeft: "1rem" }}>
+                  <h4>Hello {user.username}!</h4>
+                  <button
+                    className="btn btn-sm btn-info justify-content-end"
+                    onClick={addAdmin}
+                  >
+                    Add Admin
+                  </button>
+                </div>
+                <div className=" col-1 justify-content-end">
+                  <button
+                    className="btn btn-sm bg-danger justify-content-end"
+                    onClick={logout}
+                  >
+                    LOGOUT
+                  </button>
+                </div>
+
+                <Table
+                  columns={columns}
+                  dataSource={list.map((item, index) => (
+                    <>
+                      <p>{item.username}</p>
+                    </>
+                  ))}
+                />
+                {/*<div className="card col-12">
+                  <div className="card-body ">
+                    <table className="table table-striped">
+                      <thead>
+                        <tr>List Admin</tr>
+                        
+                      </thead>
+                      <tbody>
+                        <tr></tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>*/}
               </>
             )}
-            {!user && (
-              <>
-                <p>login now</p>
-              </>
-            )}
+            {!user && <>Please Login </>}
             <br />
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur
-            laborum nam voluptatibus. Molestiae cum necessitatibus quaerat
-            excepturi soluta rerum quis minima assumenda commodi incidunt
-            pariatur laborum, neque unde non dolorem?
+
             <Routes>
               <Route path="/admin/question" element={<Question />} />
               <Route path="/admin/genral" element={<General />} />
             </Routes>
-          </div>
-          <div className="col-lg-3">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim
-            impedit atque consequatur unde nihil doloribus excepturi quis
-            architecto, facere corrupti fuga reiciendis cum inventore porro
-            temporibus amet maiores repudiandae incidunt!
           </div>
         </div>
       </div>
