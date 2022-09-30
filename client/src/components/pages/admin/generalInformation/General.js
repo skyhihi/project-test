@@ -7,6 +7,7 @@ import { listFaculty } from "../../../functions/faculty";
 import { readAnsRS } from "../../../functions/ans_result";
 import { readAll } from "../../../functions/ans";
 import { CSVLink } from "react-csv";
+import { Input, Space } from "antd";
 
 const { Option } = Select;
 
@@ -37,6 +38,11 @@ const General = () => {
     //console.log(`selected ${value}`);
   };
 
+  //-------Search----------//
+  const onSearch = (value) => console.log(value);
+  const { Search } = Input;
+
+  //-------loadData---------//
   const loadData = () => {
     readAnsRS()
       .then((res) => {
@@ -80,115 +86,112 @@ const General = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(dataA);
-  console.log(data);
-
   const headers = [
-    { label: "Student ID", key: "all_ans.student_id" },
-    { label: "Name", key: "all_ans.name" },
-    { label: "University", key: "all_ans.university" },
-    { label: "Faculty", key: "all_ans.faculty" },
-    { label: "Years", key: "all_ans.year" },
+    { label: "Student ID", key: "all_ans.ansValues.student_id" },
+    { label: "Name", key: "all_ans.ansValues.name" },
+    { label: "University", key: "all_ans.ansValues.university" },
+    { label: "Faculty", key: "all_ans.ansValues.faculty" },
+    { label: "Years", key: "all_ans.ansValues.year" },
     {
       label: "q_1",
-      key: "all_ans.qaId_1",
+      key: "all_ans.ansValues.qaId_1",
     },
-    { label: "q_2", key: "all_ans.qaId_2" },
+    { label: "q_2", key: "all_ans.ansValues.qaId_2" },
     {
       label: "q_3",
-      key: "all_ans.qaId_3",
+      key: "all_ans.ansValues.qaId_3",
     },
     {
       label: "q_4",
-      key: "all_ans.qaId_4",
+      key: "all_ans.ansValues.qaId_4",
     },
-    { label: "q_5", key: "all_ans.qaId_5" },
+    { label: "q_5", key: "all_ans.ansValues.qaId_5" },
     {
       label: "q_6",
-      key: "all_ans.qaId_6",
+      key: "all_ans.ansValues.qaId_6",
     },
-    { label: "q_7", key: "all_ans.qaId_7" },
+    { label: "q_7", key: "all_ans.ansValues.qaId_7" },
     {
       label: "q_8",
-      key: "all_ans.qaId_8",
+      key: "all_ans.ansValues.qaId_8",
     },
     {
       label: "q_9",
-      key: "all_ans.qaId_9",
+      key: "all_ans.ansValues.qaId_9",
     },
     {
       label: "q_10",
-      key: "all_ans.qaId_10",
+      key: "all_ans.ansValues.qaId_10",
     },
-    { label: "q_11", key: "all_ans.qaId_11" },
-    { label: "q_12", key: "all_ans.qaId_12" },
-    { label: "q_13", key: "all_ans.qaId_13" },
+    { label: "q_11", key: "all_ans.ansValues.qaId_11" },
+    { label: "q_12", key: "all_ans.ansValues.qaId_12" },
+    { label: "q_13", key: "all_ans.ansValues.qaId_13" },
     {
       label: "q_14",
-      key: "all_ans.qaId_14",
+      key: "all_ans.ansValues.qaId_14",
     },
-    { label: "q_15", key: "all_ans.qaId_15" },
+    { label: "q_15", key: "all_ans.ansValues.qaId_15" },
     {
       label: "q_16",
-      key: "all_ans.qaId_16",
+      key: "all_ans.ansValues.qaId_16",
     },
     {
       label: "q_17",
-      key: "all_ans.qaId_17",
+      key: "all_ans.ansValues.qaId_17",
     },
-    { label: "q_18", key: "all_ans.qaId_18" },
-    { label: "q_19", key: "all_ans.qaId_19" },
+    { label: "q_18", key: "all_ans.ansValues.qaId_18" },
+    { label: "q_19", key: "all_ans.ansValues.qaId_19" },
     {
       label: "q_20",
-      key: "all_ans.qaId_20",
+      key: "all_ans.ansValues.qaId_20",
     },
     {
       label: "q_21",
-      key: "all_ans.qaId_21",
+      key: "all_ans.ansValues.qaId_21",
     },
     {
       label: "q_22",
-      key: "all_ans.qaId_22",
+      key: "all_ans.ansValues.qaId_22",
     },
     {
       label: "q_23",
-      key: "all_ans.qaId_23",
+      key: "all_ans.ansValues.qaId_23",
     },
     {
       label: "q_24",
-      key: "all_ans.qaId_24",
+      key: "all_ans.ansValues.qaId_24",
     },
     {
       label: "q_25",
-      key: "all_ans.qaId_25",
+      key: "all_ans.ansValues.qaId_25",
     },
     {
       label: "q_26",
-      key: "all_ans.qaId_26",
+      key: "all_ans.ansValues.qaId_26",
     },
     {
       label: "q_27",
-      key: "all_ans.qaId_27",
+      key: "all_ans.ansValues.qaId_27",
     },
     {
       label: "q_28",
-      key: "all_ans.qaId_28",
+      key: "all_ans.ansValues.qaId_28",
     },
     {
       label: "q_29",
-      key: "all_ans.qaId_29",
+      key: "all_ans.ansValues.qaId_29",
     },
     {
       label: "q_30",
-      key: "all_ans.qaId_30",
+      key: "all_ans.ansValues.qaId_30",
     },
-    { label: "e", key: "all_ans.วิศวกร" },
-    { label: "i", key: "all_ans.นักเทคโนโลยีสารสนเทศ" },
-    { label: "b", key: "all_ans.นักการตลาดการจัดการ" },
-    { label: "p", key: "all_ans.นักสาธารณสุข" },
-    { label: "t", key: "all_ans.อาจารย์แพทย์" },
-    { label: "d", key: "all_ans.แพทย์" },
-    { label: "result", key: "all_ans.result" },
+    { label: "e", key: "all_ans.result.วิศวกร" },
+    { label: "i", key: "all_ans.result.นักเทคโนโลยีสารสนเทศ" },
+    { label: "b", key: "all_ans.result.นักการตลาดการจัดการ" },
+    { label: "p", key: "all_ans.result.นักสาธารณสุข" },
+    { label: "t", key: "all_ans.result.อาจารย์แพทย์" },
+    { label: "d", key: "all_ans.result.แพทย์" },
+    { label: "result", key: "all_ans.result.result" },
     /*{ label: "e", key: "result.sum1" },
     { label: "i", key: "result.sum2" },
     { label: "b", key: "result.sum3" },
@@ -211,7 +214,36 @@ const General = () => {
                 <h5>ข้อมูลทั้งหมด</h5>
                 <br />
                 <br />
-                <div className="col-sm-3" style={{ marginBottom: "1rem" }}>
+                <div className="col-lg-8">
+                  <div class="input-group input-group-sm mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                    >
+                      <b>ค้นหา</b>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-2">
+                  <CSVLink
+                    //data={data}
+                    data={dataA}
+                    headers={headers}
+                    filename="sixEvaluate.csv"
+                  >
+                    <button className="btn btn-success btn-sm">
+                      <i class="bi bi-file-earmark-arrow-down"></i>
+                      ดาวน์โหลดเอกสาร
+                    </button>
+                  </CSVLink>
+                </div>
+                {/*<div className="col-sm-3" style={{ marginBottom: "1rem" }}>
                   <Select
                     defaultValue="มหาวิทยาลัย"
                     style={{
@@ -262,20 +294,7 @@ const General = () => {
                     ))}
                   </Select>
                 </div>
-
-                <div className="col-lg-2">
-                  <CSVLink
-                    //data={data}
-                    data={dataA}
-                    headers={headers}
-                    filename="sixEvaluate.csv"
-                  >
-                    <button className="btn btn-success btn-sm">
-                      <i class="bi bi-file-earmark-arrow-down"></i>
-                      ดาวน์โหลดเอกสาร
-                    </button>
-                  </CSVLink>
-                </div>
+*/}
                 {/** code here */}
                 <br />
                 <div className="card-body">
