@@ -57,7 +57,7 @@ const HomeAm = () => {
     message.error("This account is not deleted.");
   };
   const buttonDelete = (id) => {
-    console.log(id);
+    //console.log(id);
 
     deleteUsers(id)
       .then((res) => {
