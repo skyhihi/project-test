@@ -23,7 +23,7 @@ const Home = () => {
                   size="large"
                   //icon={<DownloadOutlined />}
                 >
-                  เริ่มทำแบบสอบถาม
+                  เริ่มทำแบบประเมิน
                 </Button>
               </Link>
             </div>
