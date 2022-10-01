@@ -59,7 +59,7 @@ const HomeAm = () => {
   const buttonDelete = (id) => {
     console.log(id);
 
-    deleteUsers(id)
+    deleteUsers(user.token, id)
       .then((res) => {
         toast.success(res.data.status);
         loadData();
