@@ -3,13 +3,15 @@ import MenuAdmin from "./MenuAdmin";
 import { Routes, Route } from "react-router-dom";
 import Question from "./questionAd/Question";
 import General from "./generalInformation/General";
-import { Table } from "antd";
+import { message, Popconfirm } from "antd";
 import { listUsers } from "../../functions/user";
+import { deleteUsers } from "../../functions/user";
 
 import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 //useSelector คือการเข้าถึง store
 
@@ -29,10 +31,6 @@ const HomeAm = () => {
   };
 
   const addAdmin = () => {
-    dispatch({
-      type: "LOGOUT",
-      payload: null,
-    });
     navigate("/register");
   };
 
@@ -53,7 +51,23 @@ const HomeAm = () => {
     // eslint-disable-next-line
   }, []);
 
-  const columns = [{ title: "Username" }];
+  //---------Pop delete------------//
+  const cancel = () => {
+    //console.log(e);
+    message.error("This account is not deleted.");
+  };
+  const buttonDelete = (id) => {
+    console.log(id);
+
+    deleteUsers(id)
+      .then((res) => {
+        toast.success(res.data.status);
+        loadData();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
+  };
 
   return (
     <>
@@ -70,26 +84,55 @@ const HomeAm = () => {
                     className="btn btn-sm btn-info justify-content-end"
                     onClick={addAdmin}
                   >
-                    Add Admin
+                    <i class="bi bi-person-plus"></i> Add Admin
                   </button>
                 </div>
                 <div className=" col-1 justify-content-end">
                   <button
-                    className="btn btn-sm bg-danger justify-content-end"
+                    className="btn btn-sm bg-danger "
+                    type="text"
                     onClick={logout}
                   >
-                    LOGOUT
+                    <i class="bi bi-door-closed"></i> LOGOUT
                   </button>
                 </div>
-
-                <Table
-                  columns={columns}
-                  dataSource={list.map((item, index) => (
+                <br />
+                <table className="table " style={{ marginLeft: "2rem" }}>
+                  {list.map((item, index) => (
                     <>
-                      <p>{item.username}</p>
+                      <br />
+                      <br />
+
+                      <thead></thead>
+                      <tbody>
+                        <tr>
+                          <td style={{ marginLeft: "2rem" }}>
+                            <h5>{item.name}</h5>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <Popconfirm
+                              placement="topRight"
+                              title="Are you sure?"
+                              onConfirm={() => buttonDelete(item.id)}
+                              onCancel={cancel}
+                              okText="Yes"
+                              cancelText="No"
+                            >
+                              <button
+                                className="btn btn-danger btn-sm "
+                                type="text"
+                              >
+                                <i class="bi bi-trash3"></i> Delete
+                              </button>
+                            </Popconfirm>
+                          </td>
+                        </tr>
+                      </tbody>
                     </>
                   ))}
-                />
+                </table>
                 {/*<div className="card col-12">
                   <div className="card-body ">
                     <table className="table table-striped">

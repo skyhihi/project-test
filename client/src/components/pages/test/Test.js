@@ -1,6 +1,6 @@
 import { Select, Input, Radio, Form, Button } from "antd";
 import { UserOutlined, NumberOutlined } from "@ant-design/icons";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
 //import RadioBtn from "./RadioBtn";
 import "./radioBtn.css";
@@ -13,7 +13,7 @@ import { submitAnsRs } from "../../functions/ans_result";
 import { submitAll } from "../../functions/ans";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { type } from "../../functions/type";
+//import { type } from "../../functions/type";
 import emailjs from "@emailjs/browser";
 import { Skeleton } from "antd";
 const { Option } = Select;
@@ -35,28 +35,28 @@ const Test = () => {
         setQuestions(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
     await listUniversity()
       .then((res) => {
         setUniversity(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
     await listYears()
       .then((res) => {
         setYears(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
     await listFaculty()
       .then((res) => {
         setFaculty(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
     setLoading(false);
   };
@@ -143,19 +143,6 @@ const Test = () => {
     let sumTea = sumArray(teacher);
     let sumDoc = sumArray(doc);
 
-    const result = {
-      วิศวกร: sumEn,
-      นักเทคโนโลยีสารสนเทศ: sumTec,
-      นักการตลาดการจัดการ: sumBu,
-      นักสาธารณสุข: sumPh,
-      อาจารย์แพทย์: sumTea,
-      แพทย์: sumDoc,
-      result: maxName,
-    };
-    const ansV = { ansValues, result };
-
-    //console.log("ansV", ansV);
-
     let sum = [sumEn, sumTec, sumBu, sumPh, sumTea, sumDoc];
     let sumToResult = [sumTec, sumEn, sumPh, sumBu, sumTea, sumDoc];
 
@@ -191,7 +178,18 @@ const Test = () => {
       แพทย์: sumDoc,
       result: maxName,
     };
+    const result = {
+      วิศวกร: sumEn,
+      นักเทคโนโลยีสารสนเทศ: sumTec,
+      นักการตลาดการจัดการ: sumBu,
+      นักสาธารณสุข: sumPh,
+      อาจารย์แพทย์: sumTea,
+      แพทย์: sumDoc,
+      result: maxName,
+    };
+    const ansV = { ansValues, result };
 
+    //console.log("ansV", ansV);
     //console.log(request);
     //console.log(ansValues);
 
@@ -215,10 +213,10 @@ const Test = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          //console.log(result.text);
         },
         (error) => {
-          console.log(error.text);
+          //console.log(error.text);
         }
       );
 
@@ -264,7 +262,7 @@ const Test = () => {
         return -1;
       }
     });
-    console.log(data);
+    //console.log(data);
 
     navigate("/result", { state: { data: data, sum: sumToResult } });
   };

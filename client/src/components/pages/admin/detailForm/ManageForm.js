@@ -21,8 +21,10 @@ import {
   editFaculty as pushFaculty,
   deleteFaculty,
 } from "../../../functions/faculty";
+import { useSelector } from "react-redux";
 
 const ManageForm = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const [years, setYears] = useState([]);
   const [university, setUniversity] = useState([]);
   const [faculty, setFaculty] = useState([]);
@@ -74,7 +76,7 @@ const ManageForm = () => {
     e.preventDefault(); //
     //console.log(value);
 
-    createUniversity(valueUniversity)
+    createUniversity(user.token, valueUniversity)
       .then((res) => {
         //console.log(res.data);
         toast.success(res.data.status);
@@ -105,7 +107,7 @@ const ManageForm = () => {
     e.preventDefault(); //
     //console.log(value);
 
-    createYear(valueYear)
+    createYear(user.token, valueYear)
       .then((res) => {
         //console.log(res.data);
         toast.success(res.data.status);
@@ -123,8 +125,8 @@ const ManageForm = () => {
   });
 
   const onChangeFaculty = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setValueFaculty({
       ...valueFaculty,
       [e.target.name]: e.target.value,
@@ -134,9 +136,9 @@ const ManageForm = () => {
   const onClickAddFaculty = (e) => {
     e.preventDefault(); //
 
-    createFaculty(valueFaculty)
+    createFaculty(user.token, valueFaculty)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         toast.success(res.data.status);
         loadData();
       })
@@ -173,7 +175,7 @@ const ManageForm = () => {
 
   const handleSubmitUniversity = () => {
     //console.log(editDetail);
-    pushUniversity(editUniversity)
+    pushUniversity(user.token, editUniversity)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -215,7 +217,7 @@ const ManageForm = () => {
 
   const handleSubmitYear = () => {
     //console.log(editDetail);
-    pushYear(editYear)
+    pushYear(user.token, editYear)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -257,7 +259,7 @@ const ManageForm = () => {
 
   const handleSubmitFaculty = () => {
     //console.log(editDetail);
-    pushFaculty(editFaculty)
+    pushFaculty(user.token, editFaculty)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -275,7 +277,7 @@ const ManageForm = () => {
   const confirmUniversity = (id) => {
     //console.log(e);
     //message.success("Click on Yes");
-    deleteUniversity(id)
+    deleteUniversity(user.token, id)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -294,7 +296,7 @@ const ManageForm = () => {
   const confirmYear = (id) => {
     //console.log(e);
     //message.success("Click on Yes");
-    deleteYear(id)
+    deleteYear(user.token, id)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -313,7 +315,7 @@ const ManageForm = () => {
   const confirmFaculty = (id) => {
     //console.log(e);
     //message.success("Click on Yes");
-    deleteFaculty(id)
+    deleteFaculty(user.token, id)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);

@@ -1,26 +1,24 @@
-import React, { /*useRef ,*/ useState, useEffect } from "react";
-import { Select /*Input, Tabl*/ } from "antd";
+import React, { useState, useEffect } from "react";
+
 import MenuAdmin from "../MenuAdmin";
-import { listUniversity } from "../../../functions/university";
-import { listYears } from "../../../functions/year";
-import { listFaculty } from "../../../functions/faculty";
+//import { listUniversity } from "../../../functions/university";
+//import { listYears } from "../../../functions/year";
+//import { listFaculty } from "../../../functions/faculty";
 import { readAnsRS } from "../../../functions/ans_result";
 import { readAll } from "../../../functions/ans";
 import { CSVLink } from "react-csv";
-import { Input, Space } from "antd";
-
-const { Option } = Select;
 
 const General = () => {
   const [dataA, setDataA] = useState([]);
   const [data, setData] = useState([]);
   //const [selected, setSelected] = useState("มหาวิทยาลัย");
-
+  /*
   const [university, setUniversity] = useState([]);
   const [year, setYears] = useState([]);
   const [faculty, setFaculty] = useState([]);
-
+*/
   const [selectedU, setSelectedU] = useState("มหาวิทยาลัย");
+  /*
   const handleChangeU = (value) => {
     setSelectedU(value);
     //console.log(`selected ${value}`);
@@ -37,10 +35,10 @@ const General = () => {
     setSelectedF(value);
     //console.log(`selected ${value}`);
   };
-
+*/
   //-------Search----------//
-  const onSearch = (value) => console.log(value);
-  const { Search } = Input;
+  // const onSearch = (value) => console.log(value);
+  //const { Search } = Input;
 
   //-------loadData---------//
   const loadData = () => {
@@ -58,7 +56,7 @@ const General = () => {
       .catch((err) => {
         console.log(err);
       });
-    listUniversity()
+    /*listUniversity()
       .then((res) => {
         setUniversity(res.data);
       })
@@ -78,7 +76,7 @@ const General = () => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      });*/
   };
 
   useEffect(() => {
