@@ -14,7 +14,6 @@ import Types from "./components/pages/types/Types";
 import Test from "./components/pages/test/Test";
 
 import General from "./components/pages/admin/generalInformation/General";
-import StudentIn from "./components/pages/admin/studentIn/StudentIn";
 
 //react-toastify
 import { ToastContainer } from "react-toastify";
@@ -132,14 +131,7 @@ function App() {
                 </UserRoute>
               }
             />
-            <Route
-              path="/admin/student-i"
-              element={
-                <UserRoute>
-                  <StudentIn />
-                </UserRoute>
-              }
-            />
+
             <Route
               path="/admin/general"
               element={

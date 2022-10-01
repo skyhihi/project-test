@@ -10,12 +10,13 @@ import {
 } from "../../../functions/question";
 
 import { type } from "../../../functions/type";
-
 import { FontSizeOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 const { Option } = Select;
 
 const Question = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const [selected, setSelected] = useState("ทั้งหมด");
   const clearSelected = () => {
     setSelected("ทั้งหมด");
@@ -43,9 +44,6 @@ const Question = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const loadDataType = () => {
     type()
       .then((res) => {
         setTypeData(res.data);
@@ -57,7 +55,6 @@ const Question = () => {
 
   useEffect(() => {
     loadData();
-    loadDataType();
     // eslint-disable-next-line
   }, []);
 
@@ -77,7 +74,7 @@ const Question = () => {
     e.preventDefault(); //
     //console.log(value);
 
-    createQuestion(value)
+    createQuestion(user.token, value)
       .then((res) => {
         //console.log(res.data);
         toast.success(res.data.status);
@@ -93,7 +90,7 @@ const Question = () => {
   const confirm = (id) => {
     //console.log(e);
     //message.success("Click on Yes");
-    removeQuestion(id)
+    removeQuestion(user.token, id)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -151,7 +148,7 @@ const Question = () => {
 
   const handleSubmitDetail = () => {
     //console.log(editDetail);
-    changeQuestion(editDetail)
+    changeQuestion(user.token, editDetail)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);
@@ -178,7 +175,7 @@ const Question = () => {
   };
   const handleSubmitTypeDetail = () => {
     //console.log(editTypeDetail);
-    changeType(editTypeDetail)
+    changeType(user.token, editTypeDetail)
       .then((res) => {
         //console.log(res.data.status);
         toast.success(res.data.status);

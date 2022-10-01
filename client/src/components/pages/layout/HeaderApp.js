@@ -70,9 +70,7 @@ const HeaderApp = () => {
         <Menu.Item className="menu-items" key="3">
           <Link to="/test">Test</Link>
         </Menu.Item>
-        <Menu.Item className="menu-items" key="5">
-          <Link to="/result">Result</Link>
-        </Menu.Item>
+
         {!user && (
           <>
             <Menu.Item className="menu-items" key="4">
@@ -120,9 +118,7 @@ const HeaderApp = () => {
           <Menu.Item>
             <Link to="/test">Test</Link>
           </Menu.Item>
-          <Menu.Item>
-            <Link to="/result">Result</Link>
-          </Menu.Item>
+
           {!user && (
             <>
               <Menu.Item>
