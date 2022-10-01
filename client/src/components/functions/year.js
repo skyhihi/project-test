@@ -18,7 +18,7 @@ export const editYear = async (authtoken, value) =>
   });
 
 export const deleteYear = async (authtoken, id) =>
-  await axios.delete(process.env.REACT_APP_API + "/del-year/" + id, {
+  await axios.delete(process.env.REACT_APP_API + "/delete-year/" + id, {
     headers: {
       authtoken,
     },
