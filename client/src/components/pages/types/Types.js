@@ -37,8 +37,7 @@ const Type = () => {
     <>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-1"></div>
-          <div className="col-lg-10">
+          <div className="col-lg-12">
             {loading ? (
               <>
                 <Skeleton active />
@@ -73,41 +72,7 @@ const Type = () => {
                 </div>
               </>
             ))}
-            {/**
-            <div className="typeBox">
-              <div className="type-icon">
-                <span>
-                  <i className="fa fa-helmet-safety"></i>
-                  <h3 className="type__name">วิศวกร</h3>
-                </span>
-              </div>
-              <div className="type__content">
-                <p className="description_header">เงินเดือน :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-
-                <p className="description_header">รายละเอียด :</p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui
-                  quaerat fugit quas veniam perferendis repudiandae sequi,
-                  dolore quisquam illum. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Vel tempora impedit saepe rerum officiis
-                  cupiditate itaque exercitationem explicabo commodi quae quis
-                  perspiciatis excepturi est, reprehenderit dignissimos non
-                  sequi unde ab!
-                </p>
-              </div>
-            </div> */}
           </div>
-
-          <div className="col-lg-1"></div>
         </div>
       </div>
     </>

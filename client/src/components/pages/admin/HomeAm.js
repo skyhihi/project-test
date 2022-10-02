@@ -1,17 +1,25 @@
 import React from "react";
 import MenuAdmin from "./MenuAdmin";
-import { message, Popconfirm } from "antd";
+import { message, Popconfirm, Tooltip } from "antd";
 import { listUsers, deleteUsers, changeRole } from "../../functions/user";
-
+import { register } from "../../functions/auth";
 import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { Tag, Button, Dropdown, Menu, Space, Select } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Tag, Button, Dropdown, Menu, Space, Select, Modal, Input } from "antd";
+import {
+  DownOutlined,
+  UserOutlined,
+  InfoCircleOutlined,
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  LockFilled,
+  PlusOutlined,
+} from "@ant-design/icons";
 //useSelector คือการเข้าถึง store
-
+//const { Option } = Select;
 const HomeAm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,11 +45,7 @@ const HomeAm = () => {
       ]}
     />
   );
-  /*
-  const addAdmin = () => {
-    navigate("/register");
-  };
-*/
+
   const loadData = (authtoken) => {
     listUsers(authtoken)
       .then((res) => {
@@ -68,7 +72,7 @@ const HomeAm = () => {
     deleteUsers(user.token, id)
       .then((res) => {
         toast.success(res.data.status);
-        loadData();
+        loadData(user.token);
       })
       .catch((err) => {
         toast.error(err.response.data.error);
@@ -91,11 +95,54 @@ const HomeAm = () => {
       });
   };
 
+  //----------model-----------//
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  //-------register---------//
+  const [value, setValue] = useState({
+    name: "",
+    username: "",
+    password: "",
+  });
+
+  const onChange = (e) => {
+    //console.log(e.target.name);
+    //console.log(e.target.value);
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onClick = (e) => {
+    e.preventDefault();
+    //console.log(value);
+    register(user.token, value)
+      .then((res) => {
+        //console.log(res.data);
+        toast.success(res.data.message);
+        setIsModalOpen(false);
+        loadData(user.token);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
+        toast.error(err.response.data.error);
+      });
+  };
+
   return (
     <>
       <MenuAdmin />
       <div className="admin__content" style={{ paddingLeft: "200px" }}>
-        <Button type="primary">
+        <Button type="primary" size="large">
           <Dropdown overlay={menu} trigger={["click"]}>
             <p onClick={(e) => e.preventDefault()}>
               <Space>
@@ -105,11 +152,33 @@ const HomeAm = () => {
             </p>
           </Dropdown>
         </Button>
+
         <br />
         <br />
         <div class="card">
           <div class="card-header">ผู้ใช้งาน</div>
           <div class="card-body">
+            {user.role === "admin" ? (
+              <>
+                <Button
+                  type="primary"
+                  style={{
+                    marginRight: "1rem",
+                    float: "right",
+                    backgroundColor: "#ffe71a",
+                    borderStyle: "none",
+                    color: "black",
+                  }}
+                  icon={<PlusOutlined />}
+                  onClick={() => showModal()}
+                >
+                  Add User
+                </Button>
+              </>
+            ) : (
+              <></>
+            )}
+
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -190,6 +259,71 @@ const HomeAm = () => {
             </table>
           </div>
         </div>
+
+        <Modal
+          title="Register"
+          open={isModalOpen}
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <label>
+            <b>Register</b>
+          </label>
+          <br />
+          <br />
+          <Input
+            type="text"
+            name="name"
+            size="large"
+            placeholder=" Please Enter Your Name"
+            onChange={onChange}
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            suffix={
+              <Tooltip title="Extra Information">
+                <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+              </Tooltip>
+            }
+          />
+          <br />
+          <br />
+          <Input
+            type="text"
+            name="username"
+            size="large"
+            placeholder=" Please Enter Your Username"
+            onChange={onChange}
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            suffix={
+              <Tooltip title="Extra Information">
+                <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+              </Tooltip>
+            }
+          />
+          <br />
+          <br />
+
+          <Input
+            name="password"
+            size="large"
+            type="password"
+            placeholder=" Please Input Your Password"
+            onChange={onChange}
+            prefix={<LockFilled />}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+          />
+
+          <br />
+          <br />
+          <Button
+            type="primary"
+            style={{ marginTop: "0.5rem" }}
+            onClick={onClick}
+          >
+            add
+          </Button>
+        </Modal>
       </div>
     </>
   );

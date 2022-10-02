@@ -4,7 +4,6 @@ import "./result.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { type as typeData } from "../../functions/type";
 import { details_type } from "../../functions/details";
-import { readAnsRS } from "../../functions/ans_result";
 import { Modal, Skeleton } from "antd";
 
 const Result = () => {
@@ -23,7 +22,6 @@ const Result = () => {
 
   const [listType, setListType] = useState([]);
   const [listDetailType, setListDetailType] = useState([]);
-  const [listAns, setListAns] = useState([]);
 
   //console.log(listAns);
 
@@ -33,7 +31,7 @@ const Result = () => {
         setListDetailType(res.data);
       })
       .catch((err) => {
-        //console.log(err);
+        console.log(err);
       });
 
     await typeData()
@@ -41,16 +39,9 @@ const Result = () => {
         setListType(res.data);
       })
       .catch((err) => {
-        //console.log(err);
+        console.log(err);
       });
 
-    await readAnsRS()
-      .then((res) => {
-        setListAns(res.data);
-      })
-      .catch((err) => {
-        //console.log(err);
-      });
     setLoading(false);
   };
   useEffect(() => {
@@ -89,7 +80,7 @@ const Result = () => {
             <br />
             <p> กรุณาถ่ายภาพหน้าจอแสดงผลเพื่อใช้ในการเรียนการสอนต่อไป</p>
           </Modal>
-          <div className="container-fuild result__page">
+          <div className="container-fluid result__page">
             <div className="row">
               <div className="col-lg-6 result__chart-card">
                 <div className="result__chart-ch">

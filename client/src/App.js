@@ -6,7 +6,6 @@ import HeaderApp from "./components/pages/layout/HeaderApp";
 import Home from "./components/pages/home/Home";
 import Login from "./components/pages/login/Login";
 import Result from "./components/pages/result/Result";
-import Register from "./components/pages/register/Register";
 import HomeAm from "./components/pages/admin/HomeAm";
 import Question from "./components/pages/admin/questionAd/Question";
 import DetailTypes from "./components/pages/admin/detailTypes/DetailTypes";
@@ -83,14 +82,6 @@ function App() {
             <Route path="/result" element={<Result />} />
 
             <Route path="/test" element={<Test />} />
-            <Route
-              path="/register"
-              element={
-                <UserRoute>
-                  <Register />
-                </UserRoute>
-              }
-            />
             <Route
               path="/admin/"
               element={

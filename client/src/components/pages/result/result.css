@@ -76,4 +76,10 @@ canvas {
   canvas {
     position: relative;
   }
+  .box-result {
+    font-size: medium;
+  }
+  .result__info-header {
+    font-size: 24px;
+  }
 }

@@ -344,6 +344,7 @@ const ManageForm = () => {
               <div className="col-lg-12">
                 <div className="card">
                   <div className="card-body">
+                    {/**==================================== */}
                     <h4>
                       <span className="badge rounded-pill bg-primary">
                         มหาวิทยาลัย

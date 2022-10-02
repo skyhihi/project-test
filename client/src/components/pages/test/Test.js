@@ -192,8 +192,8 @@ const Test = () => {
     const ansV = { ansValues, result };
 
     //console.log("ansV", ansV);
-    console.log("sum", request); //sum
-    console.log("all", ansValues); //all
+    //console.log("sum", request); //sum
+    //console.log("all", ansValues); //all
 
     var templateParams = {
       user_name: userName,
@@ -267,7 +267,7 @@ const Test = () => {
         return 0;
       }
     });
-    console.log(data);
+    //console.log(data);
 
     navigate("/result", { state: { data: data, sum: sumToResult } });
   };

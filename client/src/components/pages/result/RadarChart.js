@@ -106,7 +106,7 @@ export class RadarChart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.chartRef);
+    //console.log(this.chartRef);
   }
 
   render() {

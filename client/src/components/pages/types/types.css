@@ -1,12 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200;300&display=swap");
+
 :root {
   --main-color: #0e6880;
 }
+.container-fluid,
+.col-lg-12 {
+  padding: 0;
+}
+
 .typeBox {
   color: var(--main-color);
-  background-color: #fff;
-  /*font-family: "Raleway", sans-serif;*/
+  /*background-color: #fff;*/
+  font-family: "Kanit", sans-serif !important;
   text-align: center;
-  padding: 0 25px 30px;
+  /*padding: 0 25px 30px;*/
+  padding-bottom: 20px;
   position: relative;
   margin: 3rem 0;
   z-index: 1;
@@ -83,12 +91,14 @@
   font-size: 18px;
   letter-spacing: 0.5px;
   line-height: 25px;
+  padding: 0 30px;
 }
 .description_header {
   text-align: left;
   font-size: 22px;
   margin: 0 0;
   font-weight: 900;
+  padding: 0 30px;
 }
 .type__content {
   text-align: left;
@@ -113,18 +123,18 @@
     margin: 0 0 40px;
   }
   .typeBox .type-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .typeBox .type-icon .type__name {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
   .typeBox .title {
-    font-size: 20px;
-  }
-  .typeBox .description {
     font-size: 16px;
   }
+  .typeBox .description {
+    font-size: 14px;
+  }
   .description_header {
-    font-size: 20px;
+    font-size: 14px;
   }
 }

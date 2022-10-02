@@ -25,6 +25,7 @@ const Register = () => {
     password: "",
     confirm_password: "",
   });
+
   const onClick = (e) => {
     e.preventDefault(); //
     console.log(value);
