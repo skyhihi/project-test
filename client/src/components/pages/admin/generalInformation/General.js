@@ -17,7 +17,6 @@ const General = () => {
   const [year, setYears] = useState([]);
   const [faculty, setFaculty] = useState([]);
 */
-  const [selectedU, setSelectedU] = useState("มหาวิทยาลัย");
   /*
   const handleChangeU = (value) => {
     setSelectedU(value);
@@ -90,6 +89,7 @@ const General = () => {
     { label: "University", key: "all_ans.ansValues.university" },
     { label: "Faculty", key: "all_ans.ansValues.faculty" },
     { label: "Years", key: "all_ans.ansValues.year" },
+    { label: "Email", key: "all_ans.ansValues.email" },
     {
       label: "q_1",
       key: "all_ans.ansValues.qaId_1",
@@ -183,13 +183,15 @@ const General = () => {
       label: "q_30",
       key: "all_ans.ansValues.qaId_30",
     },
+
     { label: "e", key: "all_ans.result.วิศวกร" },
     { label: "i", key: "all_ans.result.นักเทคโนโลยีสารสนเทศ" },
     { label: "b", key: "all_ans.result.นักการตลาดการจัดการ" },
     { label: "p", key: "all_ans.result.นักสาธารณสุข" },
     { label: "t", key: "all_ans.result.อาจารย์แพทย์" },
     { label: "d", key: "all_ans.result.แพทย์" },
-    { label: "result", key: "all_ans.result.result" },
+    { label: "Result", key: "all_ans.result.result" },
+
     /*{ label: "e", key: "result.sum1" },
     { label: "i", key: "result.sum2" },
     { label: "b", key: "result.sum3" },
@@ -221,7 +223,7 @@ const General = () => {
                     filename="sixEvaluate.csv"
                   >
                     <button className="btn btn-success btn-sm">
-                      <i class="bi bi-file-earmark-arrow-down"></i>
+                      <i class="bi bi-file-earmark-arrow-down"></i>{" "}
                       ดาวน์โหลดเอกสาร
                     </button>
                   </CSVLink>
@@ -282,50 +284,53 @@ const General = () => {
                 <br />
                 <div className="card-body">
                   <div className="ques__body">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">no.</th>
-                          <th scope="col">Student ID</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">University</th>
-                          <th scope="col">Faculty</th>
-                          <th scope="col">Years</th>
-                          <th scope="col">e</th>
-                          <th scope="col">i</th>
-                          <th scope="col">b</th>
-                          <th scope="col">p</th>
-                          <th scope="col">t</th>
-                          <th scope="col">d</th>
-                          <th scope="col">result</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {data.map((item, index) => (
-                          <tr key={index}>
-                            <>
-                              {selectedU === item.university ? <></> : <></>}
-                              <th scope="row">{index + 1}</th>
-                              <td>{item.result.student_id}</td>
-                              <td>{item.result.name}</td>
-                              <td>{item.result.university}</td>
-                              <td>{item.result.faculty}</td>
-                              <td>{item.result.year}</td>
-                              <td>{item.result.วิศวกร}</td>
-                              <td>{item.result.นักเทคโนโลยีสารสนเทศ}</td>
-                              <td>{item.result.นักการตลาดการจัดการ}</td>
-                              <td>{item.result.นักสาธารณสุข}</td>
-                              <td>{item.result.อาจารย์แพทย์}</td>
-                              <td>{item.result.แพทย์}</td>
-                              <td>{item.result.result}</td>
-                            </>
+                    <div className="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">no.</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">University</th>
+                            <th scope="col">Faculty</th>
+                            <th scope="col">Years</th>
+                            <th scope="col">e</th>
+                            <th scope="col">i</th>
+                            <th scope="col">b</th>
+                            <th scope="col">p</th>
+                            <th scope="col">t</th>
+                            <th scope="col">d</th>
+                            <th scope="col">Result</th>
+                            <th scope="col">Email</th>
                           </tr>
-                        ))}
-                        {data.map((item, index) => (
-                          <></>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {data.map((item, index) => (
+                            <tr key={index}>
+                              <>
+                                <th scope="row">{index + 1}</th>
+                                <td>{item.result.student_id}</td>
+                                <td>{item.result.name}</td>
+                                <td>{item.result.university}</td>
+                                <td>{item.result.faculty}</td>
+                                <td>{item.result.year}</td>
+                                <td>{item.result.วิศวกร}</td>
+                                <td>{item.result.นักเทคโนโลยีสารสนเทศ}</td>
+                                <td>{item.result.นักการตลาดการจัดการ}</td>
+                                <td>{item.result.นักสาธารณสุข}</td>
+                                <td>{item.result.อาจารย์แพทย์}</td>
+                                <td>{item.result.แพทย์}</td>
+                                <td>{item.result.result}</td>
+                                <td>{item.result.email}</td>
+                              </>
+                            </tr>
+                          ))}
+                          {data.map((item, index) => (
+                            <></>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
