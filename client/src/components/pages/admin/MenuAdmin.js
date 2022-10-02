@@ -6,7 +6,6 @@ import {
   NumberOutlined,
   DatabaseOutlined,
   ProfileOutlined,
-  UserOutlined,
   FormOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";

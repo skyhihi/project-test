@@ -1,5 +1,5 @@
 import { Select, Input, Radio, Form, Button } from "antd";
-import { UserOutlined, NumberOutlined } from "@ant-design/icons";
+import { UserOutlined, NumberOutlined, MailOutlined } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
 //import RadioBtn from "./RadioBtn";
@@ -94,6 +94,7 @@ const Test = () => {
     setAnsValues({ ...ansValues, faculty: value });
   };
   const handleChangeEmail = (e) => {
+    setAnsValues({ ...ansValues, [e.target.name]: e.target.value });
     setEmail(e.target.value);
   };
 
@@ -170,6 +171,7 @@ const Test = () => {
       year: values.year,
       student_id: values.student_id,
       university: values.university,
+      email: values.email,
       วิศวกร: sumEn,
       นักเทคโนโลยีสารสนเทศ: sumTec,
       นักการตลาดการจัดการ: sumBu,
@@ -190,8 +192,8 @@ const Test = () => {
     const ansV = { ansValues, result };
 
     //console.log("ansV", ansV);
-    //console.log(request);
-    //console.log(ansValues);
+    console.log("sum", request); //sum
+    console.log("all", ansValues); //all
 
     var templateParams = {
       user_name: userName,
@@ -204,6 +206,7 @@ const Test = () => {
       doctor: sumDoc,
     };
 
+    /*==========ส่งข้อมูล=============== */
     emailjs
       .send(
         "service_hnph8ya",
@@ -260,9 +263,11 @@ const Test = () => {
     data = data.sort((a, b) => {
       if (a.value > b.value) {
         return -1;
+      } else {
+        return 0;
       }
     });
-    //console.log(data);
+    console.log(data);
 
     navigate("/result", { state: { data: data, sum: sumToResult } });
   };
@@ -448,8 +453,8 @@ const Test = () => {
                     //size="large"
 
                     name="email"
-                    placeholder="กรอกอีเมล"
-                    prefix={<NumberOutlined />}
+                    placeholder="กรุณากรอกอีเมล"
+                    prefix={<MailOutlined />}
                     onChange={handleChangeEmail}
                   />
                 </Form.Item>

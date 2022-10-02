@@ -42,7 +42,7 @@ const Login = () => {
   );
   const roleBaseRedirect = (role) => {
     //console.log(role);
-    if (role === "m" || role === "a") {
+    if (role === "user" || role === "admin") {
       navigate("/admin");
     } else {
       navigate("/");

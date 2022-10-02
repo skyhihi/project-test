@@ -1,24 +1,22 @@
 import React from "react";
 import MenuAdmin from "./MenuAdmin";
-import { Routes, Route } from "react-router-dom";
-import Question from "./questionAd/Question";
-import General from "./generalInformation/General";
 import { message, Popconfirm } from "antd";
-import { listUsers } from "../../functions/user";
-import { deleteUsers } from "../../functions/user";
+import { listUsers, deleteUsers, changeRole } from "../../functions/user";
 
 import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-
+import { Tag, Button, Dropdown, Menu, Space, Select } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 //useSelector คือการเข้าถึง store
 
 const HomeAm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [list, setList] = useState([]);
+  const roleData = ["admin", "user"];
   const { user } = useSelector((state) => ({ ...state }));
   //console.log("user navbar " + user.username);
 
@@ -29,15 +27,23 @@ const HomeAm = () => {
     });
     navigate("/");
   };
-
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: <div onClick={logout}>ออกจากระบบ</div>,
+          key: "0",
+        },
+      ]}
+    />
+  );
+  /*
   const addAdmin = () => {
     navigate("/register");
   };
-
-  const [list, setList] = useState([]);
-
-  const loadData = () => {
-    listUsers()
+*/
+  const loadData = (authtoken) => {
+    listUsers(authtoken)
       .then((res) => {
         setList(res.data);
       })
@@ -47,7 +53,7 @@ const HomeAm = () => {
   };
 
   useEffect(() => {
-    loadData();
+    loadData(user.token);
     // eslint-disable-next-line
   }, []);
 
@@ -69,49 +75,94 @@ const HomeAm = () => {
       });
   };
 
+  const handleChangeRole = (e, username) => {
+    let values = {
+      username: username,
+      role: e,
+    };
+    changeRole(user.token, values)
+      .then((res) => {
+        //console.log(res);
+        toast.success(res.data.status);
+        loadData(user.token);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
   return (
     <>
       <MenuAdmin />
-
       <div className="admin__content" style={{ paddingLeft: "200px" }}>
-        <div className="row">
-          <div className="row">
-            {user && (
-              <>
-                <div className="col-10" style={{ marginLeft: "1rem" }}>
-                  <h4>Hello {user.username}!</h4>
-                  <button
-                    className="btn btn-sm btn-info justify-content-end"
-                    onClick={addAdmin}
-                  >
-                    <i class="bi bi-person-plus"></i> Add Admin
-                  </button>
-                </div>
-                <div className=" col-1 justify-content-end">
-                  <button
-                    className="btn btn-sm bg-danger "
-                    type="text"
-                    onClick={logout}
-                  >
-                    <i class="bi bi-door-closed"></i> LOGOUT
-                  </button>
-                </div>
-                <br />
-                <table className="table " style={{ marginLeft: "2rem" }}>
-                  {list.map((item, index) => (
-                    <>
-                      <br />
-                      <br />
-
-                      <thead></thead>
-                      <tbody>
-                        <tr>
-                          <td style={{ marginLeft: "2rem" }}>
-                            <h5>{item.name}</h5>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
+        <Button type="primary">
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <p onClick={(e) => e.preventDefault()}>
+              <Space>
+                {user.username}
+                <DownOutlined />
+              </Space>
+            </p>
+          </Dropdown>
+        </Button>
+        <br />
+        <br />
+        <div class="card">
+          <div class="card-header">ผู้ใช้งาน</div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>role</th>
+                  <th>actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {list.map((item, index) => (
+                  <>
+                    <tr key={index}>
+                      <th style={{ fontWeight: "normal" }}>{item.name}</th>
+                      <th style={{ fontWeight: "normal" }}>{item.username}</th>
+                      <th>
+                        {user.role === "admin" ? (
+                          <>
+                            <Select
+                              style={{ width: "35%" }}
+                              value={item.role}
+                              onChange={(e) =>
+                                handleChangeRole(e, item.username)
+                              }
+                            >
+                              {roleData.map((item, index) => (
+                                <Select.Option value={item} key={index}>
+                                  {item === "user" ? (
+                                    <Tag color="green"> {item}</Tag>
+                                  ) : (
+                                    <Tag color="red">{item}</Tag>
+                                  )}
+                                </Select.Option>
+                              ))}
+                            </Select>
+                          </>
+                        ) : (
+                          <>
+                            {item.role === "admin" ? (
+                              <>
+                                <Tag color="red">{item.role}</Tag>
+                              </>
+                            ) : (
+                              <>
+                                <Tag color="green">{item.role}</Tag>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </th>
+                      <th>
+                        {user.role === "admin" ? (
+                          <>
                             <Popconfirm
                               placement="topRight"
                               title="Are you sure?"
@@ -127,34 +178,16 @@ const HomeAm = () => {
                                 <i class="bi bi-trash3"></i> Delete
                               </button>
                             </Popconfirm>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </>
-                  ))}
-                </table>
-                {/*<div className="card col-12">
-                  <div className="card-body ">
-                    <table className="table table-striped">
-                      <thead>
-                        <tr>List Admin</tr>
-                        
-                      </thead>
-                      <tbody>
-                        <tr></tr>
-                      </tbody>
-                    </table>
-                  </div>
-            </div>*/}
-              </>
-            )}
-            {!user && <>Please Login </>}
-            <br />
-
-            <Routes>
-              <Route path="/admin/question" element={<Question />} />
-              <Route path="/admin/general" element={<General />} />
-            </Routes>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </th>
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
